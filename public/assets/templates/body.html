@@ -1,0 +1,14 @@
+<body>
+  <h1>
+    Chromestatus Deck
+  </h1>
+  <main>
+    $$
+      for(let column of it.columns) {
+        yield P(column[1].then(() => '<section><h1><a href="' + column[0].href + '">' + column[0].name + '</a></h1><div data-url="'+ column[0].feedUrl +'">'));
+        yield P(column[1].then(items => (items != undefined) ? items.map(item => '<div class="item" data-bind_id="guid" id="'+ item.guid +'"><h3><span data-bind_inner-text="title">'+ item.title +'</span> (<a data-bind_href="link" href="'+ item.link +'">#</a>)</h3><div data-bind_inner-text="pubDate">'+ item.pubDate +'</div></div>').join('') : ''));
+        yield P('</div></section>');
+      }
+    $$
+  </main>
+</body>

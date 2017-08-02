@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang=en>
+  <head>
+    <title>Chromestatus deck</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#fff">
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker.register('/sw.js').then(function(registration) {
+            // Registration was successful
+            console.log('ServiceWorker registration successful with scope: ', registration.scope)
+          }, function(err) {
+            // registration failed :(
+            console.log('ServiceWorker registration failed: ', err)
+          })
+        })
+      }
+    </script>
+    <style>
+      
+      body > h1 {
+        font-family: 'Noto Sans', sans-serif;
+        color: #333333;
+      }
+      
+      main {
+        display: flex;
+        overflow: auto;
+        max-width: 100%;
+        max-height: calc(100vh - 100px);
+      }
+      
+      main section {
+        min-width: 240px;
+        max-width: 240px;
+        margin: 0 5px;
+        background: #fff;
+        box-shadow: 0 0 0 1px rgba(0,0,0,0.01), 0 1px 2px rgba(0,0,0,0.07), 0 5px 15px rgba(0,0,0,0.03);
+        border-radius: 8px;
+        height: 100%;
+      }
+      
+      @media screen and (max-width: 460px) {
+        main {
+          display: block;
+          overflow: initial;
+        }
+        
+        main section {
+          min-width: 100%;
+          max-width: 100%;
+        }
+        
+        main section div[data-url] {
+          margin: initial; 
+        }
+      }
+      
+      main section h1 {
+        font-family: sans-serif;
+        font-weight: 300;
+        text-align: center;
+      }
+      
+      main section h1 a {
+        color: #333333;
+      }
+      
+      main section div[data-url] {
+        /* Container */
+        font-size: 0.8em;
+        margin: 0 5px;
+      }
+      
+      main section div.item {
+        padding: 5px;
+        border-top: solid 1px #dedede;
+      }
+      
+      main section div.item h3 {
+        margin: 0 0 0.8em 0;
+        font-family: sans-serif;
+        font-weight: 300;
+      }
+      
+      div[data-bind_inner-text="pubDate"] {
+        font-style: italic;
+      }
+    </style>
+  </head>
