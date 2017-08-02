@@ -1,0 +1,108 @@
+<template id='itemTemplate'>
+  <div class="item" data-bind_id='guid'>
+    <h3><span data-bind_inner-text='title'></span> (<a data-bind_href='link'>#</a>)</h3>
+    <div data-bind_inner-text='pubDate'></div>
+  </div>
+</template>
+<script>
+  
+const applyTemplate = (templateElement, data) => {
+  const element = templateElement.content.cloneNode(true);    
+  const treeWalker = document.createTreeWalker(element, NodeFilter.SHOW_ELEMENT, () => NodeFilter.FILTER_ACCEPT);
+
+  while(treeWalker.nextNode()) {
+    const node = treeWalker.currentNode;
+    for(let bindAttr in node.dataset) {
+      let isBindableAttr = (bindAttr.indexOf('bind_') == 0) ? true : false;
+      if(isBindableAttr) {
+        let dataKey = node.dataset[bindAttr];
+        let bindKey = bindAttr.substr(5);
+        node[bindKey] = data[dataKey];
+      }
+    }
+  }
+
+  return element;
+};
+  
+const convertFeedItemToJSON = (item) => {
+  if(item.nodeName === 'item') {
+    return convertRSSItemToJSON(item);
+  }
+  else if(item.nodeName === 'entry') {
+    return convertAtomItemToJSON(item);
+  }
+  else {
+    return [];
+  }
+}
+  
+const convertAtomItemToJSON = (item) => {
+  const getElementText = (tagName) => {
+    const elements = item.getElementsByTagName(tagName);
+    if(elements && elements.length > 0) {
+      return elements[0].textContent;
+    }
+    
+    return "";
+  } 
+  
+  const getElementAttribute = (tagName, attribute) => {
+    const elements = item.getElementsByTagName(tagName);
+    if(elements && elements.length > 0 && elements[0].attributes['href']) {
+      return elements[0].attributes['href'].value;
+    }
+    
+    return "";
+  } 
+  
+  const title = getElementText("title");
+  const description = getElementText("summary");
+  const guid = getElementText("id");
+  const pubDate = getElementText("updated");
+  const author = getElementText("author");
+  const link = getElementAttribute("link", "href");
+  
+  return {"title": title, "guid": guid, "description": description, "pubDate": pubDate, "author": author, "link": link};
+};
+  
+const convertRSSItemToJSON = (item) => {
+  const getElementText = (tagName) => {
+    const elements = item.getElementsByTagName(tagName);
+    if(elements && elements.length > 0) {
+      return elements[0].textContent;
+    }
+    
+    return "";
+  } 
+  
+  const title = getElementText("title");
+  const description = getElementText("description");
+  const guid = getElementText("guid");
+  const pubDate = getElementText("pubDate");
+  const author = getElementText("author");
+  const link = getElementText("link");
+  
+  return {"title": title, "guid": guid, "description": description, "pubDate": pubDate, "author": author, "link": link};
+};
+  
+window.addEventListener('DOMContentLoaded', e => {
+  const columns = document.querySelectorAll('section div[data-url]');
+  const itemTemplate = document.getElementById('itemTemplate')
+  for(let column of columns) {
+    const feedUrl = column.dataset['url'];
+    fetch(`/proxy?url=${feedUrl}`)
+      .then(feedResponse => feedResponse.text())
+      .then(feedText => {
+        const parser = new DOMParser();
+        return parser.parseFromString(feedText,'application/xml');
+      })
+      .then(doc => doc.querySelectorAll(doc.firstElementChild.nodeName === 'rss' ? 'item' : 'entry'))
+      .then(items => Array.prototype.map.call(items, item => convertFeedItemToJSON(item)))
+      .then(items => items.filter(item => !!!(document.getElementById(item.guid))))
+      .then(items => items.map(item => applyTemplate(itemTemplate.cloneNode(true), item)))
+      .then(items => items.forEach(item => column.appendChild(item)))
+  }
+});
+</script>
+</html>

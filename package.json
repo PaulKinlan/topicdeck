@@ -1,0 +1,22 @@
+{
+  "name": "feeddeck",
+  "version": "0.0.1",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.15.2",
+    "node-fetch": "*",
+    "text-encoding": "*",
+    "xmldom-alpha": "*"
+  },
+  "engines": {
+    "node": "6.9.x"
+  },
+  "license": "Apache-2.0",
+  "keywords": [
+    "node",
+    "glitch",
+    "express"
+  ]
+}
