@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang=en>
   <head>
-    <title>Chromestatus deck</title>
+    <title>Web Dev Deck</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="manifest" href="/manifest.json">
     <meta name="theme-color" content="#fff">
     <script>
@@ -18,39 +19,58 @@
         })
       }
     </script>
-    <style>
+   <style>
+         
+     head, :root, body {
+       background-color: #fafafa;
+       margin: 0;
+     }
       
       body > h1 {
         font-family: 'Noto Sans', sans-serif;
         color: #333333;
+        margin: 1em;      
       }
       
       main {
         display: flex;
-        overflow: auto;
+        overflow-x: auto;
         max-width: 100%;
-        max-height: calc(100vh - 100px);
+        max-height: calc(100vh - 110px);
+        height: calc(100vh - 110px);
+        box-sizing: border-box;
       }
       
       main section {
         min-width: 240px;
         max-width: 240px;
-        margin: 0 5px 0 5px;
+        margin: 1px 5px 4px 5px;
         background: #fff;
         box-shadow: 0 0 0 1px rgba(0,0,0,0.01), 0 1px 2px rgba(0,0,0,0.07), 0 5px 15px rgba(0,0,0,0.03);
-        border-radius: 8px;
-        height: 100%;
+        height: calc(100% - 5px);
+        overflow-y: auto;
+        transition: box-shadow 0.1s ease-out;
+        box-sizing: border-box;
+      }
+     
+      main section.selected {
+        box-shadow: 0 0 0 1px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.7), 0 5px 15px rgba(0,0,0,0.3);
       }
       
       @media screen and (max-width: 460px) {
         main {
           display: block;
           overflow: initial;
+          height: initial;
         }
         
         main section {
-          min-width: 100%;
-          max-width: 100%;
+          min-width: initial;
+          max-width: initial;
+          overflow-y: initial;
+          width: calc(100% - 10px);
+          height: 100%;
+          box-sizing: border-box;
         }
         
         main section div[data-url] {
@@ -62,6 +82,11 @@
         font-family: sans-serif;
         font-weight: 300;
         text-align: center;
+        position: sticky;
+        top: 0px;
+        background-color: #fff;
+        margin: 0;
+        padding: 0.8em;
       }
       
       main section h1 a {
@@ -70,23 +95,44 @@
       
       main section div[data-url] {
         /* Container */
-        font-size: 0.8em;
         margin: 0 5px;
+        padding-top: 5px;
       }
       
       main section div.item {
-        padding: 5px;
+        font-size: 1em;
+        padding: 0.8em;
         border-top: solid 1px #dedede;
       }
       
       main section div.item h3 {
+        font-size: 1em;
         margin: 0 0 0.8em 0;
         font-family: sans-serif;
         font-weight: 300;
       }
+     
+      main section div.item div { 
+        display: flex;
+        align-items: center;
+        font-size: 12px;
+      }
+     
+      main section div.item div svg {
+        width: 18px;
+        height: 18px;
+        padding: 0px 15px;
+        margin: 0px 5px;
+        cursor: pointer;
+      }
+     
+      main section div.item div svg > * {
+        pointer-events: none;
+      }
       
-      div[data-bind_inner-text="pubDate"] {
+      div a[data-bind_inner-text="pubDate"] {
         font-style: italic;
+        color: #333333;
       }
     </style>
   </head>

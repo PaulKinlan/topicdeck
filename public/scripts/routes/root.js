@@ -38,8 +38,8 @@ const root = (dataPath, assetPath) => {
 const fetchCachedFeedData = (columnData, itemTemplate) => {
   // Return a promise that resolves to a map of column id => cached data.
   const resolveCache = (cache, url) => (!!cache) ? cache.match(new Request(url)).then(response => (!!response) ? response.text() : undefined) : Promise.resolve();
-  const mapColumnsToCache = (cache, columns) => columns.map(column => [column, resolveCache(cache, `https://chromestatus-deck.glitch.me/proxy?url=${column.feedUrl}`)]);
-  const mapCacheToTemplate = (columns) => columns.map(column => [column[0], column[1].then(items => convertFeedItemsToJSON(items))]);
+  const mapColumnsToCache = (cache, columns) => columns.map(column => [column, resolveCache(cache, `https://web-dev-deck.glitch.me/proxy?url=${column.feedUrl}`)]);
+  const mapCacheToTemplate = (columns) => columns.map(column => [column[0], column[1].then(items => itemTemplate.then(render => render({ items: convertFeedItemsToJSON(items)})))]);
     
   return caches.open('data')
       .then(cache => columnData.then(columns => mapColumnsToCache(cache, columns)))

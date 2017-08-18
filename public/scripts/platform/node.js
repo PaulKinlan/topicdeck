@@ -3,6 +3,7 @@ const fs = require('fs');
 const fetch = require('node-fetch');
 const Response = fetch.Response;
 const TextDecoder = require('text-encoding').TextDecoder;
+const TextEncoder = require('text-encoding').TextEncoder;
 const Readable = require('stream').Readable;
 
 const ReadableStream = require('../../../private/streams/readable-stream.js').ReadableStream;

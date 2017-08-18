@@ -1,17 +1,24 @@
 {
-  "name": "feeddeck",
+  "name": "web-dev-deck",
   "version": "0.0.1",
   "scripts": {
-    "start": "node server.js"
+    "prestart" : "node ./tools/generatemanifest.js",
+    "start": "node ./tools/generatemanifest.js && node ./server.js"
   },
   "dependencies": {
     "express": "^4.15.2",
     "node-fetch": "*",
     "text-encoding": "*",
-    "xmldom-alpha": "*"
+    "xmldom-alpha": "*",
+    "workbox-build": "^1.3.0",
+    "workbox-sw": "^1.3.0"
   },
   "engines": {
     "node": "6.9.x"
+  },
+  "repository" : { 
+    "type" : "git",
+    "url" : "https://github.com/paulkinlan/web-dev-deck.git"
   },
   "license": "Apache-2.0",
   "keywords": [

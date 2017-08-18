@@ -16,24 +16,7 @@ const dataPath = '/data/'
 const workbox = new WorkboxSW({clientsClaim: true, skipWaiting: true});
 
 // your custom service worker logic here
-workbox.precache([
-  {
-    "url": "/assets/templates/body.html",
-    "revision": "d4692fe9169ec9a1458f3dc11eb6921f"
-  },
-  {
-    "url": "/assets/templates/foot.html",
-    "revision": "cec363093e60b87f646fe8904a5d4cd5"
-  },
-  {
-    "url": "/assets/templates/head.html",
-    "revision": "97551ca208ceca2727f9c832e44561c4"
-  },
-  {
-    "url": "/assets/templates/item.html",
-    "revision": "d8be335f33f782caed1dccf42c4df564"
-  }
-]);
+workbox.precache([]);
 
 getCompiledTemplate(`${assetPath}templates/body.html`);
 
