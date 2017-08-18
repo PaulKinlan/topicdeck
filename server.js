@@ -26,15 +26,15 @@ app.get('/', (req, res, next) => {
     .then(response => {
       node.responseToExpressStream(res, response.body)
     });         
-});  
+});
 
 app.get('/proxy', (req, res, next) => {
   routes['proxy'](dataPath, assetPath, req)
     .then(response => response.body.pipe(res, {end: true}));
-});       
+});
 
 /*
-  Start the app 
+  Start the app.                      
 */
 app.use(express.static('public'));
 app.listen(8080);

@@ -46,25 +46,35 @@
       "var P=Promise.resolve.bind(Promise);" +
       "function* f(p,a,b){yield p.then(v=>(a=v?a:b)&&'');yield* (a||(_=>[]))();};";
     var streamToGenerator;
-    if (c.node) {
-      streamToGenerator = 
-`var s=r=>{
+    var streamNodeGenerator;
+    var streamWGGenerator;
+    
+    streamNodeGenerator = 
+`var sNode=rN=>{
 var d=!1,l,b=[];
-r.then(r=>{
-r.on('end',_=>{d=!0;l&&l()});
-r.on('data',c=>(l&&(v=>{var t=l;l=null;t(v)})||(d=>b.push(d)))(c));
+rN.then(rN=>{
+rN.on('end',_=>{d=!0;l&&l()});
+rN.on('data',c=>(l&&(v=>{var t=l;l=null;t(v)})||(d=>b.push(d)))(c));
 });
-return i={next:_=>({done:b.length===0&&d,value:P(b.shift()||new Promise(r=>l=r))}),[Symbol.iterator]:_=>i};};`;
-    } else {
-      streamToGenerator = 
-`var s=r=>{
-r=r.then(l=>l.getReader());
+return i={next:_=>({done:b.length===0&&d,value:P(b.shift()||new Promise(rN=>l=rN))}),[Symbol.iterator]:_=>i};};`;
+    
+   streamWGGenerator = 
+`var sWhatWg=rW=>{
+rW=rW.then(l=>l.getReader());
 var d=!1;
-return i={next:_=>({done:d,value:r.then(r=>r.read()).then(v=>{d=v.done;return P(v.value)})}),[Symbol.iterator]:_=>i};
+return i={next:_=>({done:d,value:rW.then(rW=>rW.read()).then(v=>{d=v.done;return P(v.value)})}),[Symbol.iterator]:_=>i};
 };`;
-    }
+  
+ /* if (c.node) {
+    streamToGenerator = 'var s=sNode;';
+  }
+  else {
+    streamToGenerator = 'var s=sWhatWg;';
+  }*/
+    
+    streamToGenerator = `var s = function(x) { return x.then(stream => (stream.constructor.name === 'StreamReader') ? sNode : sWhatWg )};`;
 
-    tmpl = helpers + streamToGenerator +
+    tmpl = helpers + streamToGenerator + streamWGGenerator + streamNodeGenerator + 
         "var g=function*(){yield P('"
         + tmpl
             .replace(/'|\\/g, "\\$&")

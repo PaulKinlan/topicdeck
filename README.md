@@ -1,4 +1,4 @@
-Feeddeck 💯
+Web Dev Deck 💯
 =========================
 
 Inspired by River of news, but HTTPs only and a PWA.

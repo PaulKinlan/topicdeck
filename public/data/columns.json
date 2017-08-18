@@ -1,82 +1,37 @@
 [
   {
-    "name": "Chrome Releases",
-    "href": "https://chromereleases.googleblog.com/",
-    "feedUrl": "https://chromereleases.googleblog.com/feeds/posts/default?alt=rss"
+    "name": "Progressive Web Apps",
+    "href": "https://medium.com/tag/progressive-web-apps",
+    "feedUrl": "https://medium.com/feed/tag/progressive-web-apps"
   },
   {
-    "name": "Web Components",
-    "href": "https://www.chromestatus.com/features#category%3A%20webcomponents",
-    "feedUrl": "https://www.chromestatus.com/features.xml?category=webcomponents"
-  },
-  {
-    "name": "Security",
-    "href": "https://www.chromestatus.com/features#category%3A%20security",
-    "feedUrl":"https://www.chromestatus.com/features.xml?category=security"
-  },
-  {
-    "name": "Multimedia",
-    "href": "https://www.chromestatus.com/features#category%3A%20multimedia",
-    "feedUrl": "https://www.chromestatus.com/features.xml?category=multimedia"
-  },
-  {
-    "name": "Misc",
-    "href": "https://www.chromestatus.com/features#category%3A%20misc",
-    "feedUrl": "https://www.chromestatus.com/features.xml?category=misc"
-  },
-  {
-    "name": "DOM",
-    "href": "https://www.chromestatus.com/features#category%3A%20dom",
-    "feedUrl": "https://www.chromestatus.com/features.xml?category=dom"
-  },
-  {
-    "name": "File APIs",
-    "href": "https://www.chromestatus.com/features#category%3A%20fileapis",
-    "feedUrl":"https://www.chromestatus.com/features.xml?category=fileapis"
-  },
-  {
-    "name": "Offline Storage",
-    "href": "https://www.chromestatus.com/features#category%3A%20offlinestorage",
-    "feedUrl": "https://www.chromestatus.com/features.xml?category=offlinestorage"
-  },
-  {
-    "name": "Device APIs",
-    "href": "https://www.chromestatus.com/features#category%3A%20device",
-    "feedUrl": "https://www.chromestatus.com/features.xml?category=device"
-  },
-  {
-    "name": "Realtime",
-    "href": "https://www.chromestatus.com/features#category%3A%20realtimecommunication",
-    "feedUrl": "https://www.chromestatus.com/features.xml?category=realtimecommunication"
+    "name": "Chrome",
+    "href": "https://medium.com/tag/chrome",
+    "feedUrl": "https://medium.com/feed/tag/chrome"
   },
   {
     "name": "Javascript",
-    "href": "https://www.chromestatus.com/features#category%3A%20javascript",
-    "feedUrl": "https://www.chromestatus.com/features.xml?category=javascript"
+    "href": "https://medium.com/tag/javascript",
+    "feedUrl": "https://medium.com/feed/tag/javascript"
+  },  
+  {
+    "name": "Web Development",
+    "href": "https://medium.com/tag/web-development",
+    "feedUrl": "https://medium.com/feed/tag/web-development"
   },
   {
-    "name": "Network Connectivity",
-    "href": "https://www.chromestatus.com/features#category%3A%20networkconnectivity",
-    "feedUrl": "https://www.chromestatus.com/features.xml?category=networkconnectivity"
-  },
-  {
-    "name": "User Input",
-    "href": "https://www.chromestatus.com/features#category%3A%20userinput",
-    "feedUrl": "https://www.chromestatus.com/features.xml?category=userinput"
-  },
-  {
-    "name": "Performance",
-    "href": "https://www.chromestatus.com/features#category%3A%20performance",
-    "feedUrl": "https://www.chromestatus.com/features.xml?category=performance"
-  },
-  {
-    "name": "Graphics",
-    "href": "https://www.chromestatus.com/features#category%3A%20graphics",
-    "feedUrl": "https://www.chromestatus.com/features.xml?category=graphics"
-  },
+    "name": "html5",
+    "href": "https://medium.com/tag/html5",
+    "feedUrl": "https://medium.com/feed/tag/html5"
+  },  
   {
     "name": "CSS",
-    "href": "https://www.chromestatus.com/features#category%3A%20css",
-    "feedUrl": "https://www.chromestatus.com/features.xml?category=css"
+    "href": "https://medium.com/tag/CSS",
+    "feedUrl": "https://medium.com/feed/tag/CSS"
+  },  
+  {
+    "name": "Offline First",
+    "href": "https://medium.com/tag/offline-first",
+    "feedUrl": "https://medium.com/feed/tag/offline-first"
   }
 ]
