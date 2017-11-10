@@ -27,7 +27,7 @@ workbox.precache([
   },
   {
     "url": "/assets/templates/head.html",
-    "revision": "97551ca208ceca2727f9c832e44561c4"
+    "revision": "1a02fb606260c730059295bf8e01d4ab"
   },
   {
     "url": "/assets/templates/item.html",
