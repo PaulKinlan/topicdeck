@@ -38,3 +38,10 @@ app.get('/proxy', (req, res, next) => {
 */
 app.use(express.static('public'));
 app.listen(8080);
+
+if (typeof process === 'object') {
+    process.on('unhandledRejection', (error, promise) => {
+        console.error("== Node detected an unhandled rejection! ==");
+        console.error(error.stack);
+    });
+}

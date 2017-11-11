@@ -1,4 +1,7 @@
-[
+{
+  "title": "Chromestatus Deck",
+  "baseUrl": "https://chromestatus-deck.glitch.me",
+  "columns": [
   {
     "name": "Chrome Releases",
     "href": "https://chromereleases.googleblog.com/",
@@ -79,4 +82,5 @@
     "href": "https://www.chromestatus.com/features#category%3A%20css",
     "feedUrl": "https://www.chromestatus.com/features.xml?category=css"
   }
-]
+  ]
+}
