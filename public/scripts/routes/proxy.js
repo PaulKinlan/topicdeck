@@ -4,7 +4,9 @@ const proxyHandler = (dataPath, assetPath, request) => {
   */ 
   const url = parseUrl(request);
   
-  var fetchPromise = fetch(url).then(networkResponse => {    
+  
+  // Always hit the network, and update the cache so subsequent renders are ok.
+  return fetch(url).then(networkResponse => {    
     if(networkResponse.ok)
       return caches.open('data')
            .then(cache => (!!cache) ? cache.put(request, networkResponse.clone()) : undefined)
@@ -12,19 +14,6 @@ const proxyHandler = (dataPath, assetPath, request) => {
     return networkResponse;
   }).catch(error => {
     console.log("Fetch Error", error);
-    throw error;
-  });  
-  
-  return caches.open('data').then(cache => {
-    // There is no cache, just hit the network.
-    if (cache === undefined) return fetchPromise;
-    
-    return cache.match(request.clone()).then(response => {
-      // Return the cache or the fetch if not there.
-      return response || fetchPromise;
-    });
-  }).catch(error => {
-    console.log("Error in SW", error);
     throw error;
   });
 }

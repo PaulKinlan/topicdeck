@@ -34,7 +34,7 @@ app.get('/proxy', (req, res, next) => {
 });
 
 /*
-  Start the app.                      
+  Start the app.
 */
 app.use(express.static('public'));
 app.listen(8080);
