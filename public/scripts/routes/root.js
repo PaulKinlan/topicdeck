@@ -1,14 +1,13 @@
 // handler
 const root = (dataPath, assetPath) => {
   
-  let columnData = loadData(`${dataPath}columns.json`).then(r => r.json());
-
-  
+  let config = loadData(`${dataPath}config.json`).then(r => r.json());
+ 
   let headTemplate = getCompiledTemplate(`${assetPath}templates/head.html`);
   let bodyTemplate = getCompiledTemplate(`${assetPath}templates/body.html`);
   let itemTemplate = getCompiledTemplate(`${assetPath}templates/item.html`);
   
-  let jsonFeedData = fetchCachedFeedData(columnData, itemTemplate);
+  let jsonFeedData = fetchCachedFeedData(config, itemTemplate);
   
   /*
    * Render the head from the cache or network
@@ -18,8 +17,8 @@ const root = (dataPath, assetPath) => {
    * Render the footer - contains JS to data bind client request.
   */
   
-  const headStream = headTemplate.then(render => render({ columns: columnData }));
-  const bodyStream = jsonFeedData.then(columns => bodyTemplate.then(render => render({ columns: columns })));
+  const headStream = headTemplate.then(render => render({ config: config }));
+  const bodyStream = jsonFeedData.then(columns => bodyTemplate.then(render => render({ config: config, columns: columns })));
   const footStream = loadTemplate(`${assetPath}templates/foot.html`);
 
   let concatStream = new ConcatStream;
@@ -35,14 +34,14 @@ const root = (dataPath, assetPath) => {
 
 
 // Helpers
-const fetchCachedFeedData = (columnData, itemTemplate) => {
+const fetchCachedFeedData = (config, itemTemplate) => {
   // Return a promise that resolves to a map of column id => cached data.
   const resolveCache = (cache, url) => (!!cache) ? cache.match(new Request(url)).then(response => (!!response) ? response.text() : undefined) : Promise.resolve();
-  const mapColumnsToCache = (cache, columns) => columns.map(column => [column, resolveCache(cache, `https://web-dev-deck.glitch.me/proxy?url=${column.feedUrl}`)]);
+  const mapColumnsToCache = (cache, config) => config.columns.map(column => [column, resolveCache(cache, `${config.baseUrl}/proxy?url=${column.feedUrl}`)]);
   const mapCacheToTemplate = (columns) => columns.map(column => [column[0], column[1].then(items => itemTemplate.then(render => render({ items: convertFeedItemsToJSON(items)})))]);
     
   return caches.open('data')
-      .then(cache => columnData.then(columns => mapColumnsToCache(cache, columns)))
+      .then(cache => config.then(configData => mapColumnsToCache(cache, configData)))
       .then(columns => mapCacheToTemplate(columns));
 };
 

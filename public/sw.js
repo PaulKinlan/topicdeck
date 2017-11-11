@@ -1,4 +1,4 @@
-/* VERSION: 0.0.4 */
+/* VERSION: 0.0.91 */
 importScripts('/scripts/router.js');
 importScripts('/scripts/dot.js');
 importScripts('/scripts/DOMParser.js');
@@ -18,7 +18,7 @@ const workbox = new WorkboxSW({clientsClaim: true, skipWaiting: true});
 workbox.precache([
   {
     "url": "/assets/templates/body.html",
-    "revision": "d4692fe9169ec9a1458f3dc11eb6921f"
+    "revision": "0ab652c4d6e840b974aa068cb5bd3d1f"
   },
   {
     "url": "/assets/templates/foot.html",
@@ -26,7 +26,7 @@ workbox.precache([
   },
   {
     "url": "/assets/templates/head.html",
-    "revision": "1a02fb606260c730059295bf8e01d4ab"
+    "revision": "eaeeb7ab9f1f93d8222fd2073a4ab526"
   },
   {
     "url": "/assets/templates/item.html",
