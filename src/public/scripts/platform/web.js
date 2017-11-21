@@ -32,3 +32,42 @@ function compileTemplate(path) {
     .then(stream => streamToString(stream))
     .then(template => doT.compile(template, {node: false, evaluate: /\$\$(([^\$]+|\\.)+)\$\$/g}));
 }
+
+function streamToString(stream) {
+  const reader = stream.getReader();
+  let buffer = new Uint8Array();
+  let resolve;
+  let reject; 
+
+  const promise = new Promise((res, rej) => {
+    resolve=res;
+    reject=rej;
+  });
+
+  function pull() {
+    return reader.read().then(({value, done}) => {
+      if(done) {          
+        const decoder = new TextDecoder();
+        return resolve(decoder.decode(buffer));
+      }
+
+      let newBuffer = new Uint8Array(buffer.length + value.length);
+      newBuffer.set(buffer);
+      newBuffer.set(value, buffer.length);
+      buffer = newBuffer;
+
+      return pull();
+    }, e => reject(e));
+  }
+
+  pull();
+
+  return promise;
+}
+
+module.exports = {
+  compileTemplate: compileTemplate,
+  loadTemplate: loadTemplate,
+  loadData: loadData,
+  streamToString: streamToString
+};

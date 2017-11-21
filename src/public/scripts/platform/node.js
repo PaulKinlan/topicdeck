@@ -1,4 +1,5 @@
-const doT = require('../dot.js');
+import * as doT from '../dot.js';
+
 const fs = require('fs');
 const fetch = require('node-fetch');
 const Response = fetch.Response;

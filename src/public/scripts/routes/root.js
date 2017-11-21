@@ -1,4 +1,11 @@
 // handler
+import * as common from '../platform/common.js';
+
+var loadTemplate = common.loadTemplate;  
+var loadData = common.loadData;
+var getCompiledTemplate = common.getCompiledTemplate;
+var ConcatStream = common.ConcatStream;
+
 const root = (dataPath, assetPath) => {
   
   let config = loadData(`${dataPath}config.json`).then(r => r.json());
@@ -135,28 +142,21 @@ const convertRSSItemToJSON = (item) => {
 
 let DOMParser = require('xmldom-alpha').DOMParser;
 
-if (typeof module !== 'undefined' && module.exports) {
-  var platform = require('../../scripts/platform/node.js');
-  var common = require('../../scripts/platform/common.js');
-  var loadTemplate = platform.loadTemplate;  
-  var loadData = platform.loadData;
-  var getCompiledTemplate = common.getCompiledTemplate;
-  var ConcatStream = common.ConcatStream;
+if (typeof module !== 'undefined' && module.exports) { 
   const fetch = require('node-fetch');
   var Request = fetch.Request;
   var Response = fetch.Response;
   
   // Really need a Cache API on the server.....
-  caches = new (function() {
+  var caches = new (function() {
     this.open = () => {
       return Promise.resolve(undefined);
     };
   });
   
-  module.exports = {
-    handler: root
-  }
+
 }
-else {
-  routes['root'] = root;
+
+module.exports = {
+  handler: root
 }

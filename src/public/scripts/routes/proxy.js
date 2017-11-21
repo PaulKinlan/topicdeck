@@ -1,10 +1,11 @@
+import * as platform from '../platform';
+
 const proxyHandler = (dataPath, assetPath, request) => {
   /* 
     Go out to the networks.
   */ 
   const url = parseUrl(request);
-  
-  
+    
   // Always hit the network, and update the cache so subsequent renders are ok.
   return fetch(url).then(networkResponse => {    
     if(networkResponse.ok)
@@ -19,12 +20,6 @@ const proxyHandler = (dataPath, assetPath, request) => {
 }
 
 if (typeof module !== 'undefined' && module.exports) {
-  var platform = require('../../scripts/platform/node.js');
-  var common = require('../../scripts/platform/common.js');
-  var loadTemplate = platform.loadTemplate;  
-  var loadData = platform.loadData;
-  var getCompiledTemplate = common.getCompiledTemplate;
-  var ConcatStream = common.ConcatStream;
   var fetch = require('node-fetch');
   var Request = fetch.Request;
   var Response = fetch.Response;
@@ -38,12 +33,11 @@ if (typeof module !== 'undefined' && module.exports) {
     };
   });
   
-  module.exports = {
-    handler: proxyHandler
-  }
 }
-else {
-  routes['proxy'] = proxyHandler;
-  
+else { 
   var parseUrl = request => request.url; //new URL(request.url).searchParams.get('url');
+}
+
+module.exports = {
+  handler: proxyHandler
 }

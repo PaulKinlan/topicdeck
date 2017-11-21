@@ -1,9 +1,11 @@
 {
-  "name": "web-dev-deck",
+  "name": "chromestatus-deck",
   "version": "0.0.1",
   "scripts": {
-    "prestart" : "node ./tools/generatemanifest.js",
-    "start": "node ./tools/generatemanifest.js && node ./server.js"
+    "clean": "rm -rf dist/",
+    "prestart": "node ./tools/generatemanifest.js",
+    "build:server": "babel src -d dist/server",
+    "start": "node ./tools/generatemanifest.js && node ./dist/server.js"
   },
   "dependencies": {
     "express": "^4.15.2",
@@ -16,14 +18,18 @@
   "engines": {
     "node": "6.9.x"
   },
-  "repository" : { 
-    "type" : "git",
-    "url" : "https://github.com/paulkinlan/web-dev-deck.git"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/paulkinlan/web-dev-deck.git"
   },
   "license": "Apache-2.0",
   "keywords": [
     "node",
     "glitch",
     "express"
-  ]
+  ],
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.1"
+  }
 }
