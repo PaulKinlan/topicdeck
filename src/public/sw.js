@@ -10,8 +10,7 @@ const assetPath = '/assets/';
 const dataPath = '/data/';
 
 const workbox = new WorkboxSW({clientsClaim: true, skipWaiting: true});
-
-// your custom service worker logic here
+// This should pre-cache all of the required assets determined at buildtime.
 workbox.precache([]);
 
 getCompiledTemplate(`${assetPath}templates/body.html`);
