@@ -1,19 +1,18 @@
-import * as express from 'express';
-import * as common from './scripts/platform/common.js';
-import * as node from './scripts/platform/node.js';
+import express from 'express';
+import { getCompiledTemplate } from './public/scripts/platform/common.js';
+import * as node from './public/scripts/platform/node.js';
 
-import { handler as root } from './scripts/routes/root.js';
-import { handler as proxy } from './scripts/routes/proxy.js';
+import { handler as root } from './public/scripts/routes/root.js';
+import { handler as proxy } from './public/scripts/routes/proxy.js';
 
 const app = express();
-const getCompiledTemplate = common.getCompiledTemplate;
 
-const assetPath = 'public/assets/';
-const dataPath = 'public/data/';
+const assetPath = 'dist/server/public/assets/';
+const dataPath = 'dist/server/public/data/';
 
 app.all('*', (req, res, next) => {
   // protocol check, if http, redirect to https
-  if(req.get('X-Forwarded-Proto').indexOf("https") == 0) {
+  if(true || req.get('X-Forwarded-Proto').indexOf("https") == 0 ) {
     return next();
   } else {
     res.redirect('https://' + req.hostname + req.url);
@@ -38,7 +37,7 @@ app.get('/proxy', (req, res, next) => {
 /*
   Start the app.
 */
-app.use(express.static('public'));
+app.use(express.static('dist/server/public'));
 app.listen(8080);
 
 if (typeof process === 'object') {

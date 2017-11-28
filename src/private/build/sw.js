@@ -1,13 +1,7 @@
 /* VERSION: 0.0.91 */
-importScripts('/scripts/router.js');
-importScripts('/scripts/dot.js');
-importScripts('/scripts/DOMParser.js');
-importScripts('/scripts/platform/web.js');
-importScripts('/scripts/platform/common.js');
-importScripts('/scripts/routes/index.js');
-importScripts('/scripts/routes/root.js');
-importScripts('/scripts/routes/proxy.js');
-importScripts('/scripts/workbox-sw.js'); // not the actual filename
+
+import { handler as root } from './scripts/routes/root.js';
+import { handler as proxy } from './scripts/routes/proxy.js';
 
 const assetPath = '/assets/';
 const dataPath = '/data/';
@@ -25,11 +19,11 @@ getCompiledTemplate(`${assetPath}templates/body.html`);
 
 // The proxy server '/proxy'
 router.get(`${self.location.origin}/proxy`, (e) => {
-  e.respondWith(routes['proxy'](dataPath, assetPath, e.request));
+  e.respondWith(proxy(dataPath, assetPath, e.request));
 }, {urlMatchProperty: 'href'});
 
 // The root '/'
 router.get(`${self.location.origin}/$`, (e) => {
-  e.respondWith(routes['root'](dataPath, assetPath));
+  e.respondWith(root(dataPath, assetPath));
 }, {urlMatchProperty: 'href'});
 

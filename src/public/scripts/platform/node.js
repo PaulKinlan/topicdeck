@@ -1,15 +1,15 @@
 import * as doT from '../dot.js';
 
 const fs = require('fs');
-const fetch = require('node-fetch');
-const Response = fetch.Response;
 const TextDecoder = require('text-encoding').TextDecoder;
 const TextEncoder = require('text-encoding').TextEncoder;
 const Readable = require('stream').Readable;
-
+const DOMParser = require('xmldom-alpha').DOMParser;
 const ReadableStream = require('../../../private/streams/readable-stream.js').ReadableStream;
 const WritableStream = require('../../../private/streams/writable-stream.js').WritableStream;
-const TransformStream = require('../../../private/streams/transform-stream.js').TransformStream;
+const fetch = require('node-fetch');
+const Request = fetch.Request;
+const Response = fetch.Response;
 
 /*
   This file is basically me futzing about with Streams between Node and WhatWG
@@ -71,7 +71,7 @@ const nodeReadStreamToWhatWGReadableStream = (stream) => {
       stream.on('data', data => {
         controller.enqueue(data)
       });
-      stream.on('error', (error) => controller.abort(error))
+      stream.on('error', error => { console.log(error); controller.abort(error); });
       stream.on('end', () => {
         controller.close();
       })
@@ -127,12 +127,21 @@ const responseToExpressStream = (expressResponse, fetchResponseStream) => {
   stream.pipe(expressResponse, {end:true});
 };
 
-module.exports = {
-  compileTemplate: compileTemplate,
-  FromWhatWGReadableStream: FromWhatWGReadableStream,
-  loadTemplate: loadTemplate,
-  loadData: loadData,
-  responseToExpressStream: responseToExpressStream,
-  streamToString: streamToString,
-  sendStream: sendStream
+var caches = new (function() {
+  this.open = () => {
+    return Promise.resolve(undefined);
+  };
+});
+
+var parseUrl = request => request.query.url;
+
+export {
+  compileTemplate, FromWhatWGReadableStream, loadTemplate,
+  loadData, responseToExpressStream, streamToString, sendStream, 
+  DOMParser,
+  WritableStream,
+  ReadableStream,
+  fetch,
+  cahces,
+  parseUrl
 };

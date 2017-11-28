@@ -2,6 +2,8 @@
   The web versions of loading the data.
 */
 
+import * as doT from '../dot.js';
+
 var loadTemplate = (path) => {
   // Always return the cached asset, before hitting the network as a fallback
   return caches.match(new Request(path))
@@ -65,9 +67,27 @@ function streamToString(stream) {
   return promise;
 }
 
-module.exports = {
-  compileTemplate: compileTemplate,
-  loadTemplate: loadTemplate,
-  loadData: loadData,
-  streamToString: streamToString
+var DOMParser = eval('DOMParser');
+var fetch = eval('self.fetch');
+var WritableStream = eval('self.WritableStream');
+var ReadableStream = eval('self.ReadableStream');
+var Request = eval('self.Request');
+var Response = eval('self.Response');
+var caches = eval('self.caches');
+
+var parseUrl = request => request.url;
+
+export {
+  compileTemplate,
+  loadTemplate,
+  loadData,
+  streamToString,
+  DOMParser,
+  WritableStream,
+  ReadableStream,
+  Request,
+  Response,
+  fetch,
+  caches,
+  parseUrl
 };

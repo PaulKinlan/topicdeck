@@ -1,13 +1,17 @@
-// handler
-import * as common from '../platform/common.js';
-
-var loadTemplate = common.loadTemplate;  
-var loadData = common.loadData;
-var getCompiledTemplate = common.getCompiledTemplate;
-var ConcatStream = common.ConcatStream;
+import {
+  loadTemplate,
+  loadData,
+  fetch,
+  CommonDOMParser,
+  ConcatStream,
+  getCompiledTemplate,
+  Request,
+  Response,
+  caches
+ } from '../platform/common.js';
 
 const root = (dataPath, assetPath) => {
-  
+
   let config = loadData(`${dataPath}config.json`).then(r => r.json());
  
   let headTemplate = getCompiledTemplate(`${assetPath}templates/head.html`);
@@ -72,7 +76,7 @@ const sanitize = (str) => {
 const convertFeedItemsToJSON = (feedText) => {
   if(feedText === undefined) return [];
   
-  const parser = new DOMParser();
+  const parser = new CommonDOMParser();
   const feed = parser.parseFromString(feedText,'application/xml');
   const documentElement = feed.documentElement;
     
@@ -140,23 +144,4 @@ const convertRSSItemToJSON = (item) => {
   return {"title": title, "guid": guid, "description": description, "pubDate": pubDate, "author": author, "link": link};
 };
 
-let DOMParser = require('xmldom-alpha').DOMParser;
-
-if (typeof module !== 'undefined' && module.exports) { 
-  const fetch = require('node-fetch');
-  var Request = fetch.Request;
-  var Response = fetch.Response;
-  
-  // Really need a Cache API on the server.....
-  var caches = new (function() {
-    this.open = () => {
-      return Promise.resolve(undefined);
-    };
-  });
-  
-
-}
-
-module.exports = {
-  handler: root
-}
+export const handler = root;

@@ -1,5 +1,5 @@
-import * as node from './node.js';
-import * as web from './web.js';
+// IF_DEF NODE import * as common from './node.js';
+// IF_DEF WEB import * as common from './web.js';
 
 let templates = {};
 
@@ -31,14 +31,16 @@ var ConcatStream = function() {
   })
 };
 
-if (typeof module !== 'undefined' && module.exports) {
-  var ReadableStream = require('../../../private/streams/readable-stream.js').ReadableStream;
-  var WritableStream = require('../../../private/streams/writable-stream.js').WritableStream;
-}
-
-module.exports = {
-  ConcatStream: ConcatStream,
-  getCompiledTemplate: getCompiledTemplate,
-  compileTemplate: (typeof module !== 'undefined' && module.exports) ? node.compileTemplate : web.compileTemplate,
-  streamToString :(typeof module !== 'undefined' && module.exports) ? node.streamToString : web.streamToString
-}
+export { ConcatStream, getCompiledTemplate };
+export const compileTemplate = common.compileTemplate;
+export const streamToString = common.streamToString;
+export const loadData = common.loadData;
+export const loadTemplate = common.loadTemplate;
+export const CommonDOMParser = common.DOMParser;
+export const ReadableStream = common.ReadableStream;
+export const WritableStream = common.WritableStream;
+export const fetch =  common.fetch;
+export const Request = common.Request;
+export const Response = common.Response;
+export const caches = common.caches;
+export const parseUrl = common.parseUrl;

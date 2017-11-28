@@ -1,4 +1,4 @@
-import * as platform from '../platform';
+import { fetch, caches, parseUrl } from '../platform/common.js';
 
 const proxyHandler = (dataPath, assetPath, request) => {
   /* 
@@ -17,27 +17,6 @@ const proxyHandler = (dataPath, assetPath, request) => {
     console.log("Fetch Error", error);
     throw error;
   });
-}
+};
 
-if (typeof module !== 'undefined' && module.exports) {
-  var fetch = require('node-fetch');
-  var Request = fetch.Request;
-  var Response = fetch.Response;
-  
-  var parseUrl = request => request.query.url;
-  
-  // Really need a Cache API on the server.....
-  caches = new (function() {
-    this.open = () => {
-      return Promise.resolve(undefined);
-    };
-  });
-  
-}
-else { 
-  var parseUrl = request => request.url; //new URL(request.url).searchParams.get('url');
-}
-
-module.exports = {
-  handler: proxyHandler
-}
+export const handler = proxyHandler;
