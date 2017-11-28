@@ -1,4 +1,4 @@
-import test from './plugins/ifdef.js';
+import ifdef from './plugins/ifdef.js';
 
 export default {
     input: 'src/public/sw.js',
@@ -7,6 +7,6 @@ export default {
         format: 'iife'
     },
     plugins: [
-        test({ifdef: 'WEB'})
+        ifdef({ifdef: 'WEB'})
     ]
 };  
