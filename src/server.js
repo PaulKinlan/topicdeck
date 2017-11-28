@@ -7,8 +7,8 @@ import { handler as proxy } from './public/scripts/routes/proxy.js';
 
 const app = express();
 
-const assetPath = 'dist/server/public/assets/';
-const dataPath = 'dist/server/public/data/';
+const assetPath = 'public/assets/';
+const dataPath = 'public/data/';
 
 app.all('*', (req, res, next) => {
   // protocol check, if http, redirect to https
@@ -37,7 +37,7 @@ app.get('/proxy', (req, res, next) => {
 /*
   Start the app.
 */
-app.use(express.static('dist/server/public'));
+app.use(express.static('public'));
 app.listen(8080);
 
 if (typeof process === 'object') {

@@ -3,12 +3,11 @@
   "version": "0.0.1",
   "scripts": {
     "clean": "rm -rf dist/",
-    "prestart": "node ./tools/generatemanifest.js",
-    "build:server": "babel src -d dist/server",
-    "build:client": "rollup -c",
+    "build:server": "mkdir -p dist/server/private/streams && cp src/private/streams/* dist/server/private/streams/ && rollup -c rollup.server.config.js",
+    "build:client": "rollup -c rollup.client.config.js",
     "build:assets": "mkdir -p dist/server/public/assets/ && mkdir -p dist/server/public/data && cp -R src/public/assets/* dist/server/public/assets/ && cp src/public/data/* dist/server/public/data/",
     "build": "npm run build:server && npm run build:client && npm run build:assets",
-    "start": "node ./tools/generatemanifest.js && node ./dist/server.js"
+    "server": "cd dist/server/ && node server.js"
   },
   "dependencies": {
     "express": "^4.15.2",

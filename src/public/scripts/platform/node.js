@@ -5,8 +5,8 @@ const TextDecoder = require('text-encoding').TextDecoder;
 const TextEncoder = require('text-encoding').TextEncoder;
 const Readable = require('stream').Readable;
 const DOMParser = require('xmldom-alpha').DOMParser;
-const ReadableStream = require('../../../private/streams/readable-stream.js').ReadableStream;
-const WritableStream = require('../../../private/streams/writable-stream.js').WritableStream;
+const ReadableStream = require('./private/streams/readable-stream.js').ReadableStream;
+const WritableStream = require('./private/streams/writable-stream.js').WritableStream;
 const fetch = require('node-fetch');
 const Request = fetch.Request;
 const Response = fetch.Response;
@@ -127,7 +127,7 @@ const responseToExpressStream = (expressResponse, fetchResponseStream) => {
   stream.pipe(expressResponse, {end:true});
 };
 
-var caches = new (function() {
+const caches = new (function() {
   this.open = () => {
     return Promise.resolve(undefined);
   };
@@ -141,7 +141,9 @@ export {
   DOMParser,
   WritableStream,
   ReadableStream,
+  Request,
+  Response,
   fetch,
-  cahces,
+  caches,
   parseUrl
 };
