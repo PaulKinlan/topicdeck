@@ -7,7 +7,8 @@
     "build:client": "rollup -c rollup.client.config.js && node ./tools/generatemanifest.js",
     "build:assets": "mkdir -p dist/server/public/assets/ && mkdir -p dist/server/public/data && cp -R src/public/assets/* dist/server/public/assets/ && cp src/public/data/* dist/server/public/data/ && cp src/public/manifest.json dist/server/public/",
     "build": "npm run build:server && npm run build:client && npm run build:assets",
-    "server": "cd dist/server/ && node server.js"
+    "server": "cd dist/server/ && node server.js",
+    "start": "npm run build && npm run server"
   },
   "dependencies": {
     "express": "^4.15.2",
