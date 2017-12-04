@@ -48,7 +48,7 @@ const root = (dataPath, assetPath) => {
 const fetchCachedFeedData = (config, itemTemplate) => {
   // Return a promise that resolves to a map of column id => cached data.
   const resolveCache = (cache, url) => (!!cache) ? cache.match(new Request(url)).then(response => (!!response) ? response.text() : undefined) : Promise.resolve();
-  const mapColumnsToCache = (cache, config) => config.columns.map(column => [column, resolveCache(cache, `${config.baseUrl}/proxy?url=${column.feedUrl}`)]);
+  const mapColumnsToCache = (cache, config) => config.columns.map(column => [column, resolveCache(cache, `/proxy?url=${column.feedUrl}`)]);
   const mapCacheToTemplate = (columns) => columns.map(column => [column[0], column[1].then(items => itemTemplate.then(render => render({ items: convertFeedItemsToJSON(items)})))]);
     
   return caches.open('data')

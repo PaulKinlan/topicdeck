@@ -1,6 +1,5 @@
 {
   "title": "Chromestatus Deck",
-  "baseUrl": "http://localhost:8080",
   "columns": [
   {
     "name": "Chrome Releases",
