@@ -3,6 +3,7 @@
 */
 
 import * as doT from '../dot.js';
+import {DOMParser} from '../../../private/xml-dom-parser/dom-parser.js';
 
 var loadTemplate = (path) => {
   // Always return the cached asset, before hitting the network as a fallback
@@ -67,7 +68,6 @@ function streamToString(stream) {
   return promise;
 }
 
-var DOMParser = eval('DOMParser');
 var fetch = eval('self.fetch');
 var WritableStream = eval('self.WritableStream');
 var ReadableStream = eval('self.ReadableStream');

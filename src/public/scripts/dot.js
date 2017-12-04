@@ -51,7 +51,7 @@ return i={next:_=>({done:b.length===0&&d,value:P(b.shift()||new Promise(rN=>l=rN
 `var sWhatWg=rW=>{
 rW=rW.then(l=>l.getReader());
 var d=!1;
-return i={next:_=>({done:d,value:rW.then(rW=>rW.read()).then(v=>{d=v.done;return P(v.value)})}),[Symbol.iterator]:_=>i};
+return i={next:_=>({done:d,value:rW.then(rW=>rW.read()).then(v=>{d=v.done; return P(v.value)})}),[Symbol.iterator]:_=>i};
 };`;
     
     streamToGenerator = `var s = function(x) { return x.then(stream => (stream.constructor.name === 'StreamReader') ? sNode : sWhatWg )};`;

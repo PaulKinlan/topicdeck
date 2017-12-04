@@ -1,6 +1,6 @@
 {
   "title": "Chromestatus Deck",
-  "baseUrl": "https://chromestatus-deck.glitch.me",
+  "baseUrl": "http://localhost:8080",
   "columns": [
   {
     "name": "Chrome Releases",
