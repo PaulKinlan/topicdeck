@@ -15,33 +15,22 @@
  * limitations under the License.
  */
 
-(function (root, factory) {
-  if (typeof exports === 'object' && typeof exports.nodeName !== 'string') {
-      factory(exports);
-  } else {
-      factory((root.doT = {}));
-  }
-}(this, function (exports) {
-  "use strict";
+function unescape(code) {
+  return code.replace(/\\('|\\)/g, "$1").replace(/[\r\t\n]/g, " ");
+}
 
-  Object.assign(exports, {
-    version: "1.1.1",
-    templateSettings: {
+export const version = "1.1.1";
+export const templateSettings = {
       evaluate: /\{\{(([^\}]+|\\.)+)\}\}/g,
       interpolate: /\{\{=\s*([^\}]+)\}\}/g,
       stream: /\{\{~\s*([^\}]+)\}\}/g,
       conditional: /\{\{\?(\?)?\s*([^\}]*)?\}\}/g,
       node: typeof(process) === 'object',
-      varname: "it",
+      varname: "it"
     }
-  });
 
-  function unescape(code) {
-    return code.replace(/\\('|\\)/g, "$1").replace(/[\r\t\n]/g, " ");
-  }
-
-  exports.compile = function(tmpl, c, def) {
-    c = Object.assign({}, exports.templateSettings, c);
+export const compile = function(tmpl, c, def) {
+    c = Object.assign({}, templateSettings, c);
     var helpers = 
       "var P=Promise.resolve.bind(Promise);" +
       "function* f(p,a,b){yield p.then(v=>(a=v?a:b)&&'');yield* (a||(_=>[]))();};";
@@ -62,15 +51,8 @@ return i={next:_=>({done:b.length===0&&d,value:P(b.shift()||new Promise(rN=>l=rN
 `var sWhatWg=rW=>{
 rW=rW.then(l=>l.getReader());
 var d=!1;
-return i={next:_=>({done:d,value:rW.then(rW=>rW.read()).then(v=>{d=v.done;return P(v.value)})}),[Symbol.iterator]:_=>i};
+return i={next:_=>({done:d,value:rW.then(rW=>rW.read()).then(v=>{d=v.done; return P(v.value)})}),[Symbol.iterator]:_=>i};
 };`;
-  
- /* if (c.node) {
-    streamToGenerator = 'var s=sNode;';
-  }
-  else {
-    streamToGenerator = 'var s=sWhatWg;';
-  }*/
     
     streamToGenerator = `var s = function(x) { return x.then(stream => (stream.constructor.name === 'StreamReader') ? sNode : sWhatWg )};`;
 
@@ -137,4 +119,3 @@ return v.value;
       throw e;
     }
   };
-}));
