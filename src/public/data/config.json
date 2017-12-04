@@ -1,6 +1,5 @@
 {
   "title": "Chromestatus Deck",
-  "baseUrl": "https://chromestatus-deck.glitch.me",
   "columns": [
   {
     "name": "Chrome Releases",

@@ -95,6 +95,8 @@ self.addEventListener('fetch', function(event) {
   }
 });
 
+export { router };
+
 /*
   thoughts: 
     want to intercept scheme origin port path

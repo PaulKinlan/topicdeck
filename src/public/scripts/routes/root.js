@@ -1,6 +1,17 @@
-// handler
+import {
+  loadTemplate,
+  loadData,
+  fetch,
+  CommonDOMParser,
+  ConcatStream,
+  getCompiledTemplate,
+  Request,
+  Response,
+  caches
+ } from '../platform/common.js';
+
 const root = (dataPath, assetPath) => {
-  
+
   let config = loadData(`${dataPath}config.json`).then(r => r.json());
  
   let headTemplate = getCompiledTemplate(`${assetPath}templates/head.html`);
@@ -37,7 +48,7 @@ const root = (dataPath, assetPath) => {
 const fetchCachedFeedData = (config, itemTemplate) => {
   // Return a promise that resolves to a map of column id => cached data.
   const resolveCache = (cache, url) => (!!cache) ? cache.match(new Request(url)).then(response => (!!response) ? response.text() : undefined) : Promise.resolve();
-  const mapColumnsToCache = (cache, config) => config.columns.map(column => [column, resolveCache(cache, `${config.baseUrl}/proxy?url=${column.feedUrl}`)]);
+  const mapColumnsToCache = (cache, config) => config.columns.map(column => [column, resolveCache(cache, `/proxy?url=${column.feedUrl}`)]);
   const mapCacheToTemplate = (columns) => columns.map(column => [column[0], column[1].then(items => itemTemplate.then(render => render({ items: convertFeedItemsToJSON(items)})))]);
     
   return caches.open('data')
@@ -65,7 +76,7 @@ const sanitize = (str) => {
 const convertFeedItemsToJSON = (feedText) => {
   if(feedText === undefined) return [];
   
-  const parser = new DOMParser();
+  const parser = new CommonDOMParser();
   const feed = parser.parseFromString(feedText,'application/xml');
   const documentElement = feed.documentElement;
     
@@ -133,30 +144,4 @@ const convertRSSItemToJSON = (item) => {
   return {"title": title, "guid": guid, "description": description, "pubDate": pubDate, "author": author, "link": link};
 };
 
-let DOMParser = require('xmldom-alpha').DOMParser;
-
-if (typeof module !== 'undefined' && module.exports) {
-  var platform = require('../../scripts/platform/node.js');
-  var common = require('../../scripts/platform/common.js');
-  var loadTemplate = platform.loadTemplate;  
-  var loadData = platform.loadData;
-  var getCompiledTemplate = common.getCompiledTemplate;
-  var ConcatStream = common.ConcatStream;
-  const fetch = require('node-fetch');
-  var Request = fetch.Request;
-  var Response = fetch.Response;
-  
-  // Really need a Cache API on the server.....
-  caches = new (function() {
-    this.open = () => {
-      return Promise.resolve(undefined);
-    };
-  });
-  
-  module.exports = {
-    handler: root
-  }
-}
-else {
-  routes['root'] = root;
-}
+export const handler = root;
