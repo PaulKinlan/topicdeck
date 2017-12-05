@@ -1,9 +1,9 @@
 import ifdef from './plugins/ifdef.js';
 
 export default {
-    input: 'src/public/scripts/client.js',
+    input: 'src/public/sw.js',
     output: { 
-        file: 'dist/server/public/scripts/client.js',
+        file: 'dist/server/public/sw.js',
         format: 'iife'
     },
     plugins: [
