@@ -1,4 +1,4 @@
-import ifdef from './plugins/ifdef.js';
+import jscc from 'rollup-plugin-jscc';
 
 export default {
     input: 'src/public/scripts/client.js',
@@ -7,6 +7,6 @@ export default {
         format: 'iife'
     },
     plugins: [
-        ifdef({ifdef: 'WEB'})
+        jscc()
     ]
 };

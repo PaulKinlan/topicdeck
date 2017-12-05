@@ -1,4 +1,4 @@
-import ifdef from './plugins/ifdef.js';
+import jscc from 'rollup-plugin-jscc';
 
 export default {
     input: 'src/server.js',
@@ -7,6 +7,6 @@ export default {
         format: 'cjs'
     },
     plugins: [
-        ifdef({ifdef: 'NODE'})
+        jscc()
     ]
 };
