@@ -1,3 +1,4 @@
+//#set _NODE 1
 import express from 'express';
 import { getCompiledTemplate } from './public/scripts/platform/common.js';
 import * as node from './public/scripts/platform/node.js';

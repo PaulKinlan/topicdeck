@@ -1,5 +1,4 @@
 /* VERSION: 0.0.91 */
-
 import { handler as root } from './scripts/routes/root.js';
 import { handler as proxy } from './scripts/routes/proxy.js';
 import { getCompiledTemplate } from './scripts/platform/common.js';

@@ -1,11 +1,11 @@
 const swBuild = require('workbox-build');
 
 swBuild.injectManifest({
-  globDirectory: './src/public/assets/templates/',
-  globPatterns: ['*.html'],
+  globDirectory: './src/public/',
+  globPatterns: ['assets/templates/*.html', 'scripts/client.js', 'styles/main.css'],
   swSrc: './dist/server/public/sw.js',
   swDest: './dist/server/public/sw.js',
-  modifyUrlPrefix: {'': '/assets/templates/'}
+  modifyUrlPrefix: {'': '/'}
 })
 .then(() => {
   console.log('Build Manifest generated.');

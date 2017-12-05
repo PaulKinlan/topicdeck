@@ -1,5 +1,8 @@
-// IF_DEF NODE import * as common from './node.js';
-// IF_DEF WEB import * as common from './web.js';
+//#ifset _NODE
+import * as common from './node.js'
+//#else
+import * as common from './web.js'
+//#endif
 
 let templates = {};
 
