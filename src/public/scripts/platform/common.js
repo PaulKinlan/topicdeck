@@ -1,6 +1,6 @@
-/*#if _NODE
+//#ifset _NODE
 import * as common from './node.js'
-//#else */
+//#else
 import * as common from './web.js'
 //#endif
 

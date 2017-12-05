@@ -7,6 +7,10 @@ export default {
         format: 'cjs'
     },
     plugins: [
-        jscc()
+        jscc({
+            values: {
+                '_NODE': '1'
+            }
+        })
     ]
 };
