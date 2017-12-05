@@ -1,4 +1,6 @@
 import jscc from 'rollup-plugin-jscc';
+import uglify from 'rollup-plugin-uglify';
+import { minify } from 'uglify-es';
 
 export default {
     input: 'src/public/sw.js',
@@ -7,6 +9,7 @@ export default {
         format: 'iife'
     },
     plugins: [
-        jscc()
+        jscc(),
+        uglify({}, minify)
     ]
 };
