@@ -1,3 +1,5 @@
+import { convertFeedItemsToJSON } from './data/common.js';
+
 (function() { 
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', function() {
@@ -29,68 +31,7 @@
 
     return element;
   };
-    
-  const convertFeedItemToJSON = (item) => {
-    if(item.nodeName === 'item') {
-      return convertRSSItemToJSON(item);
-    }
-    else if(item.nodeName === 'entry') {
-      return convertAtomItemToJSON(item);
-    }
-    else {
-      return [];
-    }
-  }
-    
-  const convertAtomItemToJSON = (item) => {
-    const getElementText = (tagName) => {
-      const elements = item.getElementsByTagName(tagName);
-      if(elements && elements.length > 0) {
-        return elements[0].textContent;
-      }
       
-      return "";
-    } 
-    
-    const getElementAttribute = (tagName, attribute) => {
-      const elements = item.getElementsByTagName(tagName);
-      if(elements && elements.length > 0 && elements[0].attributes['href']) {
-        return elements[0].attributes['href'].value;
-      }
-      
-      return "";
-    } 
-    
-    const title = getElementText("title");
-    const description = getElementText("summary");
-    const guid = getElementText("id");
-    const pubDate = getElementText("updated");
-    const author = getElementText("author");
-    const link = getElementAttribute("link", "href");
-    
-    return {"title": title, "guid": guid, "description": description, "pubDate": pubDate, "author": author, "link": link};
-  };
-    
-  const convertRSSItemToJSON = (item) => {
-    const getElementText = (tagName) => {
-      const elements = item.getElementsByTagName(tagName);
-      if(elements && elements.length > 0) {
-        return elements[0].textContent;
-      }
-      
-      return "";
-    } 
-    
-    const title = getElementText("title");
-    const description = getElementText("description");
-    const guid = getElementText("guid");
-    const pubDate = getElementText("pubDate");
-    const author = getElementText("author");
-    const link = getElementText("link");
-    
-    return {"title": title, "guid": guid, "description": description, "pubDate": pubDate, "author": author, "link": link};
-  };
-    
   window.addEventListener('DOMContentLoaded', e => {
     const columns = document.querySelectorAll('section div[data-url]');
     const itemTemplate = document.getElementById('itemTemplate')
@@ -103,7 +44,7 @@
           return parser.parseFromString(feedText,'application/xml');
         })
         .then(doc => doc.querySelectorAll(doc.firstElementChild.nodeName === 'rss' ? 'item' : 'entry'))
-        .then(items => Array.prototype.map.call(items, item => convertFeedItemToJSON(item)))
+        .then(items => Array.prototype.map.call(items, item => convertFeedItemsToJSON(item)))
         .then(items => items.reverse())
         .then(items => items.filter(item => !!!(document.getElementById(item.guid))))
         .then(items => items.map(item => applyTemplate(itemTemplate.cloneNode(true), item)))
