@@ -17,7 +17,6 @@ const root = (dataPath, assetPath) => {
   let config = loadData(`${dataPath}config.json`).then(r => r.json());
  
   let headTemplate = getCompiledTemplate(`${assetPath}templates/head.html`);
-  let bodyTemplate = getCompiledTemplate(`${assetPath}templates/body.html`);
   let itemTemplate = getCompiledTemplate(`${assetPath}templates/item.html`);
   
   let jsonFeedData = fetchCachedFeedData(config, itemTemplate);
@@ -30,17 +29,11 @@ const root = (dataPath, assetPath) => {
    * Render the footer - contains JS to data bind client request.
   */
   
-  const headStream = headTemplate.then(render => render({ config: config }));
-  const bodyStream = jsonFeedData.then(columns => bodyTemplate.then(render => render({ config: config, columns: columns })));
-  const footStream = loadTemplate(`${assetPath}templates/foot.html`);
+  const headStream = headTemplate.then(render => jsonFeedData.then(columns => render({ config: config, columns: columns })));
 
   let concatStream = new ConcatStream;
   
-  headStream.then(stream => stream.pipeTo(concatStream.writable, { preventClose:true }))
-                .then(() => bodyStream)
-                .then(stream => stream.pipeTo(concatStream.writable, { preventClose: true }))
-                .then(() => footStream)
-                .then(stream => stream.pipeTo(concatStream.writable));
+  headStream.then(stream => stream.pipeTo(concatStream.writable))
   
   return Promise.resolve(new Response(concatStream.readable, { status: "200" }))
 }

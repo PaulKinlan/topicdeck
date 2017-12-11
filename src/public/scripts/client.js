@@ -13,6 +13,9 @@ import { convertFeedItemsToJSON } from './data/common.js';
     })
   }
 
+  const installBroadcastChannel = new BroadcastChannel('install-cache-channel');
+  installBroadcastChannel.onmessage = (ev) => { console.log(ev) };
+
   const applyTemplate = (templateElement, data) => {
     const element = templateElement.content.cloneNode(true);    
     const treeWalker = document.createTreeWalker(element, NodeFilter.SHOW_ELEMENT, () => NodeFilter.FILTER_ACCEPT);
@@ -39,12 +42,7 @@ import { convertFeedItemsToJSON } from './data/common.js';
       const feedUrl = column.dataset['url'];
       fetch(`/proxy?url=${feedUrl}`)
         .then(feedResponse => feedResponse.text())
-        .then(feedText => {
-          const parser = new DOMParser();
-          return parser.parseFromString(feedText,'application/xml');
-        })
-        .then(doc => doc.querySelectorAll(doc.firstElementChild.nodeName === 'rss' ? 'item' : 'entry'))
-        .then(items => Array.prototype.map.call(items, item => convertFeedItemsToJSON(item)))
+        .then(feedText => convertFeedItemsToJSON(feedText))
         .then(items => items.reverse())
         .then(items => items.filter(item => !!!(document.getElementById(item.guid))))
         .then(items => items.map(item => applyTemplate(itemTemplate.cloneNode(true), item)))
