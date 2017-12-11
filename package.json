@@ -9,6 +9,7 @@
     "build:assets": "mkdir -p dist/server/public/assets/ && mkdir -p dist/server/public/data && mkdir -p dist/server/public/styles && cp -R src/public/assets/* dist/server/public/assets/ && cp src/public/data/* dist/server/public/data/ && cp src/public/styles/* dist/server/public/styles/ && cp src/public/manifest.json dist/server/public/",
     "build": "npm run build:server  && npm run build:serviceworker && npm run build:client && npm run build:assets",
     "server": "cd dist/server/ && node server.js",
+    "server:debug": "cd dist/server/ && node --inspect server.js",
     "start": "npm run build && npm run server"
   },
   "dependencies": {

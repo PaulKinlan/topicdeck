@@ -8,9 +8,13 @@ import { router } from './scripts/router.js';
 const assetPath = '/assets/';
 const dataPath = '/data/';
 
-const workbox = new WorkboxSW({clientsClaim: true, skipWaiting: true});
+const workbox = new WorkboxSW({clientsClaim: true, skipWaiting: true, precacheChannelName: 'install-cache-channel'});
 // This should pre-cache all of the required assets determined at buildtime.
 workbox.precache([]);
+
+//const bcu = new workbox.broadcastCacheUpdate.BroadcastCacheUpdate({
+// channelName: 'cache-updates'
+//});
 
 getCompiledTemplate(`${assetPath}templates/body.html`);
 
@@ -27,4 +31,3 @@ router.get(`${self.location.origin}/proxy`, (e) => {
 router.get(`${self.location.origin}/$`, (e) => {
   e.respondWith(root(dataPath, assetPath));
 }, {urlMatchProperty: 'href'});
-
