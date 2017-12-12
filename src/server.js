@@ -21,7 +21,6 @@ app.all('*', (req, res, next) => {
 });          
 
 getCompiledTemplate(`${assetPath}templates/head.html`);
-getCompiledTemplate(`${assetPath}templates/body.html`);
 
 app.get('/', (req, res, next) => {
   root(dataPath, assetPath)

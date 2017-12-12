@@ -16,7 +16,7 @@ workbox.precache([]);
 // channelName: 'cache-updates'
 //});
 
-getCompiledTemplate(`${assetPath}templates/body.html`);
+getCompiledTemplate(`${assetPath}templates/head.html`);
 
 /*
   Router logic.
