@@ -34,6 +34,11 @@
     "name": "Todd Motto",
     "href": "https://toddmotto.com",
     "feedUrl": "https://toddmotto.com/feed.xml"
+  },
+  {
+    "name": "Abdelrahman Omran",
+    "href": "https://omranic.com",
+    "feedUrl": "https://omranic.com/feed/"
   }
   ]
 }
