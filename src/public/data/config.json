@@ -65,6 +65,11 @@
     "name": "Martin Splitt",
     "href": "https://50linesofco.de",
     "feedUrl": "https://50linesofco.de/rss.xml"
+  },
+  {
+    "name": "Maxim Salnikov",
+    "href": "https://medium.com/@webmaxru",
+    "feedUrl": "https://medium.com/feed/@webmaxru"
   }
   ]
 }
