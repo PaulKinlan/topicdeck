@@ -25,6 +25,11 @@
     "name": "Remy Sharp",
     "href": "https://remysharp.com/",
     "feedUrl": "https://remysharp.com/feed.xml"
+  },
+  {
+    "name": "Todd Motto",
+    "href": "https://toddmotto.com",
+    "feedUrl": "https://toddmotto.com/feed.xml"
   }
   ]
 }
