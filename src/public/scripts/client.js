@@ -13,8 +13,10 @@ import { convertFeedItemsToJSON } from './data/common.js';
     })
   }
 
-  const installBroadcastChannel = new BroadcastChannel('install-cache-channel');
-  installBroadcastChannel.onmessage = (ev) => { console.log(ev) };
+  if('BroadcastChannel' in window) {
+    const installBroadcastChannel = new BroadcastChannel('install-cache-channel');
+    installBroadcastChannel.onmessage = (ev) => { console.log(ev) };
+  }
 
   const applyTemplate = (templateElement, data) => {
     const element = templateElement.content.cloneNode(true);    

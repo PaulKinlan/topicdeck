@@ -12,10 +12,6 @@ const workbox = new WorkboxSW({clientsClaim: true, skipWaiting: true, precacheCh
 // This should pre-cache all of the required assets determined at buildtime.
 workbox.precache([]);
 
-//const bcu = new workbox.broadcastCacheUpdate.BroadcastCacheUpdate({
-// channelName: 'cache-updates'
-//});
-
 getCompiledTemplate(`${assetPath}templates/head.html`);
 
 /*
