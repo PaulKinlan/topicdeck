@@ -65,6 +65,11 @@
     "name": "Martin Splitt",
     "href": "https://50linesofco.de",
     "feedUrl": "https://50linesofco.de/rss.xml"
+  },
+  {
+    "name": "Loiane Groner",
+    "href": "https://loiane.com",
+    "feedUrl": "https://loiane.com/feed.xml"
   }
   ]
 }
