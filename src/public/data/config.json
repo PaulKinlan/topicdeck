@@ -30,6 +30,11 @@
     "name": "Todd Motto",
     "href": "https://toddmotto.com",
     "feedUrl": "https://toddmotto.com/feed.xml"
+  },
+  {
+    "name": "Jorge Cano",
+    "href": "https://medium.com/@jorgeucano",
+    "feedUrl": "https://medium.com/feed/@jorgeucano"
   }
   ]
 }
