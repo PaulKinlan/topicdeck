@@ -1,4 +1,4 @@
-Web Dev Deck 💯
+Web GDE Deck 💯
 =========================
 
 Inspired by River of news, but HTTPs only and a PWA.
