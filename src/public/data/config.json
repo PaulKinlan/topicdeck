@@ -25,6 +25,11 @@
     "name": "Remy Sharp",
     "href": "https://remysharp.com/",
     "feedUrl": "https://remysharp.com/feed.xml"
+  },
+  {
+    "name": "Uri Shaked",
+    "href": "https://urish.org/",
+    "feedUrl": "https://medium.com/feed/@urish"
   }
   ]
 }
