@@ -27,6 +27,15 @@
     "feedUrl": "https://remysharp.com/feed.xml"
   },
   {
+    "name": "Uri Shaked",
+    "href": "https://urish.org/",
+    "feedUrl": "https://medium.com/feed/@urish"
+  },
+  {
+    "name": "Maurizio Mangione",
+    "href": "https://medium.com/@granze",
+    "feedUrl": "https://medium.com/feed/@granze"
+  },
     "name": "Todd Motto",
     "href": "https://toddmotto.com",
     "feedUrl": "https://toddmotto.com/feed.xml"
@@ -35,6 +44,11 @@
     "name": "Jorge Cano",
     "href": "https://medium.com/@jorgeucano",
     "feedUrl": "https://medium.com/feed/@jorgeucano"
+  },
+  {
+    "name": "Abdelrahman Omran",
+    "href": "https://omranic.com",
+    "feedUrl": "https://omranic.com/feed/"
   }
   ]
 }
