@@ -75,6 +75,11 @@
     "name": "Loiane Groner",
     "href": "https://loiane.com",
     "feedUrl": "https://loiane.com/feed.xml"
+  },
+  {
+    "name": "Phil Nash",
+    "href": "https://philna.sh",
+    "feedUrl": "https://philna.sh/feed.xml"
   }
   ]
 }
