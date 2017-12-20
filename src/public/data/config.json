@@ -34,11 +34,11 @@
     "name": "Todd Motto",
     "href": "https://toddmotto.com",
     "feedUrl": "https://toddmotto.com/feed.xml"
-  },
+  }, 
   {
-    "name": "Abdelrahman Omran",
-    "href": "https://omranic.com",
-    "feedUrl": "https://omranic.com/feed/"
+    "name": "Wassim Chegham",
+    "href": "https://medium.com/@wassimchegham",
+    "feedUrl": "https://medium.com/feed/@wassimchegham"
   }
   ]
 }
