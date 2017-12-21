@@ -12,6 +12,11 @@
     "feedUrl": "https://rachelandrew.co.uk/archives/rss.php"
   },
   {
+    "name": "Rachel Nabors",
+    "href": "http://rachelnabors.com/archive/",
+    "feedUrl": "http://rachelnabors.com/rss"
+  },
+  {
     "name": "Deborah Kurata",
     "href": "https://blogs.msmvps.com/deborahk/",
     "feedUrl": "https://blogs.msmvps.com/deborahk/feed/"
