@@ -39,6 +39,7 @@
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.6.1",
+    "now": "^8.5.4",
     "rollup": "^0.52.0",
     "rollup-plugin-jscc": "^0.3.3",
     "rollup-plugin-uglify": "^2.0.1",
