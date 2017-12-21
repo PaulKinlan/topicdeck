@@ -1,90 +1,105 @@
 {
   "title": "Web GDE Deck",
   "columns": [
-    {
-      "name": "Ire Aderinokun",
-      "href": "https://bitsofco.de/",
-      "feedUrl": "https://bitsofco.de/rss/"
-    },
-    {
-      "name": "Rachel Andrew",
-      "href": "https://rachelandrew.co.uk/archives",
-      "feedUrl": "https://rachelandrew.co.uk/archives/rss.php"
-    },
-    {
-      "name": "Deborah Kurata",
-      "href": "https://blogs.msmvps.com/deborahk/",
-      "feedUrl": "https://blogs.msmvps.com/deborahk/feed/"
-    },
-    {
-      "name": "Jecelyn Yeen",
-      "href": "https://medium.com/@jecelynyeen",
-      "feedUrl": "https://medium.com/feed/@jecelynyeen"
-    },
-    {
-      "name": "Remy Sharp",
-      "href": "https://remysharp.com/",
-      "feedUrl": "https://remysharp.com/feed.xml"
-    },
-    {
-      "name": "Uri Shaked",
-      "href": "https://urish.org/",
-      "feedUrl": "https://medium.com/feed/@urish"
-    },
-    {
-      "name": "Maurizio Mangione",
-      "href": "https://medium.com/@granze",
-      "feedUrl": "https://medium.com/feed/@granze"
-    },
-    {
-      "name": "Todd Motto",
-      "href": "https://toddmotto.com",
-      "feedUrl": "https://toddmotto.com/feed.xml"
-    }, 
-    {
-      "name": "Wassim Chegham",
-      "href": "https://medium.com/@wassimchegham",
-      "feedUrl": "https://medium.com/feed/@wassimchegham"
-    },
-    {
-      "name": "Jorge Cano",
-      "href": "https://medium.com/@jorgeucano",
-      "feedUrl": "https://medium.com/feed/@jorgeucano"
-    },
-    {
-      "name": "Abdelrahman Omran",
-      "href": "https://omranic.com",
-      "feedUrl": "https://omranic.com/feed/"
-    },
-    {
-      "name": "Jonathan Belcher",
-      "href": "https://belcher.blog",
-      "feedUrl": "https://belcher.blog/feed/"
-    },
-    {
-      "name": "Martin Splitt",
-      "href": "https://50linesofco.de",
-      "feedUrl": "https://50linesofco.de/rss.xml"
-    },
-    {
-      "name": "Maxim Salnikov",
-      "href": "https://medium.com/@webmaxru",
-      "feedUrl": "https://medium.com/feed/@webmaxru"
-    },
-    {
-      "name": "Loiane Groner",
-      "href": "https://loiane.com",
-      "feedUrl": "https://loiane.com/feed.xml"
-    },
-    {
-      "name": "Phil Nash",
-      "href": "https://philna.sh",
-      "feedUrl": "https://philna.sh/feed.xml"
-    },
-    {
-      "name": "Jurgen Van de Moere",
-      "href": "https://jvandemo.com",
-      "feedUrl": "https://jvandemo.com/rss/"
-    }
+  {
+    "name": "Ire Aderinokun",
+    "href": "https://bitsofco.de/",
+    "feedUrl": "https://bitsofco.de/rss/"
+  },
+  {
+    "name": "Rachel Andrew",
+    "href": "https://rachelandrew.co.uk/archives",
+    "feedUrl": "https://rachelandrew.co.uk/archives/rss.php"
+  },
+  {
+    "name": "Rachel Nabors",
+    "href": "http://rachelnabors.com/archive/",
+    "feedUrl": "http://rachelnabors.com/rss"
+  },
+  {
+    "name": "Pam Selle",
+    "href": "https://thewebivore.com",
+    "feedUrl": "https://thewebivore.com/feed/"
+  },
+  {
+    "name": "Deborah Kurata",
+    "href": "https://blogs.msmvps.com/deborahk/",
+    "feedUrl": "https://blogs.msmvps.com/deborahk/feed/"
+  },
+  {
+    "name": "Jecelyn Yeen",
+    "href": "https://medium.com/@jecelynyeen",
+    "feedUrl": "https://medium.com/feed/@jecelynyeen"
+  },
+  {
+    "name": "Remy Sharp",
+    "href": "https://remysharp.com/",
+    "feedUrl": "https://remysharp.com/feed.xml"
+  },
+  {
+    "name": "Uri Shaked",
+    "href": "https://urish.org/",
+    "feedUrl": "https://medium.com/feed/@urish"
+  },
+  {
+    "name": "Maurizio Mangione",
+    "href": "https://medium.com/@granze",
+    "feedUrl": "https://medium.com/feed/@granze"
+  },
+  {
+    "name": "Todd Motto",
+    "href": "https://toddmotto.com",
+    "feedUrl": "https://toddmotto.com/feed.xml"
+  }, 
+  {
+    "name": "Wassim Chegham",
+    "href": "https://medium.com/@wassimchegham",
+    "feedUrl": "https://medium.com/feed/@wassimchegham"
+  },
+  {
+    "name": "Jorge Cano",
+    "href": "https://medium.com/@jorgeucano",
+    "feedUrl": "https://medium.com/feed/@jorgeucano"
+  },
+  {
+    "name": "Abdelrahman Omran",
+    "href": "https://omranic.com",
+    "feedUrl": "https://omranic.com/feed/"
+  },
+  {
+    "name": "Jonathan Belcher",
+    "href": "https://belcher.blog",
+    "feedUrl": "https://belcher.blog/feed/"
+  },
+  {
+    "name": "Martin Splitt",
+    "href": "https://50linesofco.de",
+    "feedUrl": "https://50linesofco.de/rss.xml"
+  },
+  {
+    "name": "Maxim Salnikov",
+    "href": "https://medium.com/@webmaxru",
+    "feedUrl": "https://medium.com/feed/@webmaxru"
+  },
+  {
+    "name": "Loiane Groner",
+    "href": "https://loiane.com",
+    "feedUrl": "https://loiane.com/feed.xml"
+  },
+  {
+    "name": "Phil Nash",
+    "href": "https://philna.sh",
+    "feedUrl": "https://philna.sh/feed.xml"
+  },
+  {
+    "name": "Gokulakrishnan Kalaikovan",
+    "href": "https://gokulkrishh.github.io",
+    "feedUrl": "https://gokulkrishh.github.io/feed.xml"
+  },
+  {
+    "name": "Jurgen Van de Moere",
+    "href": "https://jvandemo.com",
+    "feedUrl": "https://jvandemo.com/rss/"
+  }
   ]
 }
