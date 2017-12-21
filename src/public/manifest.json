@@ -5,12 +5,12 @@
   "background_color": "#fff",
   "icons": [
     {
-      "src": "https://cdn.glitch.com/d7915b95-ca73-4f83-b935-551cba915e01%2Fpwa-512.png?1495987074284",
+      "src": "/images/app-192.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "https://cdn.glitch.com/d7915b95-ca73-4f83-b935-551cba915e01%2Fpwa-512.png?1495987074284",
+      "src": "/images/app-512.png",
       "type": "image/png",
       "sizes": "512x512"
     }
