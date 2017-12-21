@@ -11,7 +11,9 @@
     "server": "cd dist/server/ && node server.js",
     "server:debug": "cd dist/server/ && node --inspect server.js",
     "now-start": "npm run server",
-    "start": "npm run build && npm run server"
+    "start": "npm run build && npm run server",
+    "deploy": "now -e NODE_ENV=production --token $NOW_TOKEN --npm",
+    "alias": "now alias --token=$NOW_TOKEN"
   },
   "dependencies": {
     "express": "^4.15.2",
