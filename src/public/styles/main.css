@@ -4,9 +4,12 @@ margin: 0;
 }
 
 body > h1 {
-    font-family: 'Noto Sans', sans-serif;
-    color: #333333;
-    margin: 1em;      
+    font: 500 2em Roboto,sans-serif;
+    background-color: #1976d2;
+    color: white;
+    padding: 0.8em;
+    margin: 0 0 0.4em 0;
+    box-shadow: #000 0px 0px 10px;  
 }
 
 main {
@@ -14,8 +17,8 @@ main {
     display: grid;
     overflow-x: auto;
     max-width: 100%;
-    max-height: calc(100vh - 110px);
-    height: calc(100vh - 110px);
+    max-height: calc(100vh - 115px);
+    height: calc(100vh - 115px);
     box-sizing: border-box;
 }
 
