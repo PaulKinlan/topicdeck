@@ -63,7 +63,7 @@ main section h1 {
     font-weight: 300;
     text-align: center;
     position: sticky;
-    top: 0px;
+    top: -1px;
     background-color: #fff;
     margin: 0;
     padding: 0.8em;
