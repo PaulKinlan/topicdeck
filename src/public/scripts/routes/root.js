@@ -10,7 +10,7 @@ import {
   caches
  } from '../platform/common.js';
 
-import {convertRSSItemToJSON, convertAtomItemToJSON, convertFeedItemsToJSON} from '../data/common.js';
+import { convertFeedItemsToJSON } from '../data/common.js';
 
 const root = (dataPath, assetPath) => {
 

@@ -19,6 +19,37 @@ const sanitize = (str) => {
   return str.replace(/[&<>]/g, (tag) => tagsToReplace[tag] || tag);
 }
 
+const findElementText = (item, tagName) => {
+  const elements = findNodes(tagName, item.childNodes);
+  if(elements && elements.length > 0) {
+    return elements[0].textContent;
+  }
+  
+  return "";
+}
+
+const findElementAttribute = (item, tagName, attribute) => {
+  const elements = findNodes(tagName, item.childNodes);
+  if(elements && elements.length > 0) {
+    const attr = elements[0].attributes.getNamedItem(attribute);
+    return (attr !== undefined) ? attr.value : "";
+  }
+  
+  return "";
+}
+
+const getElementsWithAttribute = (tagName, attribute) => {
+  const elements = findNodes(tagName, item.childNodes);
+  return elements.filter(element => element.attributes.getNamedItem(attribute) !== undefined);
+};
+
+const attributeEquals = (attribute, value) => {
+  return (element) => { 
+    const attr = element.attributes.getNamedItem(attribute);
+    return (attr && attr.value === value);
+  };
+};
+
 const convertFeedItemsToJSON = (feedText) => {
   if(feedText === undefined) return [];
   
@@ -41,57 +72,28 @@ const convertFeedItemsToJSON = (feedText) => {
 }
   
 const convertAtomItemToJSON = (item) => {
-  const getElementText = (tagName) => {
-    const elements = findNodes(tagName, item.childNodes);
-    if(elements && elements.length > 0) {
-      return elements[0].textContent;
-    }
-    
-    return "";
-  } 
-  
-  const getElementAttribute = (tagName, attribute) => {
-    const elements = findNodes(tagName, item.childNodes);
-    if(elements && elements.length > 0) {
-      const href = elements[0].attributes.getNamedItem('href');
-      return (href !== undefined) ? href.value : "";
-    }
-    
-    return "";
-  } 
-  
-  const title = getElementText("title");
-  const description = getElementText("summary");
-  const guid = getElementText("id");
-  const pubDate = getElementText("updated");
-  const author = getElementText("author");
-  const link = getElementAttribute("link", "href");
+  const title = findElementText(item, "title");
+  const description = findElementText(item, "summary");
+  const guid = findElementText(item, "id");
+  const pubDate = findElementText(item, "updated");
+  const author = findElementText(item, "author");
+  const link = findElementAttribute(item, "link", "href");
   
   return {"title": sanitize(title), "guid": guid, "description": description, "pubDate": pubDate, "author": author, "link": link};
 };
   
 const convertRSSItemToJSON = (item) => {
-  const getElementText = (tagName) => {
-    const elements = findNodes(tagName, item.childNodes);
-    if(elements && elements.length > 0) {
-      return elements[0].textContent;
-    }
-    
-    return "";
-  } 
-  
-  const title = getElementText("title");
-  const description = getElementText("description");
-  const guid = getElementText("guid");
-  const pubDate = getElementText("pubDate");
-  const author = getElementText("author");
-  const link = getElementText("link");
+  const title = findElementText(item, "title");
+  const description = findElementText(item, "description");
+  const guid = findElementText(item, "guid");
+  const pubDate = findElementText(item, "pubDate");
+  const author = findElementText(item, "author");
+  const link = findElementText(item, "link");
+  const enclosureElement = findNodes("enclosure", item.childNodes).filter(attributeEquals("type", "audio/mpeg"))[0];
   
   return {"title": title, "guid": guid, "description": description, "pubDate": pubDate, "author": author, "link": link};
 };
 
 export {
-  convertRSSItemToJSON,
-  convertAtomItemToJSON,
   convertFeedItemsToJSON
 }
