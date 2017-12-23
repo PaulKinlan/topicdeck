@@ -78,6 +78,9 @@ const convertAtomItemToJSON = (item) => {
   const pubDate = findElementText(item, "updated");
   const author = findElementText(item, "author");
   const link = findElementAttribute(item, "link", "href");
+  const enclosureElement = findNodes("link", item.childNodes)
+                                .filter(attributeEquals("rel", "enclosure"))
+                                .filter(attributeEquals("type", "audio/mpeg"))[0];
   
   return {"title": sanitize(title), "guid": guid, "description": description, "pubDate": pubDate, "author": author, "link": link};
 };
