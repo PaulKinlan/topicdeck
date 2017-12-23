@@ -15,7 +15,12 @@ import { convertFeedItemsToJSON } from './data/common.js';
 
   if('BroadcastChannel' in window) {
     const installBroadcastChannel = new BroadcastChannel('install-cache-channel');
-    installBroadcastChannel.onmessage = (ev) => { console.log(ev) };
+    installBroadcastChannel.onmessage = (ev) => { 
+      console.log(ev);
+      const toast = document.getElementById('toast');
+      toast.classList.add('visible');
+      setTimeout(() => toast.classList.remove('visible'), 10000);
+    };
   }
 
   const applyTemplate = (templateElement, data) => {

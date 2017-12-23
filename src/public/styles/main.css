@@ -56,6 +56,18 @@ main section.selected {
   main section div[data-url] {
     margin: initial;
   }
+
+  div#toast {
+    height: 48px;
+    font: 'Roboto' 14pt;
+    bottom: 0px !important;
+    left: 0 !important;
+    right: 0 !important;
+    min-width: auto !important;
+    max-width: auto !important;
+    margin-left: 0 !important;
+    border-radius: 0px !important;
+  }
 }
 
 main section h1 {
@@ -114,4 +126,33 @@ main section div.item div svg>* {
 div a[data-bind_inner-text="pubDate"] {
   font-style: italic;
   color: #333333;
+}
+
+div#toast {
+  display: none;
+  background-color: #323232;
+  font-family: 'Roboto', Arial, sans-serif;
+  color: white;
+}
+
+div#toast.visible {
+  display: flex;
+  align-items: center;
+  padding: 0 1em 0 1em;
+  position: fixed;
+  height: 48px;
+  min-width: 400px;
+  max-width: 400px;
+  left: 24px;
+  bottom: 24px;
+  border-radius: 2px;
+}
+
+div#toast span {
+  flex-grow: 1;
+}
+
+div#toast a {
+  color: white;
+  text-transform: uppercase;
 }
