@@ -1,117 +1,117 @@
-head, :root, body {
-background-color: #fafafa;
-margin: 0;
+head,
+ :root,
+body {
+  background-color: #fafafa;
+  margin: 0;
 }
 
-body > h1 {
-    font: 500 2em Roboto,sans-serif;
-    background-color: #1976d2;
-    color: white;
-    padding: 0.8em;
-    margin: 0 0 0.4em 0;
-    box-shadow: #000 0px 0px 10px;  
+body>h1 {
+  font: 500 2em Roboto, sans-serif;
+  background-color: #1976d2;
+  color: white;
+  padding: 0.8em;
+  margin: 0 0 0.4em 0;
+  box-shadow: #000 0px 0px 10px;
 }
 
 main {
-    display: flex;
-    display: grid;
-    overflow-x: auto;
-    max-width: 100%;
-    max-height: calc(100vh - 115px);
-    height: calc(100vh - 115px);
-    box-sizing: border-box;
+  display: flex;
+  display: grid;
+  overflow-x: auto;
+  max-width: 100%;
+  max-height: calc(100vh - 115px);
+  height: calc(100vh - 115px);
+  box-sizing: border-box;
 }
 
 main section {
-    min-width: 240px;
-    max-width: 240px;
-    margin: 1px 5px 4px 5px;
-    background: #fff;
-    box-shadow: 0 0 0 1px rgba(0,0,0,0.01), 0 1px 2px rgba(0,0,0,0.07), 0 5px 15px rgba(0,0,0,0.03);
-    overflow-y: auto;
-    transition: box-shadow 0.1s ease-out;
-    box-sizing: border-box;
+  min-width: 240px;
+  max-width: 240px;
+  margin: 1px 5px 4px 5px;
+  background: #fff;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.01), 0 1px 2px rgba(0, 0, 0, 0.07), 0 5px 15px rgba(0, 0, 0, 0.03);
+  overflow-y: auto;
+  transition: box-shadow 0.1s ease-out;
+  box-sizing: border-box;
 }
 
 main section.selected {
-    box-shadow: 0 0 0 1px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.7), 0 5px 15px rgba(0,0,0,0.3);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.7), 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
 @media screen and (max-width: 460px) {
-    main {
+  main {
     display: block;
     overflow: initial;
     height: initial;
-    }
-    
-    main section {
+  }
+  main section {
     min-width: initial;
     max-width: initial;
     overflow-y: initial;
     width: calc(100% - 10px);
     height: 100%;
     box-sizing: border-box;
-    }
-    
-    main section div[data-url] {
-    margin: initial; 
-    }
+  }
+  main section div[data-url] {
+    margin: initial;
+  }
 }
 
 main section h1 {
-    font-family: sans-serif;
-    font-weight: 300;
-    text-align: center;
-    position: sticky;
-    top: -1px;
-    background-color: #fff;
-    margin: 0;
-    padding: 0.8em;
+  font-family: sans-serif;
+  font-weight: 300;
+  text-align: center;
+  position: sticky;
+  top: -1px;
+  background-color: #fff;
+  margin: 0;
+  padding: 0.8em;
 }
 
 main section h1 a {
-    color: #333333;
+  color: #333333;
 }
 
 main section div[data-url] {
-    /* Container */
-    margin: 0 5px;
-    padding-top: 5px;
+  /* Container */
+  margin: 0 5px;
+  padding-top: 5px;
 }
 
 main section div.item {
-    font-size: 1em;
-    padding: 0.8em;
-    border-top: solid 1px #dedede;
+  font-size: 1em;
+  padding: 0.8em;
+  border-top: solid 1px #dedede;
 }
 
 main section div.item h3 {
-    font-size: 1em;
-    margin: 0 0 0.8em 0;
-    font-family: sans-serif;
-    font-weight: 300;
-    word-break: break-word;
+  font-size: 1em;
+  margin: 0 0 0.8em 0;
+  font-family: sans-serif;
+  font-weight: 300;
+  word-break: break-word;
 }
 
-main section div.item div { 
-    display: flex;
-    align-items: center;
-    font-size: 12px;
+main section div.item div {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
 }
 
 main section div.item div svg {
-    width: 18px;
-    height: 18px;
-    padding: 0px 15px;
-    margin: 0px 5px;
-    cursor: pointer;
+  width: 18px;
+  height: 18px;
+  padding: 0px 15px;
+  margin: 0px 5px;
+  cursor: pointer;
 }
 
-main section div.item div svg > * {
-    pointer-events: none;
+main section div.item div svg>* {
+  pointer-events: none;
 }
 
 div a[data-bind_inner-text="pubDate"] {
-    font-style: italic;
-    color: #333333;
+  font-style: italic;
+  color: #333333;
 }
