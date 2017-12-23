@@ -97,6 +97,14 @@ main section div.item {
   border-top: solid 1px #dedede;
 }
 
+main section div.item.new {
+  background-image: url(data:image/svg+xml;utf8,<svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><circle cx="8" cy="8" r="8" fill="#1976d2"/></svg>);
+  background-position-x: 100%;
+  background-position-y: 5px;
+  background-repeat: no-repeat;
+  background-size: 8px;
+}
+
 main section div.item h3 {
   font-size: 1em;
   margin: 0 0 0.8em 0;
