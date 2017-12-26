@@ -110,6 +110,11 @@
     "name": "Juri Strumpflohner",
     "href": "https://juristr.com",
     "feedUrl": "https://feeds.feedburner.com/juristrumpflohner"
+  },
+  {
+    "name": "Jens Oliver Meiert",
+    "href": "https://meiert.com/en/",
+    "feedUrl": "https://meiert.com/en/feed/"
   }
   ]
 }
