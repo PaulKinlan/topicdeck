@@ -44,7 +44,8 @@ const all = (dataPath, assetPath) => {
 }
 
 
-// Helpers
+// Helpers.
+// Todo. We will want to do a server side render...
 const fetchCachedFeedData = (config, itemTemplate) => {
   // Return a promise that resolves to a map of column id => cached data.
   const resolveCachedUrl = (cache, url) => (!!cache) ? cache.match(new Request(url)).then(response => (!!response) ? response.text() : undefined) : Promise.resolve();

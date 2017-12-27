@@ -27,7 +27,7 @@ router.get(`${self.location.origin}/proxy`, (e) => {
 
 // The proxy server '/all'
 router.get(`${self.location.origin}/all`, (e) => {
-  e.respondWith(proxy(dataPath, assetPath, e.request));
+  e.respondWith(all(dataPath, assetPath, e.request));
 }, {urlMatchProperty: 'href'});
 
 // The root '/'
