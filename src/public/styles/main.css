@@ -105,6 +105,15 @@ main section div.item.new {
   background-size: 16px;
 }
 
+main section div.item p.description {
+  font-style: italic;
+  font-weight: 300;
+  font-size: 0.9em;
+  border-left: solid 1px #dadada;
+  padding-left: 1em;
+  color: #3a3a3a;
+}
+
 main section div.item h3 {
   font-size: 1em;
   margin: 0 0 0.8em 0;

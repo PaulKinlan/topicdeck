@@ -26,7 +26,7 @@ router.get(`${self.location.origin}/proxy`, (e) => {
 }, {urlMatchProperty: 'href'});
 
 // The proxy server '/all'
-router.get(`${self.location.origin}/all`, (e) => {
+router.get(`${self.location.origin}/all$`, (e) => {
   e.respondWith(all(dataPath, assetPath, e.request));
 }, {urlMatchProperty: 'href'});
 

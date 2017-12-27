@@ -46,7 +46,7 @@ app.get('/proxy', (req, res, next) => {
  Server specific functionality.
 */
 
-let RSSCombiner = require('rss-combiner');
+let RSSCombiner = require('rss-combiner-ns');
 let config = require(`./${dataPath}config.json`);
 let feeds = config.columns.map(column => column.feedUrl);
 
@@ -58,6 +58,9 @@ let feedConfig = {
   generator: config.origin,
   site_url: config.origin,
   softFail: true,
+  custom_namespaces: {
+    'content': 'http://purl.org/rss/1.0/modules/content/'
+  },
   pubDate: new Date()
 };
 

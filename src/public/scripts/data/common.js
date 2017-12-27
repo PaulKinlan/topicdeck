@@ -4,11 +4,11 @@ import {
 
 const findNode = (tagName, nodes) => {
   return Array.prototype.find.call(nodes, n => n.tagName == tagName);
-}
+};
 
 const findNodes = (tagName, nodes) => {
   return Array.prototype.filter.call(nodes, n => n.tagName == tagName);
-}  
+}; 
 
 const sanitize = (str) => {
   const tagsToReplace = {
@@ -17,7 +17,32 @@ const sanitize = (str) => {
     '>': '&gt;'
   };
   return str.replace(/[&<>]/g, (tag) => tagsToReplace[tag] || tag);
-}
+};
+
+const hardSanitize = (str, limit) => {
+  limit = limit || 100;
+  let strip = false;
+  let output = [];
+
+  for(var c of str) {
+    if(output.length > limit) break;
+    if(c == "<") { 
+      strip = true;
+      continue;
+    }
+    if(c == ">" && strip == true) {
+      strip = false;
+      continue;
+    }
+    if(c == "\n" || c == "\r") {
+      continue;
+    }
+    if(strip) continue;
+
+    output.push(c);
+  }
+  return output.join('');
+};
 
 const findElementText = (item, tagName) => {
   const elements = findNodes(tagName, item.childNodes);
@@ -92,9 +117,10 @@ const convertRSSItemToJSON = (item) => {
   const pubDate = findElementText(item, "pubDate");
   const author = findElementText(item, "author");
   const link = findElementText(item, "link");
+  const contentEncoded = findElementText(item, "content:encoded");
   const enclosureElement = findNodes("enclosure", item.childNodes).filter(attributeEquals("type", "audio/mpeg"))[0];
   
-  return {"title": title, "guid": guid, "description": description, "pubDate": pubDate, "author": author, "link": link};
+  return {"title": title, "guid": guid, "description": hardSanitize(description, 100), "content:encoded": hardSanitize(contentEncoded, 100), "pubDate": pubDate, "author": author, "link": link};
 };
 
 export {
