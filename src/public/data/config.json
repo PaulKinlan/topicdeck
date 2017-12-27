@@ -116,6 +116,11 @@
     "name": "Jens Oliver Meiert",
     "href": "https://meiert.com/en/",
     "feedUrl": "https://meiert.com/en/feed/"
+  },
+  {
+    "name": "Ciro Nunes",
+    "href": "https://cironunes.com",
+    "feedUrl": "https://medium.com/feed/@cironunesdev"
   }
   ]
 }
