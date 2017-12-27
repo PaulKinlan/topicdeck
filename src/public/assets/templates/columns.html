@@ -1,0 +1,7 @@
+$$
+for(let column of it.columns) {
+  yield P('<section style="grid-area:'+ column[0].name.replace(/\s*/g, '') +';"><h1><a href="' + column[0].href + '">' + column[0].name + '</a></h1><div data-url="'+ column[0].feedUrl +'">');
+  yield* sWhatWg(P(column[1]));
+  yield P('</div></section>'); 
+}
+$$

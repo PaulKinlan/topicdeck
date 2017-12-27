@@ -5,6 +5,7 @@ import * as node from './public/scripts/platform/node.js';
 
 import { handler as root } from './public/scripts/routes/root.js';
 import { handler as proxy } from './public/scripts/routes/proxy.js';
+import { handler as all } from './public/scripts/routes/all.js';
 
 const app = express();
 
@@ -24,6 +25,13 @@ getCompiledTemplate(`${assetPath}templates/head.html`);
 
 app.get('/', (req, res, next) => {
   root(dataPath, assetPath)
+    .then(response => {
+      node.responseToExpressStream(res, response.body)
+    });         
+});
+
+app.get('/all', (req, res, next) => {
+  all(dataPath, assetPath)
     .then(response => {
       node.responseToExpressStream(res, response.body)
     });         

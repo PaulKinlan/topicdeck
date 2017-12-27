@@ -73,7 +73,7 @@ return i={next:_=>({done:d,value:rW.then(rW=>rW.read()).then(v=>{d=v.done; retur
               }
             })
             .replace(c.stream, function(_, code) {
-              return "');yield* s(P(" + unescape(code) + "));yield P('";
+              return "');yield* sWhatWg(P(" + unescape(code) + "));yield P('";
             })
             .replace(c.evaluate, function(_, code) {
               return "');" + unescape(code) + ";yield P('";

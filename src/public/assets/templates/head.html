@@ -8,24 +8,14 @@
     <meta name="theme-color" content="#fff">
     <script src="/scripts/client.js"></script>
     <link rel="stylesheet" href="/styles/main.css" />
-    <style>
-    main {
-      grid-template-columns: {{= it.columns.map(column => '[' + column[0].name.replace(/\s*/g,'') + '] 250px ').join(' ') }};
-    }
-    </style>
+    {{~it.styles}}
   </head>
   <body>
     <h1>
       {{=it.config.then(config => config.title)}}
     </h1>
     <main>
-      $$
-      for(let column of it.columns) {
-        yield P('<section style="grid-area:'+ column[0].name.replace(/\s*/g, '') +';"><h1><a href="' + column[0].href + '">' + column[0].name + '</a></h1><div data-url="'+ column[0].feedUrl +'">');
-        yield* sWhatWg(P(column[1]));
-        yield P('</div></section>'); 
-      }
-    $$
+      {{~it.data}}
     </main>
     <div id="toast">
       <span>There is an app update available</span>

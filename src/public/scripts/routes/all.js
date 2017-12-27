@@ -11,14 +11,15 @@ import {
  } from '../platform/common.js';
 
 import { convertFeedItemsToJSON } from '../data/common.js';
+const allUrl = 'https://webgdedeck.com/all.rss';
 
-const root = (dataPath, assetPath) => {
+const all = (dataPath, assetPath) => {
 
   let config = loadData(`${dataPath}config.json`).then(r => r.json());
  
   let headTemplate = getCompiledTemplate(`${assetPath}templates/head.html`);
-  let styleTemplate = getCompiledTemplate(`${assetPath}templates/columns-styles.html`);
-  let columnsTemplate = getCompiledTemplate(`${assetPath}templates/columns.html`);
+  let styleTemplate = getCompiledTemplate(`${assetPath}templates/all-styles.html`);
+  let itemsTemplate = getCompiledTemplate(`${assetPath}templates/all.html`);
   let itemTemplate = getCompiledTemplate(`${assetPath}templates/item.html`);
   
   let jsonFeedData = fetchCachedFeedData(config, itemTemplate);
@@ -31,9 +32,9 @@ const root = (dataPath, assetPath) => {
    * Render the footer - contains JS to data bind client request.
   */
   
-  const columnsStream = columnsTemplate.then(render => jsonFeedData.then(columns => render({columns: columns })));
   const styleStream = styleTemplate.then(render => render({config: config }));
-  const headStream = headTemplate.then(render => render({config: config, data: columnsStream, styles: styleStream}));
+  const itemsStream = itemsTemplate.then(render => jsonFeedData.then(items => render({url: allUrl, items: items })));
+  const headStream = headTemplate.then(render => render({config: config, data: itemsStream, styles: styleStream}));
 
   let concatStream = new ConcatStream;
   
@@ -46,13 +47,11 @@ const root = (dataPath, assetPath) => {
 // Helpers
 const fetchCachedFeedData = (config, itemTemplate) => {
   // Return a promise that resolves to a map of column id => cached data.
-  const resolveCache = (cache, url) => (!!cache) ? cache.match(new Request(url)).then(response => (!!response) ? response.text() : undefined) : Promise.resolve();
-  const mapColumnsToCache = (cache, config) => config.columns.map(column => [column, resolveCache(cache, `/proxy?url=${column.feedUrl}`)]);
-  const mapCacheToTemplate = (columns) => columns.map(column => [column[0], column[1].then(items => itemTemplate.then(render => render({ items: convertFeedItemsToJSON(items)})))]);
-    
+  const resolveCachedUrl = (cache, url) => (!!cache) ? cache.match(new Request(url)).then(response => (!!response) ? response.text() : undefined) : Promise.resolve();
+  
   return caches.open('data')
-      .then(cache => config.then(configData => mapColumnsToCache(cache, configData)))
-      .then(columns => mapCacheToTemplate(columns));
+      .then(cache => resolveCachedUrl(cache, `/proxy?url=${allUrl}`))
+      .then(items => itemTemplate.then(render => render({ items: convertFeedItemsToJSON(items)})));
 };
 
-export const handler = root;
+export const handler = all;
