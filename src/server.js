@@ -35,6 +35,45 @@ app.get('/proxy', (req, res, next) => {
 });
 
 /*
+ Server specific functionality.
+*/
+
+let RSSCombiner = require('rss-combiner');
+let config = require(`./${dataPath}config.json`);
+let feeds = config.columns.map(column => column.feedUrl);
+
+let latestFeed;
+let feedConfig = {
+  title: config.title,
+  size: 100,
+  feeds: feeds,
+  generator: config.origin,
+  site_url: config.origin,
+  softFail: true,
+  pubDate: new Date()
+};
+
+// Promise usage
+const fetchFeeds = () => {
+  console.log('Checking Feed', Date.now());
+  feedConfig.pubDate = new Date();
+  
+  RSSCombiner(feedConfig)
+    .then(function (combinedFeed) {
+      console.log('Feed Ready', Date.now());
+      latestFeed = combinedFeed.xml();
+    });
+};
+
+fetchFeeds();
+setInterval(fetchFeeds, 30 * 60 * 1000);
+
+app.get('/all', (req, res, next) => {
+  res.setHeader('Content-Type', 'text/xml')
+  res.send(latestFeed);
+});
+
+/*
   Start the app.
 */
 app.use(express.static('public'));
