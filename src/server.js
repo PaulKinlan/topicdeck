@@ -68,7 +68,7 @@ const fetchFeeds = () => {
 fetchFeeds();
 setInterval(fetchFeeds, 30 * 60 * 1000);
 
-app.get('/all', (req, res, next) => {
+app.get('/all.rss', (req, res, next) => {
   res.setHeader('Content-Type', 'text/xml')
   res.send(latestFeed);
 });
