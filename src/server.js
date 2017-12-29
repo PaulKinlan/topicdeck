@@ -59,7 +59,8 @@ let feedConfig = {
   site_url: config.origin,
   softFail: true,
   custom_namespaces: {
-    'content': 'http://purl.org/rss/1.0/modules/content/'
+    'content': 'http://purl.org/rss/1.0/modules/content/',
+    'dc': 'http://purl.org/dc/elements/1.1/'
   },
   pubDate: new Date()
 };
