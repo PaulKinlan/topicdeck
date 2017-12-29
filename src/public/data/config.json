@@ -51,7 +51,7 @@
     "name": "Todd Motto",
     "href": "https://toddmotto.com",
     "feedUrl": "https://toddmotto.com/feed.xml"
-  }, 
+  },
   {
     "name": "Wassim Chegham",
     "href": "https://medium.com/@wassimchegham",
@@ -121,6 +121,11 @@
     "name": "Ciro Nunes",
     "href": "https://cironunes.com",
     "feedUrl": "https://medium.com/feed/@cironunesdev"
+  },
+  {
+    "name": "Warat Wongmaneekit",
+    "href": "https://medium.com/@thangman22",
+    "feedUrl": "https://medium.com/feed/@thangman22"
   }
   ]
 }
