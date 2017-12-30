@@ -1,0 +1,12 @@
+<section style="grid-area:{{=it.column.config.name.replace(/\s*/g, '')}}">
+  <h1><a href="{{=it.column.config.href}}">{{=it.column.config.name}}</a></h1>
+  <div data-url="{{=it.column.config.feedUrl}}">
+  $$
+  if(it.column.items) {
+    for(let item of it.column.items) {
+      yield* sWhatWg(P(item));
+    }
+  }
+  $$
+  </div>
+</section>

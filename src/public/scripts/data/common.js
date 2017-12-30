@@ -101,7 +101,7 @@ const convertAtomItemToJSON = (item) => {
   const description = findElementText(item, "summary");
   const guid = findElementText(item, "id");
   const pubDate = findElementText(item, "updated");
-  const author = findElementText(item, "author");
+  const author = findElementText(item, "author") || findElementText(item, "dc:creator");
   const link = findElementAttribute(item, "link", "href");
   const enclosureElement = findNodes("link", item.childNodes)
                                 .filter(attributeEquals("rel", "enclosure"))
@@ -115,7 +115,7 @@ const convertRSSItemToJSON = (item) => {
   const description = findElementText(item, "description");
   const guid = findElementText(item, "guid");
   const pubDate = findElementText(item, "pubDate");
-  const author = findElementText(item, "author");
+  const author = findElementText(item, "author") || findElementText(item, "dc:creator");
   const link = findElementText(item, "link");
   const contentEncoded = findElementText(item, "content:encoded");
   const enclosureElement = findNodes("enclosure", item.childNodes).filter(attributeEquals("type", "audio/mpeg"))[0];

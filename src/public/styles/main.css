@@ -116,6 +116,14 @@ main section div.item p.description {
 
 main section div.item h3 {
   font-size: 1em;
+  margin: 0 0 0.4em 0;
+  font-family: sans-serif;
+  font-weight: 400;
+  word-break: break-word;
+}
+
+main section div.item h4 {
+  font-size: 0.8em;
   margin: 0 0 0.8em 0;
   font-family: sans-serif;
   font-weight: 300;
