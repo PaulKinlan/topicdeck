@@ -47,13 +47,36 @@ import { convertFeedItemsToJSON } from './data/common.js';
 
     return element;
   };
-      
-  window.addEventListener('DOMContentLoaded', e => {
-    const columns = document.querySelectorAll('section div[data-url]');
+
+  function waitForElement(selector, onElement) {
+    var elements = document.querySelectorAll(selector);
+
+    if(elements) {
+      onElement(elements);
+    }
+  
+    var observer = new MutationObserver(function(mutations) {
+      mutations.forEach(function(mutation) {
+        var nodes = Array.from(mutation.addedNodes);
+        let matchedNodes = [];
+        for(var node of nodes) {
+          if(node.matches && node.nodeType == 1 && node.matches(selector)) {
+            matchedNodes.push(node);
+          }
+        };
+        onElement(matchedNodes);
+      });
+    });
+  
+    observer.observe(document.documentElement, { childList: true, subtree: true });
+  }
+
+  waitForElement("section div[data-url]", columns => {
+  
     const itemTemplate = document.getElementById('itemTemplate')
     for(let column of columns) {
       const feedUrl = column.dataset['url'];
-      fetch(`/proxy?url=${feedUrl}`)
+      fetch(`/proxy?url=${encodeURIComponent(feedUrl)}`)
         .then(feedResponse => feedResponse.text())
         .then(feedText => convertFeedItemsToJSON(feedText))
         .then(items => items.reverse())
