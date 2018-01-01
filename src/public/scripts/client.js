@@ -32,9 +32,15 @@ import { convertFeedItemsToJSON } from './data/common.js';
       for(let bindAttr in node.dataset) {
         let isBindableAttr = (bindAttr.indexOf('bind_') == 0) ? true : false;
         if(isBindableAttr) {
-          let dataKey = node.dataset[bindAttr];
+          let dataKeyString = node.dataset[bindAttr];
+          let dataKeys = dataKeyString.split("|");
           let bindKey = bindAttr.substr(5);
-          node[bindKey] = data[dataKey];
+          for(let dataKey of dataKeys) {
+            if(dataKey in data && data[dataKey] !== "") {
+              node[bindKey] = data[dataKey];
+              break;
+            }
+          }
         }
       }
     }

@@ -31,7 +31,7 @@ const all = (dataPath, assetPath) => {
     preload: preloadTemplate.then(render => config.then(c=> render({config: c }))),
     styles: styleTemplate.then(render => render({config: config })),
     data: columnTemplate.then(render => jsonFeedData.then(items => render({column: {config: { feedUrl: allUrl, name: "All GDE's"}, items: items } }))),
-    itemTemplate: itemTemplate.then(render => render({item: {}}))
+    itemTemplate: itemTemplate.then(render => render({options: {includeAuthor: true}, item: {}}))
   };
 
   const headStream = headTemplate.then(render => render({config: config, streams: streams}));

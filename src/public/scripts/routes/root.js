@@ -30,7 +30,7 @@ const root = (dataPath, assetPath) => {
     preload: preloadTemplate.then(render => config.then(c=> render({config: c }))),
     styles: styleTemplate.then(render => render({config: config })),
     data: columnsTemplate.then(render => jsonFeedData.then(columns => render({ columns: columns }))),
-    itemTemplate: itemTemplate.then(render => render({item: {}}))
+    itemTemplate: itemTemplate.then(render => render({options: {includeAuthor: false}, item: {}}))
   };
   
   const headStream = headTemplate.then(render => render({config: config, streams: streams}));
