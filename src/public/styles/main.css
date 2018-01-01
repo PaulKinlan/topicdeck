@@ -112,6 +112,7 @@ main section div.item p.description {
   border-left: solid 1px #dadada;
   padding-left: 1em;
   color: #3a3a3a;
+  overflow-x: auto;
 }
 
 main section div.item h3 {
