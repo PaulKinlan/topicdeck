@@ -1,6 +1,7 @@
 //#set _NODE 1
 import express from 'express';
-import { getCompiledTemplate } from './public/scripts/platform/common.js';
+import streamToString from 'stream-to-string';
+import { getCompiledTemplate, cacheStorage } from './public/scripts/platform/common.js';
 import * as node from './public/scripts/platform/node.js';
 
 import { handler as root } from './public/scripts/routes/root.js';
@@ -39,7 +40,7 @@ app.get('/all', (req, res, next) => {
 
 app.get('/proxy', (req, res, next) => {
   proxy(dataPath, assetPath, req)
-    .then(response => response.body.pipe(res, {end: true}));
+    .then(response => node.sendStream(response.body, true, res));
 });
 
 /*
@@ -62,10 +63,12 @@ let feedConfig = {
     'content': 'http://purl.org/rss/1.0/modules/content/',
     'dc': 'http://purl.org/dc/elements/1.1/'
   },
-  pubDate: new Date()
+  pubDate: new Date(),
+  successfulFetchCallback: (streamInfo) => cacheStorage[streamInfo.url] = streamInfo.stream
 };
 
-// Promise usage
+// A global server feedcache so we are not overloading remote servers
+
 const fetchFeeds = () => {
   console.log('Checking Feed', Date.now());
   feedConfig.pubDate = new Date();

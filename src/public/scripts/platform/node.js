@@ -1,5 +1,6 @@
 import * as doT from '../dot.js';
 
+
 const fs = require('fs');
 const TextDecoder = require('text-encoding').TextDecoder;
 const TextEncoder = require('text-encoding').TextEncoder;
@@ -8,6 +9,7 @@ const DOMParser = require('xmldom-alpha').DOMParser;
 const ReadableStream = require('./private/streams/readable-stream.js').ReadableStream;
 const WritableStream = require('./private/streams/writable-stream.js').WritableStream;
 const fetch = require('node-fetch');
+const stringToStream = require('string-to-stream');
 const Request = fetch.Request;
 const Response = fetch.Response;
 
@@ -127,9 +129,28 @@ const responseToExpressStream = (expressResponse, fetchResponseStream) => {
   stream.pipe(expressResponse, {end:true});
 };
 
+// Need a better interface to a memory store.
+const cacheStorage = {};
+
 const caches = new (function() {
-  this.open = () => {
+  this.open = (cacheName) => {
     return Promise.resolve(undefined);
+  };
+
+  this.has = (cacheName) => {
+    return Promise.resolve(true);
+  };
+
+  this.match = (request, options) => {
+    const url = parseUrl(request);
+    if(url in cacheStorage) {
+      const cachedResponse = cacheStorage[url];
+      const cachedResponseStream = stringToStream(cachedResponse);
+      return Promise.resolve(new Response(cachedResponseStream, { status: "200", contentType: "text/xml" }));
+    }
+    else {
+      return Promise.resolve(undefined);
+    }
   };
 });
 
@@ -144,6 +165,6 @@ export {
   Request,
   Response,
   fetch,
-  caches,
+  caches, cacheStorage,
   parseUrl
 };

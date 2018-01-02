@@ -9,7 +9,7 @@
     "build:assets": "mkdir -p dist/server/public/assets/ && mkdir -p dist/server/public/data && mkdir -p dist/server/public/styles && mkdir -p dist/server/public/images && cp -R src/public/assets/* dist/server/public/assets/ && cp src/public/data/* dist/server/public/data/ && cp src/public/styles/* dist/server/public/styles/ && cp src/public/images/* dist/server/public/images/ && cp src/public/manifest.json dist/server/public/",
     "build": "npm run build:server  && npm run build:serviceworker && npm run build:client && npm run build:assets",
     "server": "cd dist/server/ && node server.js",
-    "server:debug": "cd dist/server/ && node --inspect server.js",
+    "server:debug": "cd dist/server/ && node --inspect-brk server.js",
     "now-start": "npm run server",
     "start": "npm run build && npm run server",
     "deploy": "now -e NODE_ENV=production --token $NOW_TOKEN --npm",
@@ -18,7 +18,9 @@
   "dependencies": {
     "express": "^4.15.2",
     "node-fetch": "*",
-    "rss-combiner-ns": "0.0.5",
+    "rss-combiner-ns": "0.0.10",
+    "stream-to-string": "^1.1.0",
+    "string-to-stream": "^1.1.0",
     "text-encoding": "*",
     "xmldom-alpha": "*"
   },
@@ -42,7 +44,7 @@
     "rollup": "^0.52.3",
     "rollup-plugin-jscc": "^0.3.3",
     "rollup-plugin-uglify": "^2.0.1",
-    "uglify-es": "^3.3.2",
+    "uglify-es": "^3.3.4",
     "workbox-build": "^2.1.0",
     "workbox-sw": "^2.1.0"
   }

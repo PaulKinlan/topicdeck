@@ -46,4 +46,5 @@ export const fetch =  common.fetch;
 export const Request = common.Request;
 export const Response = common.Response;
 export const caches = common.caches;
+export const cacheStorage = common.cacheStorage;
 export const parseUrl = common.parseUrl;

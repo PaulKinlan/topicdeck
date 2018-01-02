@@ -77,6 +77,8 @@ var caches = eval('self.caches');
 
 var parseUrl = request => request.url;
 
+const cacheStorage = {};
+
 export {
   compileTemplate,
   loadTemplate,
@@ -88,6 +90,6 @@ export {
   Request,
   Response,
   fetch,
-  caches,
+  caches, cacheStorage,
   parseUrl
 };
