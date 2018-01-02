@@ -48,3 +48,4 @@ export const Response = common.Response;
 export const caches = common.caches;
 export const cacheStorage = common.cacheStorage;
 export const parseUrl = common.parseUrl;
+export const paths = common.paths;

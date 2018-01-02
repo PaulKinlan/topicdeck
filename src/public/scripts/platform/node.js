@@ -154,7 +154,11 @@ const caches = new (function() {
   };
 });
 
-var parseUrl = request => request.query.url;
+const parseUrl = request => request.query.url;
+const paths = {
+  assetPath: 'public/assets/',
+  dataPath: 'public/data/'
+};
 
 export {
   compileTemplate, FromWhatWGReadableStream, loadTemplate,
@@ -166,5 +170,6 @@ export {
   Response,
   fetch,
   caches, cacheStorage,
-  parseUrl
+  parseUrl,
+  paths
 };

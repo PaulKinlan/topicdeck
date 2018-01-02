@@ -1,29 +1,29 @@
 import {
-  loadTemplate,
   loadData,
   fetch,
-  CommonDOMParser,
   ConcatStream,
   getCompiledTemplate,
   Request,
   Response,
-  caches
+  caches,
+  paths
  } from '../platform/common.js';
 
 import { convertFeedItemsToJSON } from '../data/common.js';
 const allUrl = 'https://webgdedeck.com/all.rss';
 //const allUrl = 'http://127.0.0.1:8080/all.rss';
 
-const all = (dataPath, assetPath) => {
+let config = loadData(`${paths.dataPath}config.json`).then(r => r.json());
+ 
+let headTemplate = getCompiledTemplate(`${paths.assetPath}templates/head.html`);
+let preloadTemplate = getCompiledTemplate(`${paths.assetPath}templates/all-preload.html`);
+let styleTemplate = getCompiledTemplate(`${paths.assetPath}templates/all-styles.html`);
+let columnTemplate = getCompiledTemplate(`${paths.assetPath}templates/column.html`);
+let itemTemplate = getCompiledTemplate(`${paths.assetPath}templates/item.html`);
+
+const all = () => {
 
   let concatStream = new ConcatStream;
-  let config = loadData(`${dataPath}config.json`).then(r => r.json());
- 
-  let headTemplate = getCompiledTemplate(`${assetPath}templates/head.html`);
-  let preloadTemplate = getCompiledTemplate(`${assetPath}templates/all-preload.html`);
-  let styleTemplate = getCompiledTemplate(`${assetPath}templates/all-styles.html`);
-  let columnTemplate = getCompiledTemplate(`${assetPath}templates/column.html`);
-  let itemTemplate = getCompiledTemplate(`${assetPath}templates/item.html`);
   
   let jsonFeedData = fetchCachedFeedData(config, itemTemplate);
 

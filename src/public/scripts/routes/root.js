@@ -1,33 +1,33 @@
 import {
-  loadTemplate,
   loadData,
   fetch,
-  CommonDOMParser,
   ConcatStream,
   getCompiledTemplate,
   Request,
   Response,
-  caches
+  caches,
+  paths
  } from '../platform/common.js';
 
 import { convertFeedItemsToJSON } from '../data/common.js';
 
-const root = (dataPath, assetPath) => {
+let config = loadData(`${paths.dataPath}config.json`).then(r => r.json());
+ 
+let headTemplate = getCompiledTemplate(`${paths.assetPath}templates/head.html`);
+//let preloadTemplate = getCompiledTemplate(`${paths.assetPath}templates/columns-preload.html`);
+let styleTemplate = getCompiledTemplate(`${paths.assetPath}templates/columns-styles.html`);
+let columnTemplate = getCompiledTemplate(`${paths.assetPath}templates/column.html`);
+let columnsTemplate = getCompiledTemplate(`${paths.assetPath}templates/columns.html`);
+let itemTemplate = getCompiledTemplate(`${paths.assetPath}templates/item.html`);
+
+const root = () => {
 
   let concatStream = new ConcatStream;
-  let config = loadData(`${dataPath}config.json`).then(r => r.json());
- 
-  let headTemplate = getCompiledTemplate(`${assetPath}templates/head.html`);
-  let preloadTemplate = getCompiledTemplate(`${assetPath}templates/columns-preload.html`);
-  let styleTemplate = getCompiledTemplate(`${assetPath}templates/columns-styles.html`);
-  let columnTemplate = getCompiledTemplate(`${assetPath}templates/column.html`);
-  let columnsTemplate = getCompiledTemplate(`${assetPath}templates/columns.html`);
-  let itemTemplate = getCompiledTemplate(`${assetPath}templates/item.html`);
 
   let jsonFeedData = fetchCachedFeedData(config, itemTemplate, columnTemplate);
 
   const streams = {
-    preload: preloadTemplate.then(render => config.then(c=> render({config: c }))),
+    //preload: preloadTemplate.then(render => config.then(c=> render({config: c }))),
     styles: styleTemplate.then(render => render({config: config })),
     data: columnsTemplate.then(render => jsonFeedData.then(columns => render({ columns: columns }))),
     itemTemplate: itemTemplate.then(render => render({options: {includeAuthor: false}, item: {}}))

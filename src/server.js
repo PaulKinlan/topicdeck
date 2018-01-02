@@ -1,7 +1,7 @@
 //#set _NODE 1
 import express from 'express';
 import streamToString from 'stream-to-string';
-import { getCompiledTemplate, cacheStorage } from './public/scripts/platform/common.js';
+import { getCompiledTemplate, cacheStorage, paths } from './public/scripts/platform/common.js';
 import * as node from './public/scripts/platform/node.js';
 
 import { handler as root } from './public/scripts/routes/root.js';
@@ -9,9 +9,6 @@ import { handler as proxy } from './public/scripts/routes/proxy.js';
 import { handler as all } from './public/scripts/routes/all.js';
 
 const app = express();
-
-const assetPath = 'public/assets/';
-const dataPath = 'public/data/';
 
 app.all('*', (req, res, next) => {
   // protocol check, if http, redirect to https
@@ -22,24 +19,24 @@ app.all('*', (req, res, next) => {
   }
 });          
 
-getCompiledTemplate(`${assetPath}templates/head.html`);
+getCompiledTemplate(`${paths.assetPath}templates/head.html`);
 
 app.get('/', (req, res, next) => {
-  root(dataPath, assetPath)
+  root()
     .then(response => {
       node.responseToExpressStream(res, response.body)
     });         
 });
 
 app.get('/all', (req, res, next) => {
-  all(dataPath, assetPath)
+  all()
     .then(response => {
       node.responseToExpressStream(res, response.body)
     });         
 });
 
 app.get('/proxy', (req, res, next) => {
-  proxy(dataPath, assetPath, req)
+  proxy(req)
     .then(response => node.sendStream(response.body, true, res));
 });
 
@@ -48,7 +45,7 @@ app.get('/proxy', (req, res, next) => {
 */
 
 let RSSCombiner = require('rss-combiner-ns');
-let config = require(`./${dataPath}config.json`);
+let config = require(`./${paths.dataPath}config.json`);
 let feeds = config.columns.map(column => column.feedUrl);
 
 let latestFeed;

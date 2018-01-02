@@ -5,13 +5,24 @@
 import * as doT from '../dot.js';
 import {DOMParser} from '../../../private/xml-dom-parser/dom-parser.js';
 
+const templatePath = {};
+
 var loadTemplate = (path) => {
-  // Always return the cached asset, before hitting the network as a fallback
+  // Always return the memory cached asset, before hitting the cache and before the network as a fallback
+  if(path in templatePath) {
+    console.log(`loading ${path} from cache`)
+    return templatePath[path].clone().body;
+  }
+
   return caches.match(new Request(path))
     .then(response => {
       return response || fetch(new Request(path))
     })
-    .then(response => response.body);
+    .then(response => { 
+      // Cache in memory.
+      templatePath[path] = response.clone();
+      return response.body;
+    });
 };
 
 var loadData = (path) => {
@@ -31,6 +42,7 @@ var loadData = (path) => {
 }
 
 function compileTemplate(path) {
+  console.log(`loading template ${path}`);
   return loadTemplate(path)
     .then(stream => streamToString(stream))
     .then(template => doT.compile(template, {node: false, evaluate: /\$\$(([^\$]+|\\.)+)\$\$/g}));
@@ -75,7 +87,11 @@ var Request = eval('self.Request');
 var Response = eval('self.Response');
 var caches = eval('self.caches');
 
-var parseUrl = request => request.url;
+const parseUrl = request => request.url;
+const paths = {
+  assetPath: '/assets/',
+  dataPath: '/data/'
+};
 
 const cacheStorage = {};
 
@@ -91,5 +107,6 @@ export {
   Response,
   fetch,
   caches, cacheStorage,
-  parseUrl
+  parseUrl,
+  paths
 };

@@ -1,6 +1,6 @@
 import { fetch, caches, parseUrl } from '../platform/common.js';
 
-const proxyHandler = (dataPath, assetPath, request) => {
+const proxyHandler = (request) => {
   /* 
     Go out to the networks.
   */ 
