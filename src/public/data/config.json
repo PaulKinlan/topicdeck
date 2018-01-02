@@ -136,6 +136,11 @@
       "name": "Kent C. Dodds",
       "href": "https://blog.kentcdodds.com",
       "feedUrl": "https://blog.kentcdodds.com/feed"
-    }
+    },
+    {
+      "name": "Kenneth Auchenberg",
+      "href": "https://medium.com/@auchenberg",
+      "feedUrl": "https://medium.com/feed/@auchenberg"
+    }    
   ]
 }
