@@ -32,22 +32,51 @@ import { convertFeedItemsToJSON } from './data/common.js';
       for(let bindAttr in node.dataset) {
         let isBindableAttr = (bindAttr.indexOf('bind_') == 0) ? true : false;
         if(isBindableAttr) {
-          let dataKey = node.dataset[bindAttr];
+          let dataKeyString = node.dataset[bindAttr];
+          let dataKeys = dataKeyString.split("|");
           let bindKey = bindAttr.substr(5);
-          node[bindKey] = data[dataKey];
+          for(let dataKey of dataKeys) {
+            if(dataKey in data && data[dataKey] !== "") {
+              node[bindKey] = data[dataKey];
+              break;
+            }
+          }
         }
       }
     }
 
     return element;
   };
-      
-  window.addEventListener('DOMContentLoaded', e => {
-    const columns = document.querySelectorAll('section div[data-url]');
+
+  function waitForElement(selector, onElement) {
+    var elements = document.querySelectorAll(selector);
+
+    if(elements) {
+      onElement(elements);
+    }
+  
+    var observer = new MutationObserver(function(mutations) {
+      mutations.forEach(function(mutation) {
+        var nodes = Array.from(mutation.addedNodes);
+        let matchedNodes = [];
+        for(var node of nodes) {
+          if(node.matches && node.nodeType == 1 && node.matches(selector)) {
+            matchedNodes.push(node);
+          }
+        };
+        onElement(matchedNodes);
+      });
+    });
+  
+    observer.observe(document.documentElement, { childList: true, subtree: true });
+  }
+
+  waitForElement("section div[data-url]", columns => {
+  
     const itemTemplate = document.getElementById('itemTemplate')
     for(let column of columns) {
       const feedUrl = column.dataset['url'];
-      fetch(`/proxy?url=${feedUrl}`)
+      fetch(`/proxy?url=${encodeURIComponent(feedUrl)}`)
         .then(feedResponse => feedResponse.text())
         .then(feedText => convertFeedItemsToJSON(feedText))
         .then(items => items.reverse())

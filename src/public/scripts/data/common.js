@@ -4,11 +4,11 @@ import {
 
 const findNode = (tagName, nodes) => {
   return Array.prototype.find.call(nodes, n => n.tagName == tagName);
-}
+};
 
 const findNodes = (tagName, nodes) => {
   return Array.prototype.filter.call(nodes, n => n.tagName == tagName);
-}  
+}; 
 
 const sanitize = (str) => {
   const tagsToReplace = {
@@ -17,9 +17,34 @@ const sanitize = (str) => {
     '>': '&gt;'
   };
   return str.replace(/[&<>]/g, (tag) => tagsToReplace[tag] || tag);
-}
+};
 
-const findElementText = (item, tagName) => {
+const hardSanitize = (str, limit) => {
+  limit = limit || 100;
+  let strip = false;
+  let output = [];
+
+  for(var c of str) {
+    if(output.length > limit) break;
+    if(c == "<") { 
+      strip = true;
+      continue;
+    }
+    if(c == ">" && strip == true) {
+      strip = false;
+      continue;
+    }
+    if(c == "\n" || c == "\r") {
+      continue;
+    }
+    if(strip) continue;
+
+    output.push(c);
+  }
+  return output.join('');
+};
+
+const findElementText = (tagName, item) => {
   const elements = findNodes(tagName, item.childNodes);
   if(elements && elements.length > 0) {
     return elements[0].textContent;
@@ -28,7 +53,7 @@ const findElementText = (item, tagName) => {
   return "";
 }
 
-const findElementAttribute = (item, tagName, attribute) => {
+const findElementAttribute = (tagName, attribute, item) => {
   const elements = findNodes(tagName, item.childNodes);
   if(elements && elements.length > 0) {
     const attr = elements[0].attributes.getNamedItem(attribute);
@@ -56,28 +81,44 @@ const convertFeedItemsToJSON = (feedText) => {
   const parser = new CommonDOMParser();
   const feed = parser.parseFromString(feedText,'application/xml');
   const documentElement = feed.documentElement;
+  const defaults = {};
     
   if(documentElement.nodeName === 'rss') {
     const channel = findNode('channel', documentElement.childNodes);
+    const title = findElementText('title', channel);
+    const link = findElementText('link', channel);
     const items = findNodes('item', channel.childNodes);
-    return items.map(item => convertRSSItemToJSON(item));
+
+    defaults.title = title;
+    defaults.link = link;
+
+    return items.map(item => convertRSSItemToJSON(item, defaults));
   }
   else if(documentElement.nodeName === 'feed') {
     const entrys = findNodes('entry', documentElement.childNodes);
-    return entrys.map(entry => convertAtomItemToJSON(entry));
+    const title = findElementText('title', documentElement);
+    const link = "";
+
+    const linkElement = findNodes("link", documentElement)
+            .filter(attributeEquals("rel", "self"))[0];
+
+    defaults.title = title;
+    defaults.link = link;
+
+    return entrys.map(entry => convertAtomItemToJSON(entry, defaults));
   }
   else {
     return [];
   }
 }
   
-const convertAtomItemToJSON = (item) => {
-  const title = findElementText(item, "title");
-  const description = findElementText(item, "summary");
-  const guid = findElementText(item, "id");
-  const pubDate = findElementText(item, "updated");
-  const author = findElementText(item, "author");
-  const link = findElementAttribute(item, "link", "href");
+const convertAtomItemToJSON = (item, defaults) => {
+  const title = findElementText("title", item);
+  const description = findElementText("summary", item);
+  const guid = findElementText("id", item);
+  const pubDate = findElementText("updated", item);
+  const author = findElementText("author", item) || findElementText("dc:creator", item) || defaults.title;
+  const link = findElementAttribute("link", "href", item);
   const enclosureElement = findNodes("link", item.childNodes)
                                 .filter(attributeEquals("rel", "enclosure"))
                                 .filter(attributeEquals("type", "audio/mpeg"))[0];
@@ -85,16 +126,17 @@ const convertAtomItemToJSON = (item) => {
   return {"title": sanitize(title), "guid": guid, "description": description, "pubDate": pubDate, "author": author, "link": link};
 };
   
-const convertRSSItemToJSON = (item) => {
-  const title = findElementText(item, "title");
-  const description = findElementText(item, "description");
-  const guid = findElementText(item, "guid");
-  const pubDate = findElementText(item, "pubDate");
-  const author = findElementText(item, "author");
-  const link = findElementText(item, "link");
+const convertRSSItemToJSON = (item, defaults) => {
+  const title = findElementText("title", item);
+  const description = findElementText("description", item);
+  const guid = findElementText("guid", item);
+  const pubDate = findElementText("pubDate", item);
+  const author = findElementText("author", item) || findElementText("dc:creator", item) || defaults.title;
+  const link = findElementText("link", item);
+  const contentEncoded = findElementText("content:encoded", item);
   const enclosureElement = findNodes("enclosure", item.childNodes).filter(attributeEquals("type", "audio/mpeg"))[0];
   
-  return {"title": title, "guid": guid, "description": description, "pubDate": pubDate, "author": author, "link": link};
+  return {"title": title, "guid": guid, "description": hardSanitize(description, 100), "content:encoded": hardSanitize(contentEncoded, 100), "pubDate": pubDate, "author": author, "link": link};
 };
 
 export {

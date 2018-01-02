@@ -1,0 +1,5 @@
+$$
+for(let column of it.config.columns) {
+  yield P('<link rel="preload" href="/proxy?url=' + column.feedUrl +'" as="fetch" />');
+}
+$$

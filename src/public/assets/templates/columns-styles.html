@@ -1,0 +1,5 @@
+<style>
+  main {
+    grid-template-columns: {{= it.config.then(config => config.columns.map(column => '[' + column.name.replace(/\s*/g,'') + '] 250px ').join(' ')) }};
+  }
+</style>

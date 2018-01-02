@@ -1,8 +1,8 @@
 {
   "short_name": "Web GDE Deck",
   "name": "Web GDE Deck",
-  "theme_color": "#fff",
-  "background_color": "#fff",
+  "theme_color": "#1976d2",
+  "background_color": "#1976d2",
   "icons": [
     {
       "src": "/images/app-192.png",
