@@ -8,6 +8,7 @@ const Readable = require('stream').Readable;
 const DOMParser = require('xmldom-alpha').DOMParser;
 const ReadableStream = require('./private/streams/readable-stream.js').ReadableStream;
 const WritableStream = require('./private/streams/writable-stream.js').WritableStream;
+const {FromWhatWGReadableStream} = require('fromwhatwgreadablestream');
 const fetch = require('node-fetch');
 const stringToStream = require('string-to-stream');
 const Request = fetch.Request;
@@ -80,32 +81,6 @@ const nodeReadStreamToWhatWGReadableStream = (stream) => {
     }
   });
 };
-
-class FromWhatWGReadableStream extends Readable {
-  constructor(options, whatwgStream) {
-    super(options);
-    const streamReader = whatwgStream.getReader();
-    const outStream = this;
-    
-    function pump() {
-      return streamReader.read().then(({ value, done }) => {
-        if (done) {
-          outStream.push(null);
-          return;
-        }
-      
-        outStream.push(value.toString());
-        return pump();
-      });
-    }
-    
-    pump();
-  }
-  
-  _read(size) {
-    
-  }
-}
 
 const loadTemplate = (path) => {
   return Promise.resolve(nodeReadStreamToWhatWGReadableStream(fs.createReadStream(path)));
