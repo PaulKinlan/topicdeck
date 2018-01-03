@@ -151,6 +151,11 @@
       "name": "Dean Hume",
       "href": "https://deanhume.com",
       "feedUrl": "https://feeds.feedburner.com/DeanHumesBlog"
-    }
+    },
+    {
+      "name": "Raymond Camden",
+      "href": "https://www.raymondcamden.com",
+      "feedUrl": "http://feeds.feedburner.com/raymondcamdensblog"
+    }    
   ]
 }
