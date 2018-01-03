@@ -130,7 +130,7 @@ const convertRSSItemToJSON = (item, defaults) => {
   const title = findElementText("title", item);
   const description = findElementText("description", item);
   const guid = findElementText("guid", item);
-  const pubDate = findElementText("pubDate", item);
+  const pubDate = findElementText("pubDate", item) || findElementText("a10:updated", item);
   const author = findElementText("author", item) || findElementText("dc:creator", item) || defaults.title;
   const link = findElementText("link", item);
   const contentEncoded = findElementText("content:encoded", item);

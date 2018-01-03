@@ -63,7 +63,10 @@ let feedConfig = {
     'feedburner': 'http://rssnamespace.org/feedburner/ext/1.0'
   },
   pubDate: new Date(),
-  successfulFetchCallback: (streamInfo) => cacheStorage[streamInfo.url] = streamInfo.stream
+  successfulFetchCallback: (streamInfo) => {
+    console.log(`Fetched feed: ${streamInfo.url} ${streamInfo.stream.substr(0, 50)}`);
+    return cacheStorage[streamInfo.url] = streamInfo.stream
+  }
 };
 
 // A global server feedcache so we are not overloading remote servers

@@ -18,9 +18,9 @@
   },
   "dependencies": {
     "express": "^4.15.2",
-    "fromwhatwgreadablestream": "^1.0.1",
+    "fromwhatwgreadablestream": "^1.0.2",
     "node-fetch": "*",
-    "rss-combiner-ns": "0.0.10",
+    "rss-combiner-ns": "0.0.12",
     "stream-to-string": "^1.1.0",
     "string-to-stream": "^1.1.0",
     "text-encoding": "*",
