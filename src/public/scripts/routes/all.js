@@ -1,6 +1,5 @@
 import {
   loadData,
-  fetch,
   ConcatStream,
   getCompiledTemplate,
   Request,
