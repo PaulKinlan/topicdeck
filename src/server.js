@@ -58,7 +58,9 @@ let feedConfig = {
   softFail: true,
   custom_namespaces: {
     'content': 'http://purl.org/rss/1.0/modules/content/',
-    'dc': 'http://purl.org/dc/elements/1.1/'
+    'dc': 'http://purl.org/dc/elements/1.1/',
+    'a10': 'http://www.w3.org/2005/Atom',
+    'feedburner': 'http://rssnamespace.org/feedburner/ext/1.0'
   },
   pubDate: new Date(),
   successfulFetchCallback: (streamInfo) => cacheStorage[streamInfo.url] = streamInfo.stream
