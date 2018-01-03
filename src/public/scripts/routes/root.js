@@ -72,7 +72,14 @@ const fetchCachedFeedData = (config, itemTemplate, columnTemplate) => {
           });
         })
       })
-      .then(columns => columns.map(column => columnTemplate.then(render => column.then(c => render({column: c})))));
+      .then(columns => columns.map(column => {
+        return columnTemplate.then(render => column.then(c => { 
+          //console.profile(c.config.name);
+          let result = render({column: c});
+          //console.profileEnd(c.config.name);
+          return result;
+        }
+        ))}));
 };
 
 export const handler = root;
