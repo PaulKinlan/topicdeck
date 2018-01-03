@@ -1,6 +1,5 @@
 import * as doT from '../dot.js';
 
-
 const fs = require('fs');
 const TextDecoder = require('text-encoding').TextDecoder;
 const TextEncoder = require('text-encoding').TextEncoder;

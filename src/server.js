@@ -1,6 +1,6 @@
 //#set _NODE 1
 import express from 'express';
-import streamToString from 'stream-to-string';
+import compression from 'compression';
 import { getCompiledTemplate, cacheStorage, paths } from './public/scripts/platform/common.js';
 import * as node from './public/scripts/platform/node.js';
 
@@ -9,6 +9,10 @@ import { handler as proxy } from './public/scripts/routes/proxy.js';
 import { handler as all } from './public/scripts/routes/all.js';
 
 const app = express();
+console.log(compression)
+app.use(compression({
+  filter: (req, res) => true
+}));
 
 app.all('*', (req, res, next) => {
   // protocol check, if http, redirect to https
@@ -94,6 +98,7 @@ app.get('/all.rss', (req, res, next) => {
   Start the app.
 */
 app.use(express.static('public'));
+
 app.listen(8080);
 
 if (typeof process === 'object') {
