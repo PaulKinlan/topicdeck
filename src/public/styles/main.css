@@ -32,7 +32,7 @@ body>header span a:visited {
 
 main {
   display: flex;
-  display: grid;
+  /*display: grid;*/
   overflow-x: auto;
   max-width: 100%;
   max-height: calc(100vh - 87px);
