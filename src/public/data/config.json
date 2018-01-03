@@ -156,6 +156,15 @@
       "name": "Raymond Camden",
       "href": "https://www.raymondcamden.com",
       "feedUrl": "http://feeds.feedburner.com/raymondcamdensblog"
-    }    
+    },
+      "name": "Mike Hartington",
+      "href": "https://mhartington.io",
+      "feedUrl": "https://mhartington.io/index.xml"
+    },
+    {
+      "name": "Harry Roberts",
+      "href": "https://csswizardry.com/",
+      "feedUrl": "https://feeds.feedburner.com/csswizardry"
+    }
   ]
 }
