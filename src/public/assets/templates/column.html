@@ -3,9 +3,7 @@
   <div data-url="{{=it.column.config.feedUrl}}">
   $$
   if(it.column.items) {
-    for(let item of it.column.items) {
-      yield* sWhatWg(P(item));
-    }
+    yield* sWhatWg(P(it.column.items));
   }
   $$
   </div>

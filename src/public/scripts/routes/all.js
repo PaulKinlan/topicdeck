@@ -53,7 +53,7 @@ const fetchCachedFeedData = (config, itemTemplate) => {
   return caches.open('data')
       .then(cache => resolveCachedUrl(cache, `/proxy?url=${encodeURIComponent(allUrl)}`))
       .then(feed => convertFeedItemsToJSON(feed))
-      .then(items => itemTemplate.then(render => items.map(item => render({options: templateOptions, item: item}))));
+      .then(items => itemTemplate.then(render => render({options: templateOptions, items: items})));
 };
 
 export const handler = all;

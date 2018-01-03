@@ -57,7 +57,7 @@ const fetchCachedFeedData = (config, itemTemplate, columnTemplate) => {
   };
 
   const renderItems = (items) => {
-    return items.map(item => itemTemplate.then(render => render({ templateOptions: templateOptions, item: item})))
+    return itemTemplate.then(render => render({ templateOptions: templateOptions, items: items}));
   };
   
   return caches.open('data')

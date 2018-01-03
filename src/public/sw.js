@@ -8,7 +8,7 @@ import { WorkboxSW } from './scripts/workbox-sw.js';
 import { router } from './scripts/router.js';
 
 
-const workbox = new WorkboxSW({precacheChannelName: 'install-cache-channel'});
+const workbox = new WorkboxSW({ skipWaiting: true, precacheChannelName: 'install-cache-channel'});
 // This should pre-cache all of the required assets determined at buildtime.
 workbox.precache([]);
 
