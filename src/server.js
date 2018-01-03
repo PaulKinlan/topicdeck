@@ -26,7 +26,7 @@ app.all('*', (req, res, next) => {
 getCompiledTemplate(`${paths.assetPath}templates/head.html`);
 
 app.get('/', (req, res, next) => {
-  res.setHeader('Link', '</styles/main.css>; rel="preload";as="style", </scripts/client.js>; rel="preload";as="script", </sw.js>; rel="preload";as="script"');
+  res.setHeader('Link', '</styles/main.css>; rel=preload; as=style, </scripts/client.js>; rel=preload; as=script, </sw.js>; rel=preload; as=script');
   root()
     .then(response => {
       node.responseToExpressStream(res, response.body)
@@ -34,7 +34,7 @@ app.get('/', (req, res, next) => {
 });
 
 app.get('/all', (req, res, next) => {
-  res.setHeader('Link', '</styles/main.css>; rel="preload";as="style", </scripts/client.js>; rel="preload";as="script", </sw.js>; rel="preload";as="script"');
+  res.setHeader('Link', '</styles/main.css>; rel=preload; as=style, </scripts/client.js>; rel=preload; as=script, </sw.js>; rel=preload; as=script');
   all()
     .then(response => {
       node.responseToExpressStream(res, response.body)
