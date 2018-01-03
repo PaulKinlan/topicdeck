@@ -13,9 +13,12 @@
     {{~it.streams.styles}}
   </head>
   <body>
-    <h1>
-      {{=it.config.then(config => config.title)}}
-    </h1>
+    <header>
+      <h1>
+        {{=it.config.then(config => config.title)}} 
+      </h1>
+      <span><a href="/">Deck</a> | <a href="/all">Stream</a></span>
+  </header>
     <main>
       {{~it.streams.data}}
     </main>

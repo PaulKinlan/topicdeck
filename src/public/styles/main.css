@@ -5,13 +5,29 @@ body {
   margin: 0;
 }
 
-body>h1 {
-  font: 500 2em Roboto, sans-serif;
+body>header {
+  font: 500 1em Roboto, sans-serif;
   background-color: #1976d2;
   color: white;
-  padding: 0.8em;
+  padding: 0.8em 0.8em 0.2em 0.8em;
   margin: 0 0 0.4em 0;
   box-shadow: #000 0px 0px 10px;
+}
+
+body>header h1 {
+  margin: 0 0 0.2em 0;
+}
+
+body>header span {
+  font-weight: 400;
+  font-size: 0.8em;
+  color: white;
+  margin-bottom: 0.4em;
+  display: block;
+}
+
+body>header span a:visited {
+  color: white;
 }
 
 main {
@@ -19,8 +35,8 @@ main {
   display: grid;
   overflow-x: auto;
   max-width: 100%;
-  max-height: calc(100vh - 115px);
-  height: calc(100vh - 115px);
+  max-height: calc(100vh - 87px);
+  height: calc(100vh);
   box-sizing: border-box;
 }
 
