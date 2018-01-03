@@ -30,7 +30,7 @@ const all = () => {
     preload: preloadTemplate.then(render => config.then(c=> render({config: c }))),
     styles: styleTemplate.then(render => render({config: config })),
     data: columnTemplate.then(render => jsonFeedData.then(items => render({column: {config: { feedUrl: allUrl, name: "All GDE's"}, items: items } }))),
-    itemTemplate: itemTemplate.then(render => render({options: {includeAuthor: true}, item: {}}))
+    itemTemplate: itemTemplate.then(render => render({options: {includeAuthor: true, new: true}, item: {}}))
   };
 
   const headStream = headTemplate.then(render => render({config: config, streams: streams}));
@@ -51,7 +51,7 @@ const fetchCachedFeedData = (config, itemTemplate) => {
   };
 
   return caches.open('data')
-      .then(cache => resolveCachedUrl(cache, `/proxy?url=${allUrl}`))
+      .then(cache => resolveCachedUrl(cache, `/proxy?url=${encodeURIComponent(allUrl)}`))
       .then(feed => convertFeedItemsToJSON(feed))
       .then(items => itemTemplate.then(render => items.map(item => render({options: templateOptions, item: item}))));
 };

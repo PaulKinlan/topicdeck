@@ -29,7 +29,7 @@ const root = () => {
     //preload: preloadTemplate.then(render => config.then(c=> render({config: c }))),
     styles: styleTemplate.then(render => render({config: config })),
     data: columnsTemplate.then(render => jsonFeedData.then(columns => render({ columns: columns }))),
-    itemTemplate: itemTemplate.then(render => render({options: {includeAuthor: false}, item: {}}))
+    itemTemplate: itemTemplate.then(render => render({options: {includeAuthor: false, new: true}, item: {}}))
   };
   
   const headStream = headTemplate.then(render => render({config: config, streams: streams}));
