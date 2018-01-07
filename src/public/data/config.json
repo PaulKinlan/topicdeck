@@ -1,6 +1,9 @@
 {
   "title": "Web GDE Deck",
   "origin": "https://webgdedeck.com",
+  "theme": {
+    "backgroundColor": "#1976d2"
+  },
   "columns": [
     {
       "name": "Ire Aderinokun",
