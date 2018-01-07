@@ -1,6 +1,7 @@
 {
   "title": "Web GDE Deck",
   "origin": "https://webgdedeck.com",
+  "feedUrl": "https://webgdedeck.com/all.rss",
   "theme": {
     "backgroundColor": "#1976d2"
   },
