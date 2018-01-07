@@ -9,8 +9,6 @@ import {
  } from '../platform/common.js';
 
 import { convertFeedItemsToJSON } from '../data/common.js';
-const allUrl = 'https://webgdedeck.com/all.rss';
-//const allUrl = 'http://127.0.0.1:8080/all.rss';
 
 let config = loadData(`${paths.dataPath}config.json`).then(r => r.json());
  
@@ -29,7 +27,7 @@ const all = () => {
   const streams = {
     preload: preloadTemplate.then(render => config.then(c=> render({config: c }))),
     styles: styleTemplate.then(render => render({config: config })),
-    data: columnTemplate.then(render => jsonFeedData.then(items => render({column: {config: { feedUrl: allUrl, name: "All GDE's"}, items: items } }))),
+    data: columnTemplate.then(render => config.then(c => jsonFeedData.then(items => render({column: {config: { feedUrl: c.feedUrl, name: "All GDE's"}, items: items } })))),
     itemTemplate: itemTemplate.then(render => render({options: {includeAuthor: true, new: true}, item: {}}))
   };
 
@@ -51,7 +49,7 @@ const fetchCachedFeedData = (config, itemTemplate) => {
   };
 
   return caches.open('data')
-      .then(cache => resolveCachedUrl(cache, `/proxy?url=${encodeURIComponent(allUrl)}`))
+      .then(cache => config.then(c => resolveCachedUrl(cache, `/proxy?url=${encodeURIComponent(c.feedUrl)}`)))
       .then(feed => convertFeedItemsToJSON(feed))
       .then(items => itemTemplate.then(render => render({options: templateOptions, items: items})));
 };

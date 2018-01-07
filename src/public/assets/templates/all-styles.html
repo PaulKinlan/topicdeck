@@ -1,4 +1,8 @@
 <style>
+  header {
+    background-color:  {{= it.config.then(config => config.theme.backgroundColor) }};
+  }
+
   @media screen and (min-width: 460px) {
     main {
       display: flex;

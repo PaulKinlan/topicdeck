@@ -1,6 +1,10 @@
 {
   "title": "Android GDE Deck",
   "origin": "https://androidgdedeck.com",
+  "feedUrl": "https://androidgdedeck.com/all.rss",
+  "theme": {
+    "backgroundColor": "#A4C639"
+  },
   "columns": [
     {
       "name": "Dan Lew",
