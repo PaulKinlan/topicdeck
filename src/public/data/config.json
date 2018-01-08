@@ -215,6 +215,11 @@
       "name": "Roberto Orgiu",
       "href": "https://medium.com/@_tiwiz",
       "feedUrl": "https://medium.com/feed/@_tiwiz"
+    },
+    {
+      "name": "Jeroen Mols",
+      "href": "https://jeroenmols.com/",
+      "feedUrl": "https://jeroenmols.com/atom.xml"
     }
   ]
 }
