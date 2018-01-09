@@ -5,6 +5,9 @@
   "theme": {
     "backgroundColor": "#1976d2"
   },
+  "site": {
+    "googleAnalytics": "UA-111516552-1"
+  },
   "columns": [
     {
       "name": "Ire Aderinokun",
