@@ -6,7 +6,6 @@ Inspired by River of news, but HTTPs only and a PWA.
 
 Attempt to create a PWA that is a news reader that renders on the server and on the client using all the same templating and logic. 
 
-
 Progress
 --------
 
@@ -19,7 +18,6 @@ Progress
 * To render the client it still needs JS turned on. Investigate server 
   load of RSS feeds. [partially done]
   * This is done in the SW, will use on Server soon.
-
 
 Thoughts
 --------
