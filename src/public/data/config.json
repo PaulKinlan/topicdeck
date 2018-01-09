@@ -179,6 +179,11 @@
       "name": "Michael Prentice",
       "href": "https://blog.devintent.com/",
       "feedUrl": "https://blog.devintent.com/feed"
+    },
+    {
+      "name": "Danny Preussler",
+      "href": "https://medium.com/@dpreussler",
+      "feedUrl": "https://medium.com/feed/@dpreussler"
     }
   ]
 }
