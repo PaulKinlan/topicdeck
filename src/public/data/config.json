@@ -170,6 +170,11 @@
       "name": "Harry Roberts",
       "href": "https://csswizardry.com/",
       "feedUrl": "https://feeds.feedburner.com/csswizardry"
+    },
+    {
+      "name": "Michael Prentice",
+      "href": "https://blog.devintent.com/",
+      "feedUrl": "https://blog.devintent.com/feed"
     }
   ]
 }
