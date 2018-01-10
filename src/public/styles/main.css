@@ -12,6 +12,8 @@ body>header {
   padding: 0.8em 0.8em 0.2em 0.8em;
   margin: 0 0 0.4em 0;
   box-shadow: #000 0px 0px 10px;
+  display: flex;
+  align-items: center;
 }
 
 body>header h1 {
@@ -24,9 +26,9 @@ body>header span {
   color: white;
   margin-bottom: 0.4em;
   display: block;
+  margin-left: 20px;
+  margin-top: 2px;
 }
-
-
 
 body>header span a, body>header span a:visited {
   color: white;
@@ -43,8 +45,8 @@ main {
 }
 
 main section {
-  min-width: 240px;
-  max-width: 240px;
+  min-width: 310px;
+  max-width: 310px;
   margin: 1px 5px 4px 5px;
   background: #fff;
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.01), 0 1px 2px rgba(0, 0, 0, 0.07), 0 5px 15px rgba(0, 0, 0, 0.03);
@@ -94,9 +96,12 @@ main section h1 {
   text-align: center;
   position: sticky;
   top: -1px;
-  background-color: #fff;
+  background-color: #f5f8fa;
   margin: 0;
   padding: 0.8em;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  width: initial;
 }
 
 main section h1 a {
@@ -105,13 +110,15 @@ main section h1 a {
 
 main section div[data-url] {
   /* Container */
-  margin: 0 5px;
   padding-top: 5px;
 }
 
 main section div.item {
   font-size: 1em;
   padding: 0.8em;
+}
+
+main section div.item:not(:first-child) {
   border-top: solid 1px #dedede;
 }
 
@@ -124,11 +131,8 @@ main section div.item.new {
 }
 
 main section div.item p.description {
-  font-style: italic;
   font-weight: 300;
   font-size: 0.9em;
-  border-left: solid 1px #dadada;
-  padding-left: 1em;
   color: #3a3a3a;
   overflow-x: auto;
 }
@@ -153,14 +157,15 @@ main section div.item div {
   display: flex;
   align-items: center;
   font-size: 12px;
+  position: relative;
 }
 
 main section div.item div svg {
   width: 18px;
   height: 18px;
-  padding: 0px 15px;
-  margin: 0px 5px;
   cursor: pointer;
+  position: absolute;
+  right: 0;
 }
 
 main section div.item div svg>* {
@@ -169,7 +174,7 @@ main section div.item div svg>* {
 
 div a[data-bind_inner-text="pubDate"] {
   font-style: italic;
-  color: #333333;
+  color: #737272;
 }
 
 div#toast {
