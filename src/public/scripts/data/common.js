@@ -83,6 +83,10 @@ const convertFeedItemsToJSON = (feedText) => {
   const documentElement = feed.documentElement;
   const defaults = {};
     
+  if(documentElement === null) {
+    return [];
+  }
+  
   if(documentElement.nodeName === 'rss') {
     const channel = findNode('channel', documentElement.childNodes);
     const title = findElementText('title', channel);

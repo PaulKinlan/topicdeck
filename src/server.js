@@ -43,7 +43,14 @@ app.get('/all', (req, res, next) => {
 
 app.get('/proxy', (req, res, next) => {
   proxy(req)
-    .then(response => node.sendStream(response.body, true, res));
+    .then(response => { 
+      if(typeof(response.body) === 'string') {
+        res.status(response.status).send(response.body);
+      }
+      else {
+        node.sendStream(response.body, true, res);
+      }
+    });
 });
 
 /*

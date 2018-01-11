@@ -49,6 +49,13 @@ function streamToString(stream) {
 }
 
 const sendStream = (stream, last, res) => {
+  if(stream == null || typeof(stream) === 'string') {
+    if(last) {
+      res.end();
+    }
+    return Promise.resolve();
+  }
+
   stream.on('data', (data) => {
     res.write(data);
   });

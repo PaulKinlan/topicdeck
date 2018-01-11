@@ -87,7 +87,10 @@ var Request = eval('self.Request');
 var Response = eval('self.Response');
 var caches = eval('self.caches');
 
-const parseUrl = request => request.url;
+const parseUrl = request => { 
+  return new URL(request.url).searchParams.get("url");
+};
+
 const paths = {
   assetPath: '/assets/',
   dataPath: '/data/'
