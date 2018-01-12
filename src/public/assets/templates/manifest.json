@@ -1,0 +1,20 @@
+{
+  "short_name": "{{=it.config.then(config => config.title)}}",
+  "name": "{{=it.config.then(config => config.title)}}",
+  "theme_color": "{{=it.config.then(config => config.theme.backgroundColor)}}",
+  "background_color": "{{=it.config.then(config => config.theme.backgroundColor)}}",
+  "icons": [
+    {
+      "src": "/images/app-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/images/app-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone"
+}

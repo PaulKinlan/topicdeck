@@ -7,6 +7,7 @@ import * as node from './public/scripts/platform/node.js';
 import { handler as root } from './public/scripts/routes/root.js';
 import { handler as proxy } from './public/scripts/routes/proxy.js';
 import { handler as all } from './public/scripts/routes/all.js';
+import { handler as manifest } from './public/scripts/routes/manifest.js';
 
 const app = express();
 app.use(compression({
@@ -35,6 +36,13 @@ app.get('/', (req, res, next) => {
 app.get('/all', (req, res, next) => {
   res.setHeader('Link', '</styles/main.css>; rel=preload; as=style, </scripts/client.js>; rel=preload; as=script, </sw.js>; rel=preload; as=script');
   all()
+    .then(response => {
+      node.responseToExpressStream(res, response.body)
+    });         
+});
+
+app.get('/manifest.json', (req, res, next) => {
+  manifest()
     .then(response => {
       node.responseToExpressStream(res, response.body)
     });         
