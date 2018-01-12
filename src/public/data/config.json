@@ -179,6 +179,11 @@
       "name": "Michael Prentice",
       "href": "https://blog.devintent.com/",
       "feedUrl": "https://blog.devintent.com/feed"
+    },
+    {
+      "name": "Jean-François Garreau",
+      "href": "https://jef.binomed.fr",
+      "feedUrl": "https://jef.binomed.fr/atom.xml"
     }
   ]
 }
