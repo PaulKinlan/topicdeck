@@ -58,7 +58,7 @@ import { convertFeedItemsToJSON } from './data/common.js';
     var observer = new MutationObserver(function(mutations) {
       mutations.forEach(function(mutation) {
         var nodes = Array.prototype.slice.call(mutation.addedNodes);
-        let matchedNodes = [];
+        var matchedNodes = [];
         for(var node of nodes) {
           if(node.matches && node.nodeType == 1 && node.matches(selector)) {
             matchedNodes.push(node);

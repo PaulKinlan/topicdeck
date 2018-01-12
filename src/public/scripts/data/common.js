@@ -3,11 +3,28 @@ import {
  } from '../platform/common.js';
 
 const findNode = (tagName, nodes) => {
-  return Array.prototype.find.call(nodes, n => n.tagName == tagName);
+  let node;
+  for(var i = 0; i < nodes.length; i++) {
+    node = nodes[i];
+    if(node.tagName == tagName) {
+      return node;
+    }
+  }
+
+  return undefined;
 };
 
 const findNodes = (tagName, nodes) => {
-  return Array.prototype.filter.call(nodes, n => n.tagName == tagName);
+  let foundNodes = [];
+  let node;
+  for(var i = 0; i < nodes.length; i++) {
+    node = nodes[i];
+    if(node.tagName == tagName) {
+      foundNodes.push(node);
+    }
+  }
+
+  return foundNodes;
 }; 
 
 const sanitize = (str) => {
