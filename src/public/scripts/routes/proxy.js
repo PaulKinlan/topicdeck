@@ -9,7 +9,7 @@ const proxyHandler = (request) => {
   let config = loadData(`${paths.dataPath}config.json`).then(r => r.json());
 
   return config.then(c => {
-    if(c.columns.map(col => col.feedUrl).indexOf(url) < 0 || url.endsWith('/all.rss') == false) {
+    if(c.columns.map(col => col.feedUrl).indexOf(url) < 0 && url.endsWith('/all.rss') == false) {
       // The request to proxy is not in the list of configured urls
       return new Response("Proxy feed not configured", {status: "401"});
     }
