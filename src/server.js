@@ -9,7 +9,6 @@ import { handler as proxy } from './public/scripts/routes/proxy.js';
 import { handler as all } from './public/scripts/routes/all.js';
 
 const app = express();
-console.log(compression)
 app.use(compression({
   filter: (req, res) => true
 }));
