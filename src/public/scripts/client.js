@@ -52,12 +52,12 @@ import { convertFeedItemsToJSON } from './data/common.js';
     var elements = document.querySelectorAll(selector);
 
     if(elements) {
-      onElement(Array.prototype.slice(elements));
+      onElement(Array.prototype.slice.call(elements));
     }
   
     var observer = new MutationObserver(function(mutations) {
       mutations.forEach(function(mutation) {
-        var nodes = Array.prototype.slice(mutation.addedNodes);
+        var nodes = Array.prototype.slice.call(mutation.addedNodes);
         let matchedNodes = [];
         for(var node of nodes) {
           if(node.matches && node.nodeType == 1 && node.matches(selector)) {
