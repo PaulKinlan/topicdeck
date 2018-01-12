@@ -52,7 +52,7 @@ import { convertFeedItemsToJSON } from './data/common.js';
     var elements = document.querySelectorAll(selector);
 
     if(elements) {
-      onElement(elements);
+      onElement(Array.from(elements));
     }
   
     var observer = new MutationObserver(function(mutations) {
