@@ -13,7 +13,7 @@ export default {
         jscc(),
         babel({
             exclude: 'node_modules/**'
-        }),
-        uglify({}, minify)
+        })//,
+        //uglify({}, minify)
     ]
 };
