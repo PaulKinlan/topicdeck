@@ -86,7 +86,7 @@ const convertFeedItemsToJSON = (feedText) => {
   if(documentElement === null) {
     return [];
   }
-  
+
   if(documentElement.nodeName === 'rss') {
     const channel = findNode('channel', documentElement.childNodes);
     const title = findElementText('title', channel);
@@ -127,7 +127,7 @@ const convertAtomItemToJSON = (item, defaults) => {
                                 .filter(attributeEquals("rel", "enclosure"))
                                 .filter(attributeEquals("type", "audio/mpeg"))[0];
   
-  return {"title": sanitize(title), "guid": guid, "description": description, "pubDate": pubDate, "author": author, "link": link};
+  return {"title": hardSanitize(title, 400), "guid": guid, "description": description, "pubDate": pubDate, "author": author, "link": link};
 };
   
 const convertRSSItemToJSON = (item, defaults) => {
@@ -140,7 +140,7 @@ const convertRSSItemToJSON = (item, defaults) => {
   const contentEncoded = findElementText("content:encoded", item);
   const enclosureElement = findNodes("enclosure", item.childNodes).filter(attributeEquals("type", "audio/mpeg"))[0];
   
-  return {"title": title, "guid": guid, "description": hardSanitize(description, 100), "content:encoded": hardSanitize(contentEncoded, 100), "pubDate": pubDate, "author": author, "link": link};
+  return {"title": hardSanitize(title, 400), "guid": guid, "description": hardSanitize(description, 100), "content:encoded": hardSanitize(contentEncoded, 100), "pubDate": pubDate, "author": author, "link": link};
 };
 
 export {
