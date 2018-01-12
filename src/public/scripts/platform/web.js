@@ -91,6 +91,8 @@ const parseUrl = request => {
   return new URL(request.url).searchParams.get("url");
 };
 
+const getProxyUrl = request => request.url;
+
 const paths = {
   assetPath: '/assets/',
   dataPath: '/data/'
@@ -111,5 +113,6 @@ export {
   fetch,
   caches, cacheStorage,
   parseUrl,
+  getProxyUrl,
   paths
 };

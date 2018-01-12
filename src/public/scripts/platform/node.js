@@ -136,6 +136,9 @@ const caches = new (function() {
 });
 
 const parseUrl = request => request.query.url;
+
+const getProxyUrl = request => request.query.url;
+
 const paths = {
   assetPath: 'public/assets/',
   dataPath: 'public/data/'
@@ -152,5 +155,6 @@ export {
   fetch,
   caches, cacheStorage,
   parseUrl,
+  getProxyUrl,
   paths
 };
