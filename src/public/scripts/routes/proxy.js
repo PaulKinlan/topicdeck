@@ -1,12 +1,12 @@
 import { loadData, fetch, caches, parseUrl, getProxyUrl, paths, Response } from '../platform/common.js';
 
+let config = loadData(`${paths.dataPath}config.json`).then(r => r.json());
+
 const proxyHandler = (request) => {
   /* 
     Go out to the networks.
   */ 
   const url = parseUrl(request); // The URL we want to fetch.
-
-  let config = loadData(`${paths.dataPath}config.json`).then(r => r.json());
 
   return config.then(c => {
     if(c.columns.map(col => col.feedUrl).indexOf(url) < 0 && url.endsWith('/all.rss') == false) {
