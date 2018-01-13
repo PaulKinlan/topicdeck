@@ -11,6 +11,24 @@ function getCompiledTemplate(template) {
   return compileTemplate(template).then(templateFunction => templates[template] = templateFunction);
 }
 
+function generateCSPPolicy(nonce) {
+  return `default-src 'self'; script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com 'nonce-script-${nonce.analytics}' 'unsafe-eval'; connect-src 'self'; img-src 'self' data: https://www.google-analytics.com; style-src 'self' 'nonce-style-${nonce.style}';`; 
+};
+
+function generateIncrementalNonce(source) {
+  let val = 0;
+  let max = Math.pow(10, 3); // Date + pow 3 gets us close to max number;
+
+  const generate = () => {
+    let now = max * +new Date();
+    if(val >= max) val = 0;
+    else val++;
+    return (source !== undefined ? source : '') + (now + val).toString();
+  }
+
+  return generate;
+};
+
 var ConcatStream = function() {
   let readableController;
   this.readable = new ReadableStream({
@@ -34,7 +52,7 @@ var ConcatStream = function() {
   })
 };
 
-export { ConcatStream, getCompiledTemplate };
+export { ConcatStream, getCompiledTemplate, generateCSPPolicy, generateIncrementalNonce };
 export const compileTemplate = common.compileTemplate;
 export const streamToString = common.streamToString;
 export const loadData = common.loadData;

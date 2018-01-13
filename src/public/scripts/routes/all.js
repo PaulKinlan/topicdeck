@@ -18,7 +18,7 @@ let styleTemplate = getCompiledTemplate(`${paths.assetPath}templates/all-styles.
 let columnTemplate = getCompiledTemplate(`${paths.assetPath}templates/column.html`);
 let itemTemplate = getCompiledTemplate(`${paths.assetPath}templates/item.html`);
 
-const all = () => {
+const all = (nonce) => {
 
   let concatStream = new ConcatStream;
   
@@ -26,12 +26,12 @@ const all = () => {
 
   const streams = {
     preload: preloadTemplate.then(render => config.then(c=> render({config: c }))),
-    styles: styleTemplate.then(render => render({config: config })),
+    styles: styleTemplate.then(render => config.then(c => render({config: c, nonce: nonce}))),
     data: columnTemplate.then(render => config.then(c => jsonFeedData.then(items => render({column: {config: { feedUrl: c.feedUrl, name: "All GDE's"}, items: items } })))),
     itemTemplate: itemTemplate.then(render => render({options: {includeAuthor: true, new: true}, item: {}}))
   };
 
-  const headStream = headTemplate.then(render => render({config: config, streams: streams}));
+  const headStream = headTemplate.then(render => render({config: config, streams: streams, nonce: nonce}));
 
   headStream.then(stream => stream.pipeTo(concatStream.writable))
   

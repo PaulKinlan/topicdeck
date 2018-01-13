@@ -33,7 +33,7 @@
   </template>
   <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id={{=it.config.then(config=>config.site.googleAnalytics)}}"></script>
-<script>
+<script nonce='script-{{= it.nonce.analytics }}'>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());

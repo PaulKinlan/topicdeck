@@ -1,9 +1,16 @@
-<style>
+<style nonce='style-{{= it.nonce.style }}'>
   header {
-    background-color:  {{= it.config.then(config => config.theme.backgroundColor) }} !important;
+    background-color:  {{= it.config.theme.backgroundColor }} !important;
   }
 
   main {
-    grid-template-columns: {{= it.config.then(config => config.columns.map(column => '[' + column.name.replace(/[\s.]*/g,'') + '] 250px ').join(' ')) }};
+    grid-template-columns: {{= it.config.columns.map(column => '[' + column.name.replace(/[\s.]*/g,'') + '] 250px ').join(' ') }};
   }
+
+$$
+for(let column of it.config.columns) {
+  let id = column.name.replace(/[\s.]*/g, '');
+  yield P('#' + id +' { grid-area: \''+ id +'\'}');
+}
+$$
 </style>

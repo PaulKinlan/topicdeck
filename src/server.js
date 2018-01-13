@@ -1,7 +1,7 @@
 //#set _NODE 1
 import express from 'express';
 import compression from 'compression';
-import { getCompiledTemplate, cacheStorage, paths } from './public/scripts/platform/common.js';
+import { getCompiledTemplate, cacheStorage, paths, generateCSPPolicy, generateIncrementalNonce } from './public/scripts/platform/common.js';
 import * as node from './public/scripts/platform/node.js';
 
 import { handler as root } from './public/scripts/routes/root.js';
@@ -13,6 +13,8 @@ const app = express();
 app.use(compression({
   filter: (req, res) => true
 }));
+
+const generator = generateIncrementalNonce('server')
 
 app.all('*', (req, res, next) => {
   // protocol check, if http, redirect to https
@@ -26,16 +28,28 @@ app.all('*', (req, res, next) => {
 getCompiledTemplate(`${paths.assetPath}templates/head.html`);
 
 app.get('/', (req, res, next) => {
+  let nonce = {
+    analytics: generator(),
+    style: generator()
+  };
+
+  res.setHeader('Content-Security-Policy', generateCSPPolicy(nonce));
   res.setHeader('Link', '</styles/main.css>; rel=preload; as=style, </scripts/client.js>; rel=preload; as=script, </sw.js>; rel=preload; as=script');
-  root()
+  root(nonce)
     .then(response => {
       node.responseToExpressStream(res, response.body)
     });         
 });
 
 app.get('/all', (req, res, next) => {
+  let nonce = {
+    analytics: generator(),
+    style: generator()
+  };
+
+  res.setHeader('Content-Security-Policy', generateCSPPolicy(nonce));
   res.setHeader('Link', '</styles/main.css>; rel=preload; as=style, </scripts/client.js>; rel=preload; as=script, </sw.js>; rel=preload; as=script');
-  all()
+  all(nonce)
     .then(response => {
       node.responseToExpressStream(res, response.body)
     });         
