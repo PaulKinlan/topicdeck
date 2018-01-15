@@ -8,7 +8,7 @@
     <link rel="manifest" href="/manifest.json">
     <link rel="alternate" type="application/rss+xml" href="/all.rss" />
     <link rel="icon" href="/images/app-192.png">
-    <meta name="theme-color" content="#fff">
+    <meta name="theme-color" content="{{=it.config.then(config=>config.theme.backgroundColor)}">
     <script src="/scripts/client.js" defer></script>
     <link rel="stylesheet" href="/styles/main.css" />
     <meta name="google-site-verification" content="{{=it.config.then(config=>config.site.searchConsole)}}" />
