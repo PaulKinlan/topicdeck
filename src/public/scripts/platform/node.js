@@ -140,8 +140,9 @@ const parseUrl = request => request.query.url;
 const getProxyUrl = request => request.query.url;
 
 const getProxyHeaders = request => {
-  console.log(request);
-  return {};
+  return {
+    'X-Forwarded-For': request.ips
+  };
 };
 
 const paths = {
