@@ -99,6 +99,12 @@ import { convertFeedItemsToJSON } from './data/common.js';
           text: shareTitle
         })
       }
+      else {
+        let windowOptions = 'scrollbars=yes,resizable=yes,toolbar=no,location=yes,width=520,height=420';
+        let twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareTitle)}&url=${encodeURIComponent(shareUrl)}&via=Paul_Kinlan`;
+
+        window.open(twitterUrl, 'intent', windowOptions);
+      }
     }
   });
 
