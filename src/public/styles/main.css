@@ -132,9 +132,12 @@ main section div.item.new {
 
 main section div.item p.description {
   font-weight: 300;
-  font-size: 0.9em;
-  color: #3a3a3a;
-  overflow-x: auto;
+  color: #202020;
+  overflow-x: auto;  
+  font-size: 16px;
+  font-style: italic;
+  border-left: 2px solid #cbcbcb;
+  padding-left: 1em;
 }
 
 main section div.item h3 {
