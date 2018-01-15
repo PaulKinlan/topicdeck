@@ -36,6 +36,7 @@ router.get(`${self.location.origin}/proxy`, (e) => {
 router.get(`${self.location.origin}/all$`, (e) => {
   let nonce = {
     analytics: generator(),
+    inlinedcss: generator(),
     style: generator()
   };
 
@@ -47,6 +48,7 @@ router.get(`${self.location.origin}/all$`, (e) => {
 router.get(`${self.location.origin}/$`, (e) => {
   let nonce = {
     analytics: generator(),
+    inlinedcss: generator(),
     style: generator()
   };
 
