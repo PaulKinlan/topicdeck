@@ -9,7 +9,11 @@ export default {
         format: 'iife'
     },
     plugins: [
-        jscc(),
+        jscc({
+            values: {
+                '_SERVICEWORKER': '1'
+            }
+        }),
         uglify({}, minify)
     ]
 };
