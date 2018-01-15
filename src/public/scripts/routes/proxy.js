@@ -1,4 +1,5 @@
-import { loadData, fetch, caches, parseUrl, getProxyUrl, paths, Response } from '../platform/common.js';
+import { loadData, fetch, caches, parseUrl, getProxyUrl, getProxyHeaders, paths, Response } from '../platform/common.js';
+import { getProxyHeaders } from '../platform/web';
 
 const proxyHandler = (request) => {
   /* 
@@ -15,7 +16,7 @@ const proxyHandler = (request) => {
     }
     // Always hit the network, and update the cache so offline (and the streming) renders are ok.
     return caches.match(request).then(response => {
-      let network = fetch(getProxyUrl(request)).then(networkResponse => {    
+      let network = fetch(getProxyUrl(request), getProxyHeaders(request)).then(networkResponse => {    
         if(networkResponse.ok) {
           return caches.open('data')
               .then(cache => (!!cache) ? cache.put(request, networkResponse.clone()) : undefined)
