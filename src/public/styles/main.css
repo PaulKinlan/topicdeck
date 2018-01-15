@@ -39,7 +39,7 @@ main {
   /*display: grid;*/
   overflow-x: auto;
   max-width: 100%;
-  max-height: calc(100vh - 87px);
+  max-height: calc(100vh - 66px);
   height: calc(100vh);
   box-sizing: border-box;
 }
