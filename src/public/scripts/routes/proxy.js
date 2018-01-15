@@ -1,5 +1,4 @@
 import { loadData, fetch, caches, parseUrl, getProxyUrl, getProxyHeaders, paths, Response } from '../platform/common.js';
-import { getProxyHeaders } from '../platform/web';
 
 let config = loadData(`${paths.dataPath}config.json`).then(r => r.json());
 
