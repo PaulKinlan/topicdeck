@@ -14,6 +14,8 @@ app.use(compression({
   filter: (req, res) => true
 }));
 
+app.set('trust proxy', true);
+
 const generator = generateIncrementalNonce('server')
 
 app.all('*', (req, res, next) => {
