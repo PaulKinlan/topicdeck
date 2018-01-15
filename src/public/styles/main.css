@@ -133,7 +133,7 @@ main section div.item.new {
 main section div.item p.description {
   font-weight: 300;
   color: #202020;
-  overflow-x: auto;  
+  overflow-x: none;  
   font-size: 16px;
   font-style: italic;
   border-left: 2px solid #cbcbcb;
