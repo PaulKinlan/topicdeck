@@ -28,7 +28,7 @@
     "xmldom-alpha": "*"
   },
   "engines": {
-    "node": "8.2.x"
+    "node": "9.4.x"
   },
   "repository": {
     "type": "git",
