@@ -100,8 +100,8 @@ let feedConfig = {
   },
   pubDate: new Date(),
   successfulFetchCallback: (streamInfo) => {
-    console.log(`Fetched feed: ${streamInfo.url} ${streamInfo.stream.substr(0, 50)}`);
-    return cacheStorage[streamInfo.url] = streamInfo.stream
+    console.log(`Fetched feed: ${streamInfo.url}`);
+    return cacheStorage[streamInfo.url] = streamInfo.stream;
   }
 };
 
@@ -122,7 +122,7 @@ fetchFeeds();
 setInterval(fetchFeeds, 30 * 60 * 1000);
 
 app.get('/all.rss', (req, res, next) => {
-  res.setHeader('Content-Type', 'text/xml')
+  res.setHeader('Content-Type', 'text/xml');
   res.send(latestFeed);
 });
 
