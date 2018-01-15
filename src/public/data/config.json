@@ -1,5 +1,6 @@
 {
   "title": "Web GDE Deck",
+  "description": "The latest news and updates from the Google Developer Expert for web program.", 
   "origin": "https://webgdedeck.com",
   "feedUrl": "https://webgdedeck.com/all.rss",
   "theme": {
