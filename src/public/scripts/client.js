@@ -76,8 +76,20 @@ import { convertFeedItemsToJSON } from './data/common.js';
     const itemTemplate = document.getElementById('itemTemplate')
     for(let column of columns) {
       const feedUrl = column.dataset['url'];
-      fetch(`/proxy?url=${encodeURIComponent(feedUrl)}`)
-        .then(feedResponse => feedResponse.text())
+      const url = `/proxy?url=${encodeURIComponent(feedUrl)}`;
+      fetch(url)
+        .then(feedResponse => {
+          let response = feedResponse.clone();
+          if(caches) {
+            return caches.open('data').then(cache => { 
+              if(!!cache) {
+                cache.put(url, response);
+              }
+              return feedResponse.text();
+            });
+          }
+          return feedResponse.text();
+        })
         .then(feedText => convertFeedItemsToJSON(feedText))
         .then(items => items.reverse())
         .then(items => items.filter(item => !!!(document.getElementById(item.guid))))
