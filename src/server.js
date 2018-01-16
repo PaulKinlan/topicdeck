@@ -128,6 +128,14 @@ app.get('/all.rss', (req, res, next) => {
   res.send(latestFeed);
 });
 
+app.get('/data/config.json', (req, res, next) => {
+  /*
+
+  */
+  console.log(req)
+  res.send();
+});
+
 /*
   Start the app.
 */
