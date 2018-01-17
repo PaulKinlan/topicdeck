@@ -80,7 +80,7 @@ import { convertFeedItemsToJSON } from './data/common.js';
       fetch(url)
         .then(feedResponse => {
           let response = feedResponse.clone();
-          if(caches) {
+          if('caches' in window) {
             return caches.open('data').then(cache => { 
               if(!!cache) {
                 cache.put(url, response);
