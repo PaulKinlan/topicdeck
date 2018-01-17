@@ -1,5 +1,7 @@
 //#set _NODE 1
 import express from 'express';
+import fs from 'fs';
+import { URL } from 'url';
 import compression from 'compression';
 import { getCompiledTemplate, cacheStorage, paths, generateCSPPolicy, generateIncrementalNonce } from './public/scripts/platform/common.js';
 import * as node from './public/scripts/platform/node.js';
@@ -83,57 +85,71 @@ app.get('/proxy', (req, res, next) => {
 */
 
 let RSSCombiner = require('rss-combiner-ns');
-let config = require(`./${paths.dataPath}config.json`);
-let feeds = config.columns.map(column => column.feedUrl);
 
-let latestFeed;
-let feedConfig = {
-  title: config.title,
-  size: 100,
-  feeds: feeds,
-  generator: config.origin,
-  site_url: config.origin,
-  softFail: true,
-  custom_namespaces: {
-    'content': 'http://purl.org/rss/1.0/modules/content/',
-    'dc': 'http://purl.org/dc/elements/1.1/',
-    'a10': 'http://www.w3.org/2005/Atom',
-    'feedburner': 'http://rssnamespace.org/feedburner/ext/1.0'
-  },
-  pubDate: new Date(),
-  successfulFetchCallback: (streamInfo) => {
-    console.log(`Fetched feed: ${streamInfo.url}`);
-    return cacheStorage[streamInfo.url] = streamInfo.stream;
-  }
-};
+let latestFeeds = {};
 
 // A global server feedcache so we are not overloading remote servers
-
 const fetchFeeds = () => {
-  console.log('Checking Feed', Date.now());
-  feedConfig.pubDate = new Date();
-  
-  RSSCombiner(feedConfig)
-    .then(function (combinedFeed) {
-      console.log('Feed Ready', Date.now());
-      latestFeed = combinedFeed.xml();
+  let feeds = getFeedConfigs();
+
+  feeds.forEach(config => {
+    const hostname = new URL(config.origin).hostname;
+    console.log(`${hostname} Checking Feeds`, Date.now());
+    
+    const feedConfig = {
+      title: config.title,
+      size: 100,
+      feeds: config.columns.map(column => column.feedUrl),
+      generator: config.origin,
+      site_url: config.origin,
+      softFail: true,
+      custom_namespaces: {
+        'content': 'http://purl.org/rss/1.0/modules/content/',
+        'dc': 'http://purl.org/dc/elements/1.1/',
+        'a10': 'http://www.w3.org/2005/Atom',
+        'feedburner': 'http://rssnamespace.org/feedburner/ext/1.0'
+      },
+      pubDate: new Date(),
+      successfulFetchCallback: (streamInfo) => {
+        console.log(`Fetched feed: ${streamInfo.url}`);
+        return cacheStorage[streamInfo.url] = streamInfo.stream;
+      }
+    };
+
+    feedConfig.pubDate = new Date();
+
+    RSSCombiner(feedConfig)
+    .then(combinedFeed => {
+      console.log(`${hostname} Feed Ready`, Date.now());
+      latestFeeds[hostname] = combinedFeed.xml();
     });
+  });
+  
 };
+
+const getFeedConfigs = () => {
+  var path = 'configs/';
+  // Dynamically import the config objects
+  return fs.readdirSync(path)
+            .filter(fileName => fileName.endsWith('.json') && fileName.startsWith("_") == false && fileName.startsWith(".") == false)
+            .map(fileName => require("./" + path + fileName))
+}
 
 fetchFeeds();
 setInterval(fetchFeeds, 30 * 60 * 1000);
 
 app.get('/all.rss', (req, res, next) => {
+  let hostname = req.hostname; // Cleanse this.
+  hostname = hostname.replace(/\//g,"");
+
   res.setHeader('Content-Type', 'text/xml');
-  res.send(latestFeed);
+  res.send(latestFeeds[hostname]);
 });
 
 app.get('/data/config.json', (req, res, next) => {
-  /*
-
-  */
-  console.log(req)
-  res.send();
+  let hostname = req.hostname; // Cleanse this.
+  hostname = hostname.replace(/\//g,"");
+  res.sendFile(`${__dirname}/configs/${hostname}.config.json`);
 });
 
 /*

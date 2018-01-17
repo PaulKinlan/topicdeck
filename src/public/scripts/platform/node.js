@@ -111,6 +111,7 @@ const responseToExpressStream = (expressResponse, fetchResponseStream) => {
 };
 
 // Need a better interface to a memory store.
+// The server can host multiple origins cache.
 const cacheStorage = {};
 
 const caches = new (function() {
@@ -124,8 +125,13 @@ const caches = new (function() {
 
   this.match = (request, options) => {
     const url = parseUrl(request);
-    if(url in cacheStorage) {
-      const cachedResponse = cacheStorage[url];
+    const origin = request.hostname;
+    
+
+    if(origin in cacheStorage == false) cacheStorage[origin] = {};
+    
+    if(url in cacheStorage[origin]) {
+      const cachedResponse = cacheStorage[origin][url];
       const cachedResponseStream = stringToStream(cachedResponse);
       return Promise.resolve(new Response(cachedResponseStream, { status: "200", contentType: "text/xml" }));
     }

@@ -1,4 +1,6 @@
 {
   "name": "webgde-deck",
-  "alias": "webgdedeck.com"
+  "alias": [
+    "webgdedeck.com"
+  ]
 }
