@@ -1,0 +1,25 @@
+{
+  "title": "GDE Deck",
+  "description": "The latest news and updates from all the Google Developer Experts.", 
+  "origin": "https://gdedeck.com",
+  "feedUrl": "https://gdedeck.com/all.rss",
+  "theme": {
+    "backgroundColor": "#1976d2"
+  },
+  "site": {
+    "googleAnalytics": "UA-111516552-1",
+    "searchConsole": "PR3mkTUh-MFM9msW-rGhyT0qFgWW5w3_0985tkjzWIw"
+  },
+  "columns": [
+    {
+      "name": "Web GDE Deck",
+      "href": "https://webgdedeck.com/",
+      "feedUrl": "https://webgdedeck.com/all.rss"
+    },
+    {
+      "name": "Android GDE Deck",
+      "href": "https://androidgdedeck.com",
+      "feedUrl": "https://androidgdedeck.com/all.rss"
+    }
+  ]
+}
