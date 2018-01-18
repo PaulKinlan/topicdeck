@@ -12,12 +12,12 @@
   },
   "columns": [
     {
-      "name": "Web GDE Deck",
+      "name": "Web GDE's",
       "href": "https://webgdedeck.com/",
       "feedUrl": "https://webgdedeck.com/all.rss"
     },
     {
-      "name": "Android GDE Deck",
+      "name": "Android GDE's",
       "href": "https://androidgdedeck.com",
       "feedUrl": "https://androidgdedeck.com/all.rss"
     }
