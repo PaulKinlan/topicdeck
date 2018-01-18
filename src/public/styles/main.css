@@ -128,7 +128,6 @@ main section div.item:not(:first-child) {
 }
 
 main section div.item.new {
-  /*background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><circle cx="8" cy="8" r="8" fill="#1976d2"/></svg>');*/
   background-position-x: calc(100% + 8px);
   background-position-y: -8px;
   background-repeat: no-repeat;
@@ -151,6 +150,7 @@ main section div.item h3 {
   margin: 0 0 0.4em 0;
   font-family: Roboto, Helvetica, Arial, sans-serif;
   font-weight: 400;
+  word-break: break-word;
 }
 
 main section div.item h4 {
