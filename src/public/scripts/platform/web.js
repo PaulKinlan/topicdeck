@@ -28,20 +28,29 @@ var loadTemplate = (path) => {
     });
 };
 
+var configCache = {};
 var loadData = (path) => {
+  // The config will never update when you are on the page and it's not multi-tenency.
+  if(path in configCache) {
+    return Promise.resolve(configCache[path].then(r => r.clone()));
+  }
+
   const request = new Request(path);
    // Always return the cached asset, before hitting the network as a fallback
-  return caches.open('data').then((cache) => {
-    return cache.match(request.clone()).then(response => {
+  const response = caches.open('data').then((cache) => {
+    return cache.match(request.clone()).then(cacheResponse => {
       const networkResource = fetch(path).then((networkResponse) => {
         cache.put(path, networkResponse.clone());
         return networkResponse;
       })
-      .catch(error => {});
+      .catch(error => new Response("Not found.", {status: "404"}));
       
-      return response || networkResource;
+      return cacheResponse || networkResource;
     })    
-  })
+  });
+
+  configCache[path] = response.then(r => r.clone());
+  return response;
 }
 
 function compileTemplate(path) {
