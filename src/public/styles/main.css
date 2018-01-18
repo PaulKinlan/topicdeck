@@ -6,7 +6,7 @@ body {
 }
 
 body>header {
-  font: 500 1em Roboto, sans-serif;
+  font: 500 1em Roboto, Helvetica, Arial, sans-serif;
   color: black;
   padding: 0.8em 0.8em 0.2em 0.8em;
   margin: 0 0 0.4em 0;
@@ -99,7 +99,7 @@ main section.selected {
 }
 
 main section h1 {
-  font-family: sans-serif;
+  font-family: Helvetica, Arial, sans-serif;
   font-weight: 300;
   text-align: center;
   position: sticky;
@@ -138,9 +138,10 @@ main section div.item.new {
 }
 
 main section div.item p.description {
-  font-weight: 300;
+  font-weight: 200;
   color: #202020;
-  overflow-x: hidden;  
+  overflow-x: hidden; 
+  font-family: Georgia, serif;
   font-size: 16px;
   font-style: italic;
   border-left: 2px solid #cbcbcb;
@@ -148,17 +149,16 @@ main section div.item p.description {
 }
 
 main section div.item h3 {
-  font-size: 1em;
+  font-size: 1.1em;
   margin: 0 0 0.4em 0;
-  font-family: sans-serif;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
   font-weight: 400;
   word-break: break-word;
 }
 
 main section div.item h4 {
-  font-size: 0.8em;
   margin: 0 0 0.8em 0;
-  font-family: sans-serif;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
   font-weight: 300;
   word-break: break-word;
 }
