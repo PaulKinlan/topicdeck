@@ -10,15 +10,15 @@ import {
 
 import { convertFeedItemsToJSON } from '../data/common.js';
 
-let config = loadData(`${paths.dataPath}config.json`).then(r => r.json());
- 
+
 let headTemplate = getCompiledTemplate(`${paths.assetPath}templates/head.html`);
 let preloadTemplate = getCompiledTemplate(`${paths.assetPath}templates/all-preload.html`);
 let styleTemplate = getCompiledTemplate(`${paths.assetPath}templates/all-styles.html`);
 let columnTemplate = getCompiledTemplate(`${paths.assetPath}templates/column.html`);
 let itemTemplate = getCompiledTemplate(`${paths.assetPath}templates/item.html`);
 
-const all = (nonce) => {
+const all = (nonce,  paths) => {
+  let config = loadData(`${paths.dataPath}config.json`).then(r => r.json());
 
   let concatStream = new ConcatStream;
   

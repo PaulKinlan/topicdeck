@@ -6,10 +6,11 @@ import {
   paths
  } from '../platform/common.js';
 
-let config = loadData(`${paths.dataPath}config.json`).then(r => r.json());
+
 let manifestTemplate = getCompiledTemplate(`${paths.assetPath}templates/manifest.json`);
 
-const manifest = () => {
+const manifest = (paths) => {
+  let config = loadData(`${paths.dataPath}config.json`).then(r => r.json());
   let concatStream = new ConcatStream;
   const manifestStream = manifestTemplate.then(render => render({config: config}));
 

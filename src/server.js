@@ -32,6 +32,9 @@ app.all('*', (req, res, next) => {
 getCompiledTemplate(`${paths.assetPath}templates/head.html`);
 
 app.get('/', (req, res, next) => {
+  let hostname = req.hostname; // Cleanse this.
+  hostname = hostname.replace(/\//g,"");
+
   let nonce = {
     analytics: generator(),
     inlinedcss: generator(),
@@ -40,13 +43,19 @@ app.get('/', (req, res, next) => {
 
   res.setHeader('Content-Security-Policy', generateCSPPolicy(nonce));
   res.setHeader('Link', '</scripts/client.js>; rel=preload; as=script, </sw.js>; rel=preload; as=script');
-  root(nonce)
+  root(nonce, {
+      dataPath: `${paths.dataPath}${hostname}.`,
+      assetPath: paths.assetPath  
+    })
     .then(response => {
       node.responseToExpressStream(res, response.body)
     });         
 });
 
 app.get('/all', (req, res, next) => {
+  let hostname = req.hostname; // Cleanse this.
+  hostname = hostname.replace(/\//g,"");
+
   let nonce = {
     analytics: generator(),
     inlinedcss: generator(),
@@ -55,21 +64,36 @@ app.get('/all', (req, res, next) => {
 
   res.setHeader('Content-Security-Policy', generateCSPPolicy(nonce));
   res.setHeader('Link', '</scripts/client.js>; rel=preload; as=script, </sw.js>; rel=preload; as=script');
-  all(nonce)
+  all(nonce, {
+      dataPath: `${paths.dataPath}${hostname}.`,
+      assetPath: paths.assetPath 
+    })
     .then(response => {
       node.responseToExpressStream(res, response.body)
     });         
 });
 
 app.get('/manifest.json', (req, res, next) => {
-  manifest()
+  let hostname = req.hostname; // Cleanse this.
+  hostname = hostname.replace(/\//g,"");
+
+  manifest({
+    dataPath: `${paths.dataPath}${hostname}.`,
+    assetPath: paths.assetPath 
+  })
     .then(response => {
       node.responseToExpressStream(res, response.body)
     });         
 });
 
 app.get('/proxy', (req, res, next) => {
-  proxy(req)
+  let hostname = req.hostname; // Cleanse this.
+  hostname = hostname.replace(/\//g,"");
+  
+  proxy(req,  {
+      dataPath: `${paths.dataPath}${hostname}.`,
+      assetPath: paths.assetPath  
+    })
     .then(response => { 
       if(typeof(response.body) === 'string') {
         res.status(response.status).send(response.body);

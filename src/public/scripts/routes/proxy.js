@@ -1,8 +1,9 @@
 import { loadData, fetch, caches, parseUrl, getProxyUrl, getProxyHeaders, paths, Response } from '../platform/common.js';
 
-let config = loadData(`${paths.dataPath}config.json`).then(r => r.json());
 
-const proxyHandler = (proxyRequest) => {
+const proxyHandler = (proxyRequest, paths) => {
+  let config = loadData(`${paths.dataPath}config.json`).then(r => r.json());
+
   /* 
     Go out to the networks.
   */ 

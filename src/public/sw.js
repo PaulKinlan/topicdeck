@@ -27,7 +27,10 @@ const generator = generateIncrementalNonce('service-worker');
 // The proxy server '/proxy'
 
 router.get(`${self.location.origin}/proxy`, (e) => {
-  let response = proxy(e.request);
+  let response = proxy(e.request, {
+    dataPath: paths.dataPath,
+    assetPath: paths.assetPath
+  });
 
   e.respondWith(response);
 }, {urlMatchProperty: 'href'});
@@ -40,7 +43,10 @@ router.get(`${self.location.origin}/all$`, (e) => {
     style: generator()
   };
 
-  let response = all(nonce).then(r => setHeader(r, 'Content-Security-Policy', generateCSPPolicy(nonce)));;
+  let response = all(nonce, {
+    dataPath: paths.dataPath,
+    assetPath: paths.assetPath
+  }).then(r => setHeader(r, 'Content-Security-Policy', generateCSPPolicy(nonce)));;
   e.respondWith(response);
 }, {urlMatchProperty: 'href'});
 
@@ -52,6 +58,9 @@ router.get(`${self.location.origin}/$`, (e) => {
     style: generator()
   };
 
-  let response = root(nonce).then(r => setHeader(r, 'Content-Security-Policy', generateCSPPolicy(nonce)));
+  let response = root(nonce, {
+    dataPath: paths.dataPath,
+    assetPath: paths.assetPath
+  }).then(r => setHeader(r, 'Content-Security-Policy', generateCSPPolicy(nonce)));
   e.respondWith(response);
 }, {urlMatchProperty: 'href'});

@@ -153,7 +153,7 @@ const getProxyHeaders = request => {
 
 const paths = {
   assetPath: 'public/assets/',
-  dataPath: 'public/data/'
+  dataPath: 'configs/'
 };
 
 export {

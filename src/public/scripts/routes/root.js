@@ -9,8 +9,6 @@ import {
  } from '../platform/common.js';
 
 import { convertFeedItemsToJSON } from '../data/common.js';
-
-let config = loadData(`${paths.dataPath}config.json`).then(r => r.json());
  
 let headTemplate = getCompiledTemplate(`${paths.assetPath}templates/head.html`);
 let styleTemplate = getCompiledTemplate(`${paths.assetPath}templates/columns-styles.html`);
@@ -18,7 +16,9 @@ let columnTemplate = getCompiledTemplate(`${paths.assetPath}templates/column.htm
 let columnsTemplate = getCompiledTemplate(`${paths.assetPath}templates/columns.html`);
 let itemTemplate = getCompiledTemplate(`${paths.assetPath}templates/item.html`);
 
-const root = (nonce) => {
+const root = (nonce, paths) => {
+
+  let config = loadData(`${paths.dataPath}config.json`).then(r => r.json());
 
   let concatStream = new ConcatStream;
 
