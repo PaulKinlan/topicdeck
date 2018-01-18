@@ -115,11 +115,6 @@ main section h1 a {
   color: #333333;
 }
 
-main section div[data-url] {
-  /* Container */
-  padding-top: 5px;
-}
-
 main section div.item {
   font-size: 1em;
   padding: 0.8em;
@@ -153,7 +148,9 @@ main section div.item h3 {
   margin: 0 0 0.4em 0;
   font-family: Roboto, Helvetica, Arial, sans-serif;
   font-weight: 400;
-  word-break: break-word;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 main section div.item h4 {
