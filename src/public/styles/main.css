@@ -39,7 +39,7 @@ main {
   /*display: grid;*/
   overflow-x: auto;
   max-width: 100%;
-  max-height: calc(100vh - 100px);
+  max-height: calc(100vh - 93px);
   height: calc(100vh);
   box-sizing: border-box;
 }
@@ -59,7 +59,7 @@ main section h1 {
 }
 
 main section div[data-url] {
-  height: calc(100% - 92px);
+  height: calc(100% - 68px);
   overflow-y: auto;
 }
 
@@ -109,6 +109,9 @@ main section h1 {
   z-index: 1;
   width: initial;
   border-bottom: solid 1px white;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 main section h1 a {
@@ -148,9 +151,6 @@ main section div.item h3 {
   margin: 0 0 0.4em 0;
   font-family: Roboto, Helvetica, Arial, sans-serif;
   font-weight: 400;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
 }
 
 main section div.item h4 {
