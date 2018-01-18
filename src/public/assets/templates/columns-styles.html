@@ -1,6 +1,10 @@
 <style nonce='style-{{=it.nonce.style}}'>
-  header {
-    background-color: {{= it.config.theme.backgroundColor }} !important;
+  header h1, header span a {
+    text-decoration-color: {{= it.config.theme.backgroundColor }} !important;
+  }
+
+  main section h1 {
+    border-bottom-color: {{= it.config.theme.backgroundColor }} !important;
   }
 
   main {

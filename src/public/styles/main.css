@@ -1,29 +1,30 @@
 head,
  :root,
 body {
-  background-color: #fafafa;
+  background-color: white;
   margin: 0;
 }
 
 body>header {
   font: 500 1em Roboto, sans-serif;
-  background-color: #1976d2;
-  color: white;
+  color: black;
   padding: 0.8em 0.8em 0.2em 0.8em;
   margin: 0 0 0.4em 0;
-  box-shadow: #000 0px 0px 10px;
   display: flex;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
 
 body>header h1 {
   margin: 0 0 0.2em 0;
+  text-decoration: underline;
 }
 
 body>header span {
   font-weight: 400;
   font-size: 0.8em;
-  color: white;
+  color: black;
   margin-bottom: 0.4em;
   display: block;
   margin-left: 20px;
@@ -31,7 +32,7 @@ body>header span {
 }
 
 body>header span a, body>header span a:visited {
-  color: white;
+  color:black;
 }
 
 main {
@@ -39,7 +40,7 @@ main {
   /*display: grid;*/
   overflow-x: auto;
   max-width: 100%;
-  max-height: calc(100vh - 66px);
+  max-height: calc(100vh - 100px);
   height: calc(100vh);
   box-sizing: border-box;
 }
@@ -50,9 +51,18 @@ main section {
   margin: 1px 5px 4px 5px;
   background: #fff;
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.01), 0 1px 2px rgba(0, 0, 0, 0.07), 0 5px 15px rgba(0, 0, 0, 0.03);
-  overflow-y: auto;
   transition: box-shadow 0.1s ease-out;
   box-sizing: border-box;
+}
+
+main section h1 {
+  background-color: #fff;
+}
+
+main section div[data-url] {
+  padding-top: 5px;
+  height: calc(100% - 80px);
+  overflow-y: auto;
 }
 
 main section.selected {
@@ -96,12 +106,11 @@ main section h1 {
   text-align: center;
   position: sticky;
   top: -1px;
-  background-color: #f5f8fa;
   margin: 0;
   padding: 0.8em;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
   z-index: 1;
   width: initial;
+  border-bottom: solid 1px white;
 }
 
 main section h1 a {
