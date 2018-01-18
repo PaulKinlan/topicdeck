@@ -59,8 +59,7 @@ main section h1 {
 }
 
 main section div[data-url] {
-  padding-top: 5px;
-  height: calc(100% - 80px);
+  height: calc(100% - 92px);
   overflow-y: auto;
 }
 
