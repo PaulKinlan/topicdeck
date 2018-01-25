@@ -45,7 +45,7 @@
     "babel-plugin-transform-es2015-arrow-functions": "^6.22.0",
     "babel-preset-env": "^1.6.1",
     "clean-css": "^4.1.9",
-    "lighthouse-ci": "git@github.com:ebidel/lighthouse-ci.git",
+    //"lighthouse-ci": "git@github.com:ebidel/lighthouse-ci.git",
     "minimist": "^1.2.0",
     "now": "^9.2.7",
     "replace-in-file": "^3.1.0",
