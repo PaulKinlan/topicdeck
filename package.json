@@ -13,7 +13,7 @@
     "server:debugbrk": "cd dist/server/ && node --inspect-brk server.js",
     "now-start": "npm run server",
     "start": "npm run build && npm run server",
-    "deploy": "now -e NODE_ENV=production --token $NOW_TOKEN --npm",
+    "deploy": "export NOW_DEPLOY_URL=$(now -e NODE_ENV=production --token $NOW_TOKEN --npm)",
     "alias": "now alias --token=$NOW_TOKEN"
   },
   "dependencies": {
@@ -45,6 +45,7 @@
     "babel-plugin-transform-es2015-arrow-functions": "^6.22.0",
     "babel-preset-env": "^1.6.1",
     "clean-css": "^4.1.9",
+    "lighthouse-ci": "git@github.com:ebidel/lighthouse-ci.git",
     "minimist": "^1.2.0",
     "now": "^9.2.7",
     "replace-in-file": "^3.1.0",
