@@ -11,7 +11,7 @@
     "server": "cd dist/server/ && node server.js",
     "server:debug": "cd dist/server/ && node --inspect server.js",
     "server:debugbrk": "cd dist/server/ && node --inspect-brk server.js",
-    "lighthouse": "node tools/parseLighthouseResponse.js $NOW_DEPLOY_URL",
+    "lighthouse": "echo $NOW_DEPLOY_URL && node tools/parseLighthouseResponse.js $NOW_DEPLOY_URL",
     "now-start": "npm run server",
     "start": "npm run build && npm run server",
     "deploy": "NOW_DEPLOY_URL=$(now --token $NOW_TOKEN --npm)",

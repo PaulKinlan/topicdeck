@@ -18,7 +18,17 @@ app.use(compression({
 
 app.set('trust proxy', true);
 
-const generator = generateIncrementalNonce('server')
+const generator = generateIncrementalNonce('server');
+const getHostName = (req) => {
+  let hostname = req.hostname; // Cleanse this.
+  hostname = hostname.replace(/\//g,"");
+
+  if(knownHosts.has(hostname)) {
+    hostname = '127.0.0.1';
+  }
+
+  return hostname;
+}
 
 app.all('*', (req, res, next) => {
   // protocol check, if http, redirect to https
@@ -32,8 +42,7 @@ app.all('*', (req, res, next) => {
 getCompiledTemplate(`${paths.assetPath}templates/head.html`);
 
 app.get('/', (req, res, next) => {
-  let hostname = req.hostname; // Cleanse this.
-  hostname = hostname.replace(/\//g,"");
+  let hostname = getHostName(req);
 
   let nonce = {
     analytics: generator(),
@@ -53,8 +62,7 @@ app.get('/', (req, res, next) => {
 });
 
 app.get('/all', (req, res, next) => {
-  let hostname = req.hostname; // Cleanse this.
-  hostname = hostname.replace(/\//g,"");
+  let hostname = getHostName(req);
 
   let nonce = {
     analytics: generator(),
@@ -74,8 +82,7 @@ app.get('/all', (req, res, next) => {
 });
 
 app.get('/manifest.json', (req, res, next) => {
-  let hostname = req.hostname; // Cleanse this.
-  hostname = hostname.replace(/\//g,"");
+  let hostname = getHostName(req);
 
   manifest({
     dataPath: `${paths.dataPath}${hostname}.`,
@@ -87,8 +94,7 @@ app.get('/manifest.json', (req, res, next) => {
 });
 
 app.get('/proxy', (req, res, next) => {
-  let hostname = req.hostname; // Cleanse this.
-  hostname = hostname.replace(/\//g,"");
+  let hostname = getHostName(req);
   
   proxy(req,  {
       dataPath: `${paths.dataPath}${hostname}.`,
@@ -111,6 +117,7 @@ app.get('/proxy', (req, res, next) => {
 let RSSCombiner = require('rss-combiner-ns');
 
 let latestFeeds = {};
+let knownHosts = new Set();
 
 // A global server feedcache so we are not overloading remote servers
 const fetchFeeds = () => {
@@ -119,6 +126,7 @@ const fetchFeeds = () => {
   feeds.forEach(config => {
     const hostname = new URL(config.origin).hostname;
     console.log(`${hostname} Checking Feeds`, Date.now());
+    knownHosts.add(hostname);
     
     const feedConfig = {
       title: config.title,
@@ -163,16 +171,15 @@ fetchFeeds();
 setInterval(fetchFeeds, 30 * 60 * 1000);
 
 app.get('/all.rss', (req, res, next) => {
-  let hostname = req.hostname; // Cleanse this.
-  hostname = hostname.replace(/\//g,"");
+  let hostname = getHostName(req);
 
   res.setHeader('Content-Type', 'text/xml');
   res.send(latestFeeds[hostname]);
 });
 
 app.get('/data/config.json', (req, res, next) => {
-  let hostname = req.hostname; // Cleanse this.
-  hostname = hostname.replace(/\//g,"");
+  let hostname = getHostName(req);
+
   res.sendFile(`${__dirname}/configs/${hostname}.config.json`);
 });
 

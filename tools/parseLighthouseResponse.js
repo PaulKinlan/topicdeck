@@ -103,6 +103,7 @@ function run(config) {
     'Content-Type': 'application/json',
     'X-API-KEY': API_KEY
   }})
+  .then(resp => {console.log(resp); return resp;})
   .then(resp => resp.json())
   .then(json => {
     if (config.runner === RUNNERS.wpt) {
