@@ -11,11 +11,11 @@
     "server": "cd dist/server/ && node server.js",
     "server:debug": "cd dist/server/ && node --inspect server.js",
     "server:debugbrk": "cd dist/server/ && node --inspect-brk server.js",
-    "lighthouse": "echo $NOW_DEPLOY_URL && node tools/parseLighthouseResponse.js $NOW_DEPLOY_URL",
+    "lighthouse": "node tools/parseLighthouseResponse.js $NOW_DEPLOY_URL",
     "now-start": "npm run server",
     "start": "npm run build && npm run server",
     "deploy": "NOW_DEPLOY_URL=$(now --token $NOW_TOKEN --npm)",
-    "deploy-and-test": "npm run deploy && npm run lighthouse",
+    "deploy-and-test": "NOW_DEPLOY_URL=$(now --token $NOW_TOKEN --npm) && node tools/parseLighthouseResponse.js $NOW_DEPLOY_URL",
     "alias": "now alias --token=$NOW_TOKEN"
   },
   "dependencies": {
