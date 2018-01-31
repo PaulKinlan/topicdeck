@@ -20,14 +20,13 @@ app.set('trust proxy', true);
 
 const generator = generateIncrementalNonce('server');
 const getHostName = (req) => {
-  let hostname = req.hostname; // Cleanse this.
-  hostname = hostname.replace(/\//g,"");
-
+  let hostname = req.hostname;
+  
   if(knownHosts.has(hostname) == false) {
     hostname = '127.0.0.1';
   }
 
-  return hostname;
+  return hostname.replace(/\//g,"");
 }
 
 app.all('*', (req, res, next) => {
