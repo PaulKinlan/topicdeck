@@ -23,7 +23,7 @@ const getHostName = (req) => {
   let hostname = req.hostname; // Cleanse this.
   hostname = hostname.replace(/\//g,"");
 
-  if(knownHosts.has(hostname)) {
+  if(knownHosts.has(hostname) == false) {
     hostname = '127.0.0.1';
   }
 
