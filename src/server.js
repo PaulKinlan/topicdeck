@@ -33,6 +33,7 @@ const getHostName = (req) => {
 app.all('*', (req, res, next) => {
   // protocol check, if http, redirect to https
   if(true || req.get('X-Forwarded-Proto').indexOf("https") == 0 ) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
     return next();
   } else {
     res.redirect('https://' + req.hostname + req.url);
