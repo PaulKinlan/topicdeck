@@ -167,8 +167,9 @@ const getFeedConfigs = () => {
             .map(fileName => require("./" + path + fileName))
 }
 
+const fetchInterval = 60 * 60 * 1000;
 fetchFeeds();
-setInterval(fetchFeeds, 30 * 60 * 1000);
+setInterval(fetchFeeds, fetchInterval);
 
 app.get('/all.rss', (req, res, next) => {
   let hostname = getHostName(req);
