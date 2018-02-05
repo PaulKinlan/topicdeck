@@ -58,6 +58,10 @@ app.get('/', (req, res, next) => {
       assetPath: paths.assetPath  
     })
     .then(response => {
+      if(!!response == false) {
+        console.error(req, hostname);
+        return res.status(500).send(`Response undefined Error ${hostname}`);
+      }
       node.responseToExpressStream(res, response.body)
     });         
 });
@@ -78,6 +82,10 @@ app.get('/all', (req, res, next) => {
       assetPath: paths.assetPath 
     })
     .then(response => {
+      if(!!response == false) {
+        console.error(req, hostname);
+        return res.status(500).send(`Response undefined Error ${hostname}`);
+      }
       node.responseToExpressStream(res, response.body)
     });         
 });
