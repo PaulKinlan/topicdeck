@@ -20,6 +20,11 @@
       "name": "Android GDE's",
       "href": "https://androidgdedeck.com",
       "feedUrl": "https://androidgdedeck.com/all.rss"
+    },
+    {
+      "name": "IoT GDE's",
+      "href": "https://iotgdedeck.com",
+      "feedUrl": "https://iotgdedeck.com/all.rss"
     }
   ]
 }
