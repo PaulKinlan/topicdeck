@@ -4,11 +4,11 @@
   "origin": "https://iotgdedeck.com",
   "feedUrl": "https://iotgdedeck.com/all.rss",
   "theme": {
-    "backgroundColor": "#ffaa00"
+    "backgroundColor": "#aa00ff"
   },
   "site": {
     "googleAnalytics": "UA-111516552-4",
-    "searchConsole": "clDnqbgIQqPX0Oy2PGM3FWZi8W_Njvowo79TAz6mXz8"
+    "searchConsole": "SrbXKyTScp_FwejgSKpQuqy7agpUaCZvaRqARGmOI2o"
   },
   "columns": [
     {
