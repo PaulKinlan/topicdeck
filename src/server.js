@@ -43,6 +43,7 @@ getCompiledTemplate(`${paths.assetPath}templates/head.html`);
 
 app.get('/', (req, res, next) => {
   let hostname = getHostName(req);
+  console.log("/", hostname);
 
   let nonce = {
     analytics: generator(),
@@ -100,7 +101,12 @@ app.get('/proxy', (req, res, next) => {
       dataPath: `${paths.dataPath}${hostname}.`,
       assetPath: paths.assetPath  
     })
-    .then(response => { 
+    .then(response => {
+      if(!!response == false) {
+        console.error(req, hostname);
+        return res.status(500).send(`Response undefined Error ${hostname}`);
+      }
+
       if(typeof(response.body) === 'string') {
         res.status(response.status).send(response.body);
       }
