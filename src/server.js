@@ -43,7 +43,6 @@ getCompiledTemplate(`${paths.assetPath}templates/head.html`);
 
 app.get('/', (req, res, next) => {
   let hostname = getHostName(req);
-  console.log("/", hostname);
 
   let nonce = {
     analytics: generator(),
@@ -62,7 +61,6 @@ app.get('/', (req, res, next) => {
         console.error(req, hostname);
         return res.status(500).send(`Response undefined Error ${hostname}`);
       }
-      console.log(response)
       node.responseToExpressStream(res, response.body)
     });         
 });
@@ -87,7 +85,6 @@ app.get('/all', (req, res, next) => {
         console.error(req, hostname);
         return res.status(500).send(`Response undefined Error ${hostname}`);
       }
-      console.log(response)
       node.responseToExpressStream(res, response.body)
     });         
 });
