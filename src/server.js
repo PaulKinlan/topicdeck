@@ -86,6 +86,7 @@ app.get('/all', (req, res, next) => {
         console.error(req, hostname);
         return res.status(500).send(`Response undefined Error ${hostname}`);
       }
+      console.log(response)
       node.responseToExpressStream(res, response.body)
     });         
 });
