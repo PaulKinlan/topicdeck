@@ -1,12 +1,16 @@
 const swBuild = require('workbox-build');
-
-swBuild.injectManifest({
+const patterns = ['assets/templates/*.html',
+  'assets/templates/*.json',
+  'scripts/client.js',
+  'styles/main.css'];
+const config = {
   globDirectory: './dist/server/public/',
-  globPatterns: ['assets/templates/*.html', 'assets/templates/*.json','scripts/client.js', 'styles/main.css'],
+  globPatterns: patterns,
   swSrc: './dist/server/public/sw.js',
   swDest: './dist/server/public/sw.js',
   modifyUrlPrefix: {'': '/'}
-})
-.then(() => {
+};
+
+swBuild.injectManifest(config).then(() => {
   console.log('Build Manifest generated.');
 });
