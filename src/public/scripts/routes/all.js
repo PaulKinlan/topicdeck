@@ -6,44 +6,41 @@ import {
   Response,
   caches,
   paths
- } from '../platform/common.js';
+} from '../platform/common.js';
 
-import { convertFeedItemsToJSON } from '../data/common.js';
+import {convertFeedItemsToJSON} from '../data/common.js';
 
+const headTemplate = getCompiledTemplate(`${paths.assetPath}templates/head.html`);
+const preloadTemplate = getCompiledTemplate(`${paths.assetPath}templates/all-preload.html`);
+const styleTemplate = getCompiledTemplate(`${paths.assetPath}templates/all-styles.html`);
+const columnTemplate = getCompiledTemplate(`${paths.assetPath}templates/column.html`);
+const itemTemplate = getCompiledTemplate(`${paths.assetPath}templates/item.html`);
 
-let headTemplate = getCompiledTemplate(`${paths.assetPath}templates/head.html`);
-let preloadTemplate = getCompiledTemplate(`${paths.assetPath}templates/all-preload.html`);
-let styleTemplate = getCompiledTemplate(`${paths.assetPath}templates/all-styles.html`);
-let columnTemplate = getCompiledTemplate(`${paths.assetPath}templates/column.html`);
-let itemTemplate = getCompiledTemplate(`${paths.assetPath}templates/item.html`);
-
-const all = (nonce,  paths) => {
-  let config = loadData(`${paths.dataPath}config.json`).then(r => r.json());
-
-  let concatStream = new ConcatStream;
-  
-  let jsonFeedData = fetchCachedFeedData(config, itemTemplate);
+const all = (nonce, paths) => {
+  const config = loadData(`${paths.dataPath}config.json`).then(r => r.json());
+  const concatStream = new ConcatStream;
+  const jsonFeedData = fetchCachedFeedData(config, itemTemplate);
 
   const streams = {
-    preload: preloadTemplate.then(render => config.then(c=> render({config: c }))),
+    preload: preloadTemplate.then(render => config.then(c=> render({config: c}))),
     styles: styleTemplate.then(render => config.then(c => render({config: c, nonce: nonce}))),
-    data: columnTemplate.then(render => config.then(c => jsonFeedData.then(items => render({column: {config: { feedUrl: c.feedUrl, name: "All GDE's"}, items: items } })))),
+    data: columnTemplate.then(render => config.then(c => jsonFeedData.then(items => render({column: {config: {feedUrl: c.feedUrl, name: 'All GDE\'s'}, items: items}})))),
     itemTemplate: itemTemplate.then(render => render({options: {includeAuthor: true, new: true}, item: {}}))
   };
 
   const headStream = headTemplate.then(render => render({config: config, streams: streams, nonce: nonce}));
 
-  headStream.then(stream => stream.pipeTo(concatStream.writable))
-  
-  return Promise.resolve(new Response(concatStream.readable, { status: "200" }))
-}
+  headStream.then(stream => stream.pipeTo(concatStream.writable));
+
+  return Promise.resolve(new Response(concatStream.readable, {status: '200'}));
+};
 
 
 // Helpers.
 // Todo. We will want to do a server side render...
 const fetchCachedFeedData = (config, itemTemplate) => {
   // Return a promise that resolves to a map of column id => cached data.
-  const resolveCachedUrl = (cache, url) => (!!cache) ? cache.match(new Request(url)).then(response => (!!response) ? response.text() : undefined) : Promise.resolve();
+  const resolveCachedUrl = (cache, url) => (cache) ? cache.match(new Request(url)).then(response => (response) ? response.text() : undefined) : Promise.resolve();
   const templateOptions = {
     includeAuthor: true
   };

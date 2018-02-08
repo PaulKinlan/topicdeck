@@ -10,7 +10,7 @@
       "jsx": false,
       "experimentalObjectRestSpread": false
     },
-    "sourceType": "script"
+    "sourceType": "module"
   },
   "rules": {
     "indent": [2, 2, {
@@ -27,8 +27,6 @@
     "no-var": 2,
     "no-console": 0,
     "prefer-const": 2,
-
-    // Disable rules
     "comma-dangle": 0,
     "arrow-parens": 0,
     "require-jsdoc": 0
