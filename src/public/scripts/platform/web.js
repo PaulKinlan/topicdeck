@@ -4,7 +4,7 @@
 
 import * as doT from '../dot.js';
 //#ifset _SERVICEWORKER
-import {DOMParser} from '../../../private/xml-dom-parser/dom-parser.js';
+import { DOMParser } from '../../../private/xml-dom-parser/dom-parser.js';
 //#else
 let DOMParser = eval('window.DOMParser');
 //#endif
