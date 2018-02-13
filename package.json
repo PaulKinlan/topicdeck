@@ -23,7 +23,7 @@
     "compression": "^1.7.1",
     "express": "^4.15.2",
     "fromwhatwgreadablestream": "^1.0.3",
-    "node-fetch": "*",
+    "node-fetch": "^1.0.0",
     "rss-combiner-ns": "0.0.12",
     "stream-to-string": "^1.1.0",
     "string-to-stream": "^1.1.0",

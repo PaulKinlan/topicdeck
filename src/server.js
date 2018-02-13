@@ -43,7 +43,6 @@ getCompiledTemplate(`${paths.assetPath}templates/head.html`);
 
 app.get('/', (req, res, next) => {
   let hostname = getHostName(req);
-  console.log("/", hostname);
 
   let nonce = {
     analytics: generator(),
