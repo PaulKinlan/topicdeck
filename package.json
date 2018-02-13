@@ -50,7 +50,6 @@
     "clean-css": "^4.1.9",
     "eslint": "^4.17.0",
     "eslint-config-google": "^0.9.1",
-    "lighthouse-ci": "git+https://github.com/ebidel/lighthouse-ci.git",
     "minimist": "^1.2.0",
     "now": "^9.2.7",
     "replace-in-file": "^3.1.0",
