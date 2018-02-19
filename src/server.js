@@ -23,6 +23,7 @@ app.use(compression({
 
 app.set('trust proxy', true);
 
+const preload = '</scripts/client.js>; rel=preload; as=script, </sw.js>; rel=preload; as=script';
 const generator = generateIncrementalNonce('server');
 const getHostName = (req) => {
   let hostname = req.hostname;
@@ -58,18 +59,17 @@ app.get('/', (req, res, next) => {
   };
 
   res.setHeader('Content-Security-Policy', generateCSPPolicy(nonce));
-  res.setHeader('Link', '</scripts/client.js>; rel=preload; as=script, </sw.js>; rel=preload; as=script');
+  res.setHeader('Link', preload);
   root(nonce, {
     dataPath: `${paths.dataPath}${hostname}.`,
     assetPath: paths.assetPath
-  })
-      .then(response => {
-        if (!!response == false) {
-          console.error(req, hostname);
-          return res.status(500).send(`Response undefined Error ${hostname}`);
-        }
-        node.responseToExpressStream(res, response.body);
-      });
+  }).then(response => {
+    if (!!response == false) {
+      console.error(req, hostname);
+      return res.status(500).send(`Response undefined Error ${hostname}`);
+    }
+    node.responseToExpressStream(res, response.body);
+  });
 });
 
 app.get('/all', (req, res, next) => {
@@ -80,8 +80,6 @@ app.get('/all', (req, res, next) => {
     inlinedcss: generator(),
     style: generator()
   };
-
-  const preload = '</scripts/client.js>; rel=preload; as=script, </sw.js>; rel=preload; as=script';
 
   res.setHeader('Content-Security-Policy', generateCSPPolicy(nonce));
   res.setHeader('Link', preload);
@@ -117,7 +115,6 @@ app.get('/proxy', (req, res, next) => {
     assetPath: paths.assetPath
   }).then(response => {
     if (!!response == false) {
-      console.error(req, hostname);
       return res.status(500).send(`Response undefined Error ${hostname}`);
     }
 
