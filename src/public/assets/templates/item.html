@@ -3,7 +3,7 @@ const empty = (str) => str || "";
 let items = it.items || [it.item];
 for (let item of items) {
   let output = '<div class="item ' + ((it.options && it.options.new === true) ? 'new' : '') + '" data-bind_id="guid" id="' + empty(item.guid)+ '">';
-  output += '<h3><span data-bind_inner-text="title">'+ empty(item.title) + '</span></h3>';
+  output += '<h3><a data-bind_inner-text="title" data-bind_href="link" href="'+ empty(item.link) +'">'+ empty(item.title) + '</a></h3>';
   if(it.options && it.options.includeAuthor === true) {
     output += '<h4>By <span data-bind_inner-text="author">'+ empty(item.author) +'</span></h4>';
   }

@@ -179,9 +179,13 @@ main section div.item div svg>* {
   pointer-events: none;
 }
 
-div a[data-bind_inner-text="pubDate"] {
+div a[data-bind_inner-Text="pubDate"] {
   font-style: italic;
-  color: #737272;
+  color: #737272 !important;
+}
+
+div a[data-bind_href] {
+  color: black;
 }
 
 div#toast {
