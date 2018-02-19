@@ -160,7 +160,9 @@ const fetchFeeds = () => {
       pubDate: new Date(),
       successfulFetchCallback: (streamInfo) => {
         console.log(`Fetched feed: ${streamInfo.url}`);
-        return cacheStorage[streamInfo.url] = streamInfo.stream;
+        if ((streamInfo.url in cacheStorage) == false) {
+          cacheStorage[streamInfo.url] = streamInfo.stream;
+        }
       }
     };
 
