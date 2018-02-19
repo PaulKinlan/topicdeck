@@ -13,18 +13,18 @@
   "columns": [
     {
       "name": "Web GDE's",
-      "href": "https://webgdedeck.com/",
-      "feedUrl": "https://webgdedeck.com/all.rss"
+      "href": "https://web.gdedeck.com/",
+      "feedUrl": "https://web.gdedeck.com/all.rss"
     },
     {
       "name": "Android GDE's",
-      "href": "https://androidgdedeck.com",
-      "feedUrl": "https://androidgdedeck.com/all.rss"
+      "href": "https://android.gdedeck.com",
+      "feedUrl": "https://android.gdedeck.com/all.rss"
     },
     {
       "name": "IoT GDE's",
-      "href": "https://iotgdedeck.com",
-      "feedUrl": "https://iotgdedeck.com/all.rss"
+      "href": "https://iot.gdedeck.com",
+      "feedUrl": "https://iot.gdedeck.com/all.rss"
     }
   ]
 }

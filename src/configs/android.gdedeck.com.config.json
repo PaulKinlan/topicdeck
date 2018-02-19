@@ -1,0 +1,235 @@
+{
+  "title": "Android GDE Deck",
+  "origin": "https://android.gdedeck.com",
+  "feedUrl": "https://android.gdedeck.com/all.rss",
+  "description": "The latest news and updates from the Google Developer Expert for Android program.", 
+  "theme": {
+    "backgroundColor": "#A4C639"
+  },
+  "site": {
+    "googleAnalytics": "UA-111516552-2",
+    "searchConsole": "gc3aoDVRaTuR9rY00RGQXYEVpKZJSi-L5gj_iAc3uxA"
+  },
+  "columns": [
+    {
+      "name": "Dan Lew",
+      "href": "http://blog.danlew.net/",
+      "feedUrl": "http://blog.danlew.net/rss/"
+    },
+    {
+      "name": "David González",
+      "href": "http://www.malmstein.com/",
+      "feedUrl": "http://www.malmstein.com/atom.xml"
+    },
+    {
+      "name": "Rebecca Franks",
+      "href": "https://riggaroo.co.za/",
+      "feedUrl": "https://riggaroo.co.za/feed/"
+    },
+    {
+      "name": "Cyril Mottier",
+      "href": "https://cyrilmottier.com/",
+      "feedUrl": "https://cyrilmottier.com/atom.xml"
+    },
+    {
+      "name": "Marcos Placona",
+      "href": "https://medium.com/@mplacona",
+      "feedUrl": "https://medium.com/feed/@mplacona"
+    },
+    {
+      "name": "Corey Latislaw",
+      "href": "http://coreylatislaw.com/",
+      "feedUrl": "http://coreylatislaw.com/feed/"
+    },
+    {
+      "name": "Annyce Davis",
+      "href": "http://adavis.info/",
+      "feedUrl": "http://adavis.info/feed"
+    },
+    {
+      "name": "Yuki Anzai",
+      "href": "http://y-anz-m.blogspot.co.uk/",
+      "feedUrl": "http://y-anz-m.blogspot.com/feeds/posts/default?alt=rss"
+    },
+    {
+      "name": "Huyen Tue Dao",
+      "href": "http://www.randomlytyping.com/",
+      "feedUrl": "http://www.randomlytyping.com/home?format=RSS"
+    },
+    {
+      "name": "Chiu-Ki Chan",
+      "href": "http://blog.sqisland.com/",
+      "feedUrl": "http://feeds.feedburner.com/sqisland"
+    },
+    {
+      "name": "Elif Boncuk",
+      "href": "https://elifboncuk.com/",
+      "feedUrl": "https://elifboncuk.com/feed/"
+    },
+    {
+      "name": "Yonatan Levin",
+      "href": "https://medium.com/@yonatanvlevin/",
+      "feedUrl": "https://medium.com/feed/@yonatanvlevin"
+    },
+    {
+      "name": "Michael Wolfson",
+      "href": "http://www.mikewolfson.com/blog/",
+      "feedUrl": "http://www.mikewolfson.com/blog?format=RSS"
+    },
+    {
+      "name": "Erik Hellman",
+      "href": "https://hellsoft.se/",
+      "feedUrl": "https://hellsoft.se/feed"
+    },
+    {
+      "name": "Nelson Glauber",
+      "href": "http://www.nglauber.com.br/",
+      "feedUrl": "http://feeds.feedburner.com/DebugIsOnTheTable"
+    },
+    {
+      "name": "Ryan Harter",
+      "href": "http://ryanharter.com/",
+      "feedUrl": "http://ryanharter.com/atom.xml"
+    },
+    {
+      "name": "Enrique Lopez Mañas",
+      "href": "http://www.lopez-manas.com/",
+      "feedUrl": "http://www.lopez-manas.com/?feed=rss2"
+    },
+    {
+      "name": "Ubiratan Soares",
+      "href": "https://ubiratansoares.github.io/",
+      "feedUrl": "https://ubiratansoares.github.io/index.xml"
+    },
+    {
+      "name": "Paul Blundell",
+      "href": "http://blog.blundellapps.co.uk/",
+      "feedUrl": "http://blog.blundellapps.co.uk/feed/"
+    },
+    {
+      "name": "Sebastiano Poggi",
+      "href": "https://tips.seebrock3r.me/",
+      "feedUrl": "https://tips.seebrock3r.me/feed"
+    },
+    {
+      "name": "Sergi Martínez",
+      "href": "http://sergiandreplace.com/",
+      "feedUrl": "http://sergiandreplace.com/index.xml"
+    },
+    {
+      "name": "Raul Portales",
+      "href": "http://blog.shalafi.net/",
+      "feedUrl": "http://blog.shalafi.net/feed/"
+    },
+    {
+      "name": "Wiebe Elsinga",
+      "href": "http://wiebe-elsinga.com/blog/news/",
+      "feedUrl": "http://wiebe-elsinga.com/blog/news/feed/"
+    },
+    {
+      "name": "Jake Wharton",
+      "href": "http://jakewharton.com/blog/",
+      "feedUrl": "http://jakewharton.com/feed.xml"
+    },
+    {
+      "name": "Mark Allison",
+      "href": "https://blog.stylingandroid.com/",
+      "feedUrl": "http://feeds.feedburner.com/StylingAndroid"
+    },
+    {
+      "name": "Philippe Breault",
+      "href": "http://www.developerphil.com/",
+      "feedUrl": "http://www.developerphil.com/feed.xml"
+    },
+    {
+      "name": "Donn Felker",
+      "href": "http://www.donnfelker.com/",
+      "feedUrl": "http://www.donnfelker.com/comments/feed/"
+    },
+    {
+      "name": "Dario Mungoi",
+      "href": "https://dariomungoi.wordpress.com/",
+      "feedUrl": "https://dariomungoi.wordpress.com/feed/"
+    },
+    {
+      "name": "Kelly Shuster",
+      "href": "http://www.kiodev.com/",
+      "feedUrl": "http://www.kiodev.com/feed/"
+    },
+    {
+      "name": "Michael Evans",
+      "href": "http://michaelevans.org/",
+      "feedUrl": "http://michaelevans.org/atom.xml"
+    },
+    {
+      "name": "Israel Ferrer Camacho",
+      "href": "http://blog.israelferrer.com/",
+      "feedUrl": "http://blog.israelferrer.com/rss"
+    },
+    {
+      "name": "SeongUg Jung",
+      "href": "https://medium.com/@jsuch2362",
+      "feedUrl": "https://medium.com/feed/@jsuch2362"
+    },
+    {
+      "name": "Huỳnh Quang Thảo",
+      "href": "https://medium.com/@huynhquangthao",
+      "feedUrl": "https://medium.com/feed/@huynhquangthao"
+    },
+    {
+      "name": "Ataul Munim",
+      "href": "http://ataulm.com/",
+      "feedUrl": "http://ataulm.com/feed/"
+    },
+    {
+      "name": "Scott Alexander-Bown",
+      "href": "https://scottyab.com/",
+      "feedUrl": "https://scottyab.com/feed/"
+    },
+    {
+      "name": "Daichi Furiya",
+      "href": "https://wasabeef.jp/",
+      "feedUrl": "https://wasabeef.jp/rss/"
+    },
+    {
+      "name": "Kaushik Gopal",
+      "href": "https://blog.kaush.co/",
+      "feedUrl": "https://blog.kaush.co/feed.xml"
+    },
+    {
+      "name": "Daniele Bonaldo",
+      "href": "http://www.danielebonaldo.com/",
+      "feedUrl": "http://www.danielebonaldo.com/feed.xml"
+    },
+    {
+      "name": "Juhani Lehtimäki",
+      "href": "https://androiduipatterns.com/",
+      "feedUrl": "https://androiduipatterns.com/feed"
+    },
+    {
+      "name": "Samuel Edwards",
+      "href": "https://handstandsam.com/",
+      "feedUrl": "https://handstandsam.com/feed/"
+    },
+    {
+      "name": "Britt Barak",
+      "href": "https://medium.com/@britt.barak",
+      "feedUrl": "https://medium.com/feed/@britt.barak"
+    },
+    {
+      "name": "Roberto Orgiu",
+      "href": "https://medium.com/@_tiwiz",
+      "feedUrl": "https://medium.com/feed/@_tiwiz"
+    },
+    {
+      "name": "Jeroen Mols",
+      "href": "https://jeroenmols.com/",
+      "feedUrl": "https://jeroenmols.com/atom.xml"
+    },
+    {
+      "name": "Danny Preussler",
+      "href": "https://medium.com/@dpreussler",
+      "feedUrl": "https://medium.com/feed/@dpreussler"
+    }
+  ]
+}
