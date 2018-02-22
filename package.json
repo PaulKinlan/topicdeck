@@ -1,6 +1,6 @@
 {
-  "name": "webgde-deck",
-  "version": "0.0.1",
+  "name": "topicdeck",
+  "version": "0.0.2",
   "scripts": {
     "alias": "now alias --token=$NOW_TOKEN",
     "build": "npm run build:server && npm run build:client && npm run build:assets && npm run build:serviceworker",
