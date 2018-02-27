@@ -182,6 +182,11 @@
       "feedUrl": "https://blog.devintent.com/feed"
     },
     {
+      "name": "Jad Joubran",
+      "href": "https://medium.com/@joubranjad",
+      "feedUrl": "https://medium.com/feed/@JoubranJad"
+    },
+    {
       "name": "Jean-François Garreau",
       "href": "https://jef.binomed.fr",
       "feedUrl": "https://jef.binomed.fr/atom.xml"
