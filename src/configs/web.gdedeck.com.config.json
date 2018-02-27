@@ -200,11 +200,16 @@
       "name": "Una Kravets",
       "href": "https://una.im/",
       "feedUrl": "https://una.im/feed.xml"
-    }
+    },
     {
       "name": "Shidhin CR",
       "href": "https://www.undefinednull.com",
       "feedUrl": "https://www.undefinednull.com/atom.xml"
+    },
+    {
+      "name": "Lukas Ruebbelke",
+      "href": "http://onehungrymind.com",
+      "feedUrl": "http://onehungrymind.com/feed/"
     }
   ]
 }
