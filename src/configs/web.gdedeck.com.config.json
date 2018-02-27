@@ -190,6 +190,11 @@
       "name": "Alain Chautard",
       "href": "https://blog.angulartraining.com",
       "feedUrl": "https://blog.angulartraining.com/feed"
+    },
+    {
+      "name": "Una Kravets",
+      "href": "https://una.im/",
+      "feedUrl": "https://una.im/feed.xml"
     }
   ]
 }
