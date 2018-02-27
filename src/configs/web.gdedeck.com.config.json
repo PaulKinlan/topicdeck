@@ -196,5 +196,10 @@
       "href": "https://blog.angulartraining.com",
       "feedUrl": "https://blog.angulartraining.com/feed"
     }
+    {
+      "name": "Shidhin CR",
+      "href": "https://www.undefinednull.com",
+      "feedUrl": "https://www.undefinednull.com/atom.xml"
+    }
   ]
 }
