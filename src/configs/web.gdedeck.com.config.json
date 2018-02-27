@@ -185,6 +185,11 @@
       "name": "Jean-François Garreau",
       "href": "https://jef.binomed.fr",
       "feedUrl": "https://jef.binomed.fr/atom.xml"
+    },
+    {
+      "name": "Alain Chautard",
+      "href": "https://blog.angulartraining.com",
+      "feedUrl": "https://blog.angulartraining.com/feed"
     }
   ]
 }
