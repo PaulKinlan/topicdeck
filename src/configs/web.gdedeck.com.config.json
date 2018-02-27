@@ -185,6 +185,11 @@
       "name": "Jean-François Garreau",
       "href": "https://jef.binomed.fr",
       "feedUrl": "https://jef.binomed.fr/atom.xml"
+    },
+    {
+      "name": "Tim Ruffles",
+      "href": "https://truffles.me.uk",
+      "feedUrl": "https://truffles.me.uk/rss"
     }
   ]
 }
