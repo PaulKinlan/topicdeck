@@ -207,6 +207,11 @@
       "feedUrl": "https://www.undefinednull.com/atom.xml"
     },
     {
+      "name": "Lukas Ruebbelke",
+      "href": "http://onehungrymind.com",
+      "feedUrl": "http://onehungrymind.com/feed/"
+    },
+    {
       "name": "Dan Wahlin",
       "href": "https://blog.codewithdan.com",
       "feedUrl": "https://blog.codewithdan.com/feed/"
