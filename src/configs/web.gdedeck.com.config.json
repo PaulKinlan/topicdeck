@@ -200,11 +200,16 @@
       "name": "Una Kravets",
       "href": "https://una.im/",
       "feedUrl": "https://una.im/feed.xml"
-    }
+    },
     {
       "name": "Shidhin CR",
       "href": "https://www.undefinednull.com",
       "feedUrl": "https://www.undefinednull.com/atom.xml"
+    },
+    {
+      "name": "Shai Reznik",
+      "href": "https://medium.com/@shairez",
+      "feedUrl": "https://medium.com/feed/@shairez"
     }
   ]
 }
