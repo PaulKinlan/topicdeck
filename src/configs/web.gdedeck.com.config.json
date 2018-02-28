@@ -207,6 +207,11 @@
       "feedUrl": "https://www.undefinednull.com/atom.xml"
     },
     {
+      "name": "Will Huang",
+      "href": "https://blog.miniasp.com/",
+      "feedUrl": "https://blog.miniasp.com/syndication.axd"
+    },
+    {
       "name": "Lukas Ruebbelke",
       "href": "http://onehungrymind.com",
       "feedUrl": "http://onehungrymind.com/feed/"
