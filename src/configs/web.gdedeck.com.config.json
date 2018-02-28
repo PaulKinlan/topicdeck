@@ -1,6 +1,6 @@
 {
   "title": "Web GDE Deck",
-  "description": "The latest news and updates from the Google Developer Expert for web program.", 
+  "description": "The latest news and updates from the Google Developer Expert for web program.",
   "origin": "https://web.gdedeck.com",
   "feedUrl": "https://web.gdedeck.com/all.rss",
   "theme": {
@@ -230,6 +230,21 @@
       "name": "Jay Phelps",
       "href": "https://medium.com/@jayphelps",
       "feedUrl": "https://medium.com/feed/@jayphelps"
+    },
+    {
+      "name": "Diéssica Gurskas",
+      "href": "https://diessi.ca",
+      "feedUrl": "https://diessi.ca/feed.xml"
+    },
+    {
+      "name": "Ruth John",
+      "href": "https://blog.rumyra.com/",
+      "feedUrl": "https://blog.rumyra.com/feed.xml"
+    },
+    {
+      "name": "Kenneth Rohde Christiansen",
+      "href": "https://medium.com/@kennethrohde",
+      "feedUrl": "https://medium.com/feed/@kennethrohde"
     }
   ]
 }
