@@ -235,6 +235,11 @@
       "name": "Ruth John",
       "href": "https://blog.rumyra.com/",
       "feedUrl": "https://blog.rumyra.com/feed.xml"
+    },
+    {
+      "name": "Kenneth Rohde Christiansen",
+      "href": "https://medium.com/@kennethrohde",
+      "feedUrl": "https://medium.com/feed/@kennethrohde"
     }
   ]
 }
