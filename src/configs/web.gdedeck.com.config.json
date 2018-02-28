@@ -1,6 +1,6 @@
 {
   "title": "Web GDE Deck",
-  "description": "The latest news and updates from the Google Developer Expert for web program.", 
+  "description": "The latest news and updates from the Google Developer Expert for web program.",
   "origin": "https://web.gdedeck.com",
   "feedUrl": "https://web.gdedeck.com/all.rss",
   "theme": {
@@ -182,6 +182,11 @@
       "feedUrl": "https://blog.devintent.com/feed"
     },
     {
+      "name": "Jad Joubran",
+      "href": "https://medium.com/@joubranjad",
+      "feedUrl": "https://medium.com/feed/@JoubranJad"
+    },
+    {
       "name": "Jean-François Garreau",
       "href": "https://jef.binomed.fr",
       "feedUrl": "https://jef.binomed.fr/atom.xml"
@@ -190,6 +195,50 @@
       "name": "Tim Ruffles",
       "href": "https://truffles.me.uk",
       "feedUrl": "https://truffles.me.uk/rss"
+    }, {
+      "name": "Alain Chautard",
+      "href": "https://blog.angulartraining.com",
+      "feedUrl": "https://blog.angulartraining.com/feed"
+    },
+    {
+      "name": "Una Kravets",
+      "href": "https://una.im/",
+      "feedUrl": "https://una.im/feed.xml"
+    },
+    {
+      "name": "Shidhin CR",
+      "href": "https://www.undefinednull.com",
+      "feedUrl": "https://www.undefinednull.com/atom.xml"
+    },
+    {
+      "name": "Will Huang",
+      "href": "https://blog.miniasp.com/",
+      "feedUrl": "https://blog.miniasp.com/syndication.axd"
+    },
+    {
+      "name": "Lukas Ruebbelke",
+      "href": "http://onehungrymind.com",
+      "feedUrl": "http://onehungrymind.com/feed/"
+    },
+    {
+      "name": "Dan Wahlin",
+      "href": "https://blog.codewithdan.com",
+      "feedUrl": "https://blog.codewithdan.com/feed/"
+    },
+    {
+      "name": "Shai Reznik",
+      "href": "https://medium.com/@shairez",
+      "feedUrl": "https://medium.com/feed/@shairez"
+    },
+    {
+      "name": "Diéssica Gurskas",
+      "href": "https://diessi.ca",
+      "feedUrl": "https://diessi.ca/feed.xml"
+    },
+    {
+      "name": "Ruth John",
+      "href": "https://blog.rumyra.com/",
+      "feedUrl": "https://blog.rumyra.com/feed.xml"
     }
   ]
 }
