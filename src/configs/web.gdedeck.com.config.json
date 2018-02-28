@@ -192,6 +192,10 @@
       "feedUrl": "https://jef.binomed.fr/atom.xml"
     },
     {
+      "name": "Tim Ruffles",
+      "href": "https://truffles.me.uk",
+      "feedUrl": "https://truffles.me.uk/rss"
+    }, {
       "name": "Alain Chautard",
       "href": "https://blog.angulartraining.com",
       "feedUrl": "https://blog.angulartraining.com/feed"
