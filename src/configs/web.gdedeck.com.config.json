@@ -207,6 +207,11 @@
       "feedUrl": "https://www.undefinednull.com/atom.xml"
     },
     {
+      "name": "Dan Wahlin",
+      "href": "https://blog.codewithdan.com",
+      "feedUrl": "https://blog.codewithdan.com/feed/"
+    },
+    {
       "name": "Shai Reznik",
       "href": "https://medium.com/@shairez",
       "feedUrl": "https://medium.com/feed/@shairez"
