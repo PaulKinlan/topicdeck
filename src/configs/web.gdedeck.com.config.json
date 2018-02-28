@@ -1,6 +1,6 @@
 {
   "title": "Web GDE Deck",
-  "description": "The latest news and updates from the Google Developer Expert for web program.", 
+  "description": "The latest news and updates from the Google Developer Expert for web program.",
   "origin": "https://web.gdedeck.com",
   "feedUrl": "https://web.gdedeck.com/all.rss",
   "theme": {
@@ -225,6 +225,11 @@
       "name": "Shai Reznik",
       "href": "https://medium.com/@shairez",
       "feedUrl": "https://medium.com/feed/@shairez"
+    },
+    {
+      "name": "Ruth John",
+      "href": "https://blog.rumyra.com/",
+      "feedUrl": "https://blog.rumyra.com/feed.xml"
     }
   ]
 }
