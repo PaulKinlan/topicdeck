@@ -1,0 +1,25 @@
+{
+  "title": "Progressive Web Apps",
+  "description": "The latest news and updates from around the web about PWA", 
+  "origin": "https://pwa.topicdeck.com",
+  "feedUrl": "https://pwa.topicdeck.com/all.rss",
+  "theme": {
+    "backgroundColor": "#aa00ff"
+  },
+  "site": {
+    "googleAnalytics": "UA-111516552-5",
+    "searchConsole": "SrbXKyTScp_FwejgSKpQuqy7agpUaCZvaRqARGmOI2o"
+  },
+  "columns": [
+    {
+      "name": "Latest PWA",
+      "href": "https://pwa-directory.appspot.com/",
+      "feedUrl": "https://pwa-directory.appspot.com/api/pwa/?format=rss&limit=100"
+    },
+    {
+      "name": "Medium",
+      "href": "https://medium.com/tag/progressive-web-app",
+      "feedUrl": "https://medium.com/feed/tag/progressive-web-app"
+    }
+  ]
+}
