@@ -20,6 +20,11 @@
       "name": "Medium",
       "href": "https://medium.com/tag/progressive-web-app",
       "feedUrl": "https://medium.com/feed/tag/progressive-web-app"
+    },
+    {
+      "name": "PWA Stats",
+      "href": "https://www.pwastats.com/",
+      "feedUrl": "https://www.pwastats.com/feed.xml"
     }
   ]
 }
