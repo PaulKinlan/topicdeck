@@ -25,6 +25,11 @@
       "name": "PWA Stats",
       "href": "https://www.pwastats.com/",
       "feedUrl": "https://www.pwastats.com/feed.xml"
+    },
+    {
+      "name": "Paul Thurrot",
+      "href": "https://www.thurrott.com/tag/progressive-web-apps",
+      "feedUrl": "https://www.thurrott.com/tag/progressive-web-apps/feed"
     }
   ]
 }
