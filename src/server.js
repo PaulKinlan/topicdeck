@@ -57,8 +57,7 @@ app.all('*', (req, res, next) => {
   if (forwarded && forwarded.indexOf('https') == 0 || req.hostname === '127.0.0.1') {
     res.setHeader('Access-Control-Allow-Origin', '*');
     return next();
-  }
-  else {
+  } else {
     res.redirect('https://' + req.hostname + req.url);
   }
 });
@@ -155,7 +154,7 @@ const knownHosts = new Set();
 const fetchFeeds = () => {
   const feeds = getFeedConfigs();
 
-  feeds.forEach(config => {
+  feeds.filter(config => 'redirect' in config === false).forEach(config => {
     const hostname = new URL(config.origin).hostname;
     console.log(`${hostname} Checking Feeds`, Date.now());
     knownHosts.add(hostname);
