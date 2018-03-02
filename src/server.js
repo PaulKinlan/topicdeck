@@ -54,7 +54,15 @@ const getHostName = (req) => {
 app.all('*', (req, res, next) => {
   // protocol check, if http, redirect to https
   const forwarded = req.get('X-Forwarded-Proto');
-  if (forwarded && forwarded.indexOf('https') == 0 || req.hostname === '127.0.0.1') {
+  const hostname = req.hostname;
+  const feed = feedConfigs.get(hostname);
+
+  if (feed && 'redirect' in feed) {
+    res.redirect(feed.redirect);
+    return;
+  }
+
+  if (forwarded && forwarded.indexOf('https') == 0 || hostname === '127.0.0.1') {
     res.setHeader('Access-Control-Allow-Origin', '*');
     return next();
   } else {
@@ -151,10 +159,9 @@ const latestFeeds = {};
 const knownHosts = new Set();
 
 // A global server feedcache so we are not overloading remote servers
-const fetchFeeds = () => {
-  const feeds = getFeedConfigs();
-
-  feeds.filter(config => 'redirect' in config === false).forEach(config => {
+const fetchFeeds = (feeds) => {
+  const feedList = Array.from(feeds.values());
+  feedList.filter(config => 'redirect' in config === false).forEach(config => {
     const hostname = new URL(config.origin).hostname;
     console.log(`${hostname} Checking Feeds`, Date.now());
     knownHosts.add(hostname);
@@ -192,15 +199,18 @@ const fetchFeeds = () => {
 };
 
 const getFeedConfigs = () => {
-  let path = 'configs/';
+  const path = 'configs/';
   // Dynamically import the config objects
-  return fs.readdirSync(path)
-      .filter(fileName => fileName.endsWith('.json') && fileName.startsWith('_') == false && fileName.startsWith('.') == false)
-      .map(fileName => require('./' + path + fileName));
+  const configs = fs.readdirSync(path)
+      .filter(fileName => fileName.endsWith('.json') && fileName.startsWith('.') == false)
+      .map(fileName => [fileName.replace(/\.config\.json$/), require('./' + path + fileName)]);
+
+  return new Map(configs);
 };
 
 const fetchInterval = 60 * 60 * 1000;
-fetchFeeds();
+const feedConfigs = getFeedConfigs();
+fetchFeeds(feedConfigs);
 setInterval(fetchFeeds, fetchInterval);
 
 app.get('/all.rss', (req, res, next) => {
