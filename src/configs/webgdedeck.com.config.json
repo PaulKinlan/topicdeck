@@ -185,6 +185,11 @@
       "name": "Jean-François Garreau",
       "href": "https://jef.binomed.fr",
       "feedUrl": "https://jef.binomed.fr/atom.xml"
-    }
+    },
+	{
+		"name": "Fabian Gosebrink",
+		"href": "https://offering.solutions/blog/",
+		"feedUrl": "https://offering.solutions/blog/feed.xml"
+	}
   ]
 }
