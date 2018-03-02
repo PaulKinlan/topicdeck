@@ -66,7 +66,8 @@ app.all('*', (req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     return next();
   } else {
-    res.redirect('https://' + req.hostname + req.url);
+    res.redirect('https://' + hostname + req.url);
+    return;
   }
 });
 
@@ -203,7 +204,7 @@ const getFeedConfigs = () => {
   // Dynamically import the config objects
   const configs = fs.readdirSync(path)
       .filter(fileName => fileName.endsWith('.json') && fileName.startsWith('.') == false)
-      .map(fileName => [fileName.replace(/\.config\.json$/), require('./' + path + fileName)]);
+      .map(fileName => [fileName.replace(/\.config\.json$/,''), require('./' + path + fileName)]);
 
   return new Map(configs);
 };
