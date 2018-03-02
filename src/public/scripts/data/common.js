@@ -140,9 +140,6 @@ const convertAtomItemToJSON = (item, defaults) => {
   const pubDate = findElementText('updated', item);
   const author = findElementText('author', item) || findElementText('dc:creator', item) || defaults.title;
   const link = findElementAttribute('link', 'href', item);
-  const enclosureElement = findNodes('link', item.childNodes)
-      .filter(attributeEquals('rel', 'enclosure'))
-      .filter(attributeEquals('type', 'audio/mpeg'))[0];
 
   return {'title': hardSanitize(title, 400), 'guid': guid, 'description': hardSanitize(description, 100), 'pubDate': pubDate, 'author': author, 'link': link};
 };
@@ -155,8 +152,7 @@ const convertRSSItemToJSON = (item, defaults) => {
   const author = findElementText('author', item) || findElementText('dc:creator', item) || defaults.title;
   const link = findElementText('link', item);
   const contentEncoded = findElementText('content:encoded', item);
-  const enclosureElement = findNodes('enclosure', item.childNodes).filter(attributeEquals('type', 'audio/mpeg'))[0];
-
+ 
   return {'title': hardSanitize(title, 400), 'guid': guid, 'description': hardSanitize(description, 100), 'content:encoded': hardSanitize(contentEncoded, 100), 'pubDate': pubDate, 'author': author, 'link': link};
 };
 
