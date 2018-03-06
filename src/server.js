@@ -39,7 +39,7 @@ app.use(compression({
 
 app.set('trust proxy', true);
 
-const preload = '</scripts/client.js>; rel=preload; as=script, </sw.js>; rel=preload; as=script';
+const preload = '</scripts/client.js>; rel=preload; as=script';
 const generator = generateIncrementalNonce('server');
 const getHostName = (req) => {
   let hostname = req.hostname;
