@@ -199,8 +199,7 @@ const fetchFeeds = (feeds) => {
   });
 };
 
-const getFeedConfigs = () => {
-  const path = 'configs/';
+const getFeedConfigs = (path) => {
   // Dynamically import the config objects
   const configs = fs.readdirSync(path)
       .filter(fileName => fileName.endsWith('.json') && fileName.startsWith('.') == false)
@@ -210,7 +209,7 @@ const getFeedConfigs = () => {
 };
 
 const fetchInterval = 60 * 60 * 1000;
-const feedConfigs = getFeedConfigs();
+const feedConfigs = getFeedConfigs('configs/');
 fetchFeeds(feedConfigs);
 setInterval(fetchFeeds, fetchInterval);
 
