@@ -35,10 +35,6 @@ import {handler as manifest} from './public/scripts/routes/manifest.js';
 const preload = '</scripts/client.js>; rel=preload; as=script';
 const generator = generateIncrementalNonce('server');
 
-/*
- Server specific functionality.
-*/
-
 const RSSCombiner = require('rss-combiner-ns');
 
 // A global server feedcache so we are not overloading remote servers
