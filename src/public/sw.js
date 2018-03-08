@@ -32,7 +32,14 @@ const workbox = new WorkboxSW({skipWaiting: true, precacheChannelName: 'install-
 // This should pre-cache all of the required assets determined at buildtime.
 workbox.precache([]);
 
-getCompiledTemplate(`${paths.assetPath}templates/head.html`);
+const templates = {
+  head: getCompiledTemplate(`${paths.assetPath}templates/head.html`),
+  preload: getCompiledTemplate(`${paths.assetPath}templates/all-preload.html`),
+  style: getCompiledTemplate(`${paths.assetPath}templates/columns-styles.html`),
+  column: getCompiledTemplate(`${paths.assetPath}templates/column.html`),
+  columns: getCompiledTemplate(`${paths.assetPath}templates/columns.html`),
+  item: getCompiledTemplate(`${paths.assetPath}templates/item.html`)
+};
 
 const setHeader = (response, header, value) => {
   response.headers.set(header, value);
@@ -50,7 +57,7 @@ router.get(`${self.location.origin}/proxy`, (e) => {
   const response = proxy(e.request, {
     dataPath: paths.dataPath,
     assetPath: paths.assetPath
-  });
+  }, templates);
 
   e.respondWith(response);
 }, {urlMatchProperty: 'href'});
@@ -66,7 +73,7 @@ router.get(`${self.location.origin}/all$`, (e) => {
   const response = all(nonce, {
     dataPath: paths.dataPath,
     assetPath: paths.assetPath
-  }).then(r => setHeader(r, 'Content-Security-Policy', generateCSPPolicy(nonce)));
+  }, templates).then(r => setHeader(r, 'Content-Security-Policy', generateCSPPolicy(nonce)));
   e.respondWith(response);
 }, {urlMatchProperty: 'href'});
 
@@ -81,6 +88,6 @@ router.get(`${self.location.origin}/$`, (e) => {
   const response = root(nonce, {
     dataPath: paths.dataPath,
     assetPath: paths.assetPath
-  }).then(r => setHeader(r, 'Content-Security-Policy', generateCSPPolicy(nonce)));
+  }, templates).then(r => setHeader(r, 'Content-Security-Policy', generateCSPPolicy(nonce)));
   e.respondWith(response);
 }, {urlMatchProperty: 'href'});

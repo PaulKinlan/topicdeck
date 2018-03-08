@@ -10,26 +10,20 @@ import {
 
 import {convertFeedItemsToJSON} from '../data/common.js';
 
-const headTemplate = getCompiledTemplate(`${paths.assetPath}templates/head.html`);
-const styleTemplate = getCompiledTemplate(`${paths.assetPath}templates/columns-styles.html`);
-const columnTemplate = getCompiledTemplate(`${paths.assetPath}templates/column.html`);
-const columnsTemplate = getCompiledTemplate(`${paths.assetPath}templates/columns.html`);
-const itemTemplate = getCompiledTemplate(`${paths.assetPath}templates/item.html`);
-
-const root = (nonce, paths) => {
+const root = (nonce, paths, templates) => {
   const config = loadData(`${paths.dataPath}config.json`).then(r => r.json());
 
   const concatStream = new ConcatStream;
 
-  const jsonFeedData = fetchCachedFeedData(config, itemTemplate, columnTemplate);
+  const jsonFeedData = fetchCachedFeedData(config, templates.item, templates.column);
 
   const streams = {
-    styles: styleTemplate.then(render => config.then(c => render({config: c, nonce: nonce}))),
-    data: columnsTemplate.then(render => jsonFeedData.then(columns => render({columns: columns}))),
-    itemTemplate: itemTemplate.then(render => render({options: {includeAuthor: false, new: true}, item: {}}))
+    styles: templates.columnsStyle.then(render => config.then(c => render({config: c, nonce: nonce}))),
+    data: templates.columns.then(render => jsonFeedData.then(columns => render({columns: columns}))),
+    itemTemplate: templates.item.then(render => render({options: {includeAuthor: false, new: true}, item: {}}))
   };
 
-  const headStream = headTemplate.then(render => render({config: config, streams: streams, nonce: nonce}));
+  const headStream = templates.head.then(render => render({config: config, streams: streams, nonce: nonce}));
 
   headStream.then(stream => stream.pipeTo(concatStream.writable));
 

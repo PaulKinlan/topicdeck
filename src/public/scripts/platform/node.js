@@ -77,8 +77,8 @@ const sendStream = (stream, last, res) => {
   return new Promise((resolve, reject)=> {
     stream.on('end', () => {
       if (last) {
-res.end();
-}
+        res.end();
+      }
       resolve();
     });
 
@@ -96,7 +96,8 @@ const nodeReadStreamToWhatWGReadableStream = (stream) => {
         controller.enqueue(data);
       });
       stream.on('error', error => {
-        console.log(error); controller.abort(error);
+        console.log(error);
+        controller.abort(error);
       });
       stream.on('end', () => {
         controller.close();

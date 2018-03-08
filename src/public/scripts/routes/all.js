@@ -10,31 +10,24 @@ import {
 
 import {convertFeedItemsToJSON} from '../data/common.js';
 
-const headTemplate = getCompiledTemplate(`${paths.assetPath}templates/head.html`);
-const preloadTemplate = getCompiledTemplate(`${paths.assetPath}templates/all-preload.html`);
-const styleTemplate = getCompiledTemplate(`${paths.assetPath}templates/all-styles.html`);
-const columnTemplate = getCompiledTemplate(`${paths.assetPath}templates/column.html`);
-const itemTemplate = getCompiledTemplate(`${paths.assetPath}templates/item.html`);
-
-const all = (nonce, paths) => {
+const all = (nonce, paths, templates) => {
   const config = loadData(`${paths.dataPath}config.json`).then(r => r.json());
   const concatStream = new ConcatStream;
-  const jsonFeedData = fetchCachedFeedData(config, itemTemplate);
+  const jsonFeedData = fetchCachedFeedData(config, templates.item);
 
   const streams = {
-    preload: preloadTemplate.then(render => config.then(c=> render({config: c}))),
-    styles: styleTemplate.then(render => config.then(c => render({config: c, nonce: nonce}))),
-    data: columnTemplate.then(render => config.then(c => jsonFeedData.then(items => render({column: {config: {feedUrl: c.feedUrl, name: 'All GDE\'s'}, items: items}})))),
-    itemTemplate: itemTemplate.then(render => render({options: {includeAuthor: true, new: true}, item: {}}))
+    preload: templates.preload.then(render => config.then(c=> render({config: c}))),
+    styles: templates.allStyle.then(render => config.then(c => render({config: c, nonce: nonce}))),
+    data: templates.column.then(render => config.then(c => jsonFeedData.then(items => render({column: {config: {feedUrl: c.feedUrl, name: 'All GDE\'s'}, items: items}})))),
+    itemTemplate: templates.item.then(render => render({options: {includeAuthor: true, new: true}, item: {}}))
   };
 
-  const headStream = headTemplate.then(render => render({config: config, streams: streams, nonce: nonce}));
+  const headStream = templates.head.then(render => render({config: config, streams: streams, nonce: nonce}));
 
   headStream.then(stream => stream.pipeTo(concatStream.writable));
 
   return Promise.resolve(new Response(concatStream.readable, {status: '200'}));
 };
-
 
 // Helpers.
 // Todo. We will want to do a server side render...

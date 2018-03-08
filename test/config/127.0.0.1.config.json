@@ -1,0 +1,25 @@
+{
+  "title": "Localhost GDE Deck",
+  "description": "Localhost latest news and updates from the Google Developer Expert for web program.", 
+  "origin": "http://127.0.0.1:8080",
+  "feedUrl": "http://127.0.0.1:8080/all.rss",
+  "theme": {
+    "backgroundColor": "#ff4411"
+  },
+  "site": {
+    "googleAnalytics": "UA-111516552-1",
+    "searchConsole": "PR3mkTUh-MFM9msW-rGhyT0qFgWW5w3_0985tkjzWIw"
+  },
+  "columns": [
+    {
+      "name": "Ire Aderinokun",
+      "href": "https://bitsofco.de/",
+      "feedUrl": "https://bitsofco.de/rss/"
+    },
+    {
+      "name": "Rachel Andrew",
+      "href": "https://rachelandrew.co.uk/archives",
+      "feedUrl": "https://rachelandrew.co.uk/archives/rss.php"
+    }
+  ]
+}
