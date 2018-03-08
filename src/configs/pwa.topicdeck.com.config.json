@@ -30,6 +30,11 @@
       "name": "Paul Thurrot",
       "href": "https://www.thurrott.com/tag/progressive-web-apps",
       "feedUrl": "https://www.thurrott.com/tag/progressive-web-apps/feed"
+    },
+    {
+      "name": "Google News",
+      "href": "https://news.google.com/news/search/section/q/progressive%20web%20apps/progressive%20web%20apps?hl=en&gl=GB&ned=us",
+      "feedUrl": "https://news.google.com/news/rss/search/section/q/progressive%20web%20apps/progressive%20web%20apps?hl=en&gl=GB&ned=us"
     }
   ]
 }
