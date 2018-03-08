@@ -1,6 +1,6 @@
 {
   "name": "topicdeck",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "scripts": {
     "alias": "now alias --token=$NOW_TOKEN",
     "build": "npm run build:server && npm run build:client && npm run build:assets && npm run build:serviceworker",
