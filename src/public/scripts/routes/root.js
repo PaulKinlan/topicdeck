@@ -1,11 +1,9 @@
 import {
   loadData,
   ConcatStream,
-  getCompiledTemplate,
   Request,
   Response,
-  caches,
-  paths
+  caches
 } from '../platform/common.js';
 
 import {convertFeedItemsToJSON} from '../data/common.js';

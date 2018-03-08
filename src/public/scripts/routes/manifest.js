@@ -1,9 +1,7 @@
 import {
   loadData,
   ConcatStream,
-  getCompiledTemplate,
-  Response,
-  paths
+  Response
 } from '../platform/common.js';
 
 const manifest = (paths, templates) => {
