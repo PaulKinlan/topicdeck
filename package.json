@@ -1,23 +1,14 @@
 {
   "name": "topicdeck",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "scripts": {
-    "alias": "now alias --token=$NOW_TOKEN",
     "build": "npm run build:server && npm run build:client && npm run build:assets && npm run build:serviceworker",
     "build:assets": "mkdir -p dist/server/public/assets/ && mkdir -p dist/server/public/styles && mkdir -p dist/server/public/images && cp -R src/public/assets/* dist/server/public/assets/ && cp src/public/styles/* dist/server/public/styles/ && cp src/public/images/* dist/server/public/images/ && node tools/embedcss.js -i dist/server/public/styles/main.css",
     "build:client": "rollup -c rollup.client.config.js",
     "build:server": "mkdir -p dist/server/private/streams && mkdir -p dist/server/configs && cp src/private/streams/* dist/server/private/streams/ && cp src/configs/* dist/server/configs/ && rollup -c rollup.server.config.js",
     "build:serviceworker": "rollup -c rollup.serviceworker.config.js && node ./tools/generatemanifest.js",
     "clean": "rm -rf dist/",
-    "deploy": "NOW_DEPLOY_URL=$(now --token $NOW_TOKEN --npm)",
-    "deploy-and-test": "NOW_DEPLOY_URL=$(now --token $NOW_TOKEN --npm) && node tools/parseLighthouseResponse.js $NOW_DEPLOY_URL",
-    "lighthouse": "node tools/parseLighthouseResponse.js $NOW_DEPLOY_URL",
     "lint": "eslint .",
-    "now-start": "npm run server",
-    "server:debug": "cd dist/server/ && node --inspect server.js",
-    "server": "cd dist/server/ && node server.js",
-    "server:debugbrk": "cd dist/server/ && node --inspect-brk server.js",
-    "start": "npm run build && npm run server",
     "postinstall": "npm run build"
   },
   "dependencies": {
@@ -41,7 +32,6 @@
     "eslint": "^4.17.0",
     "eslint-config-google": "^0.9.1",
     "minimist": "^1.2.0",
-    "now": "^9.0.0",
     "replace-in-file": "^3.1.0",
     "uglify-es": "^3.3.8",
     "workbox-build": "^2.1.0",
