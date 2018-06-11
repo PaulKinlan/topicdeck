@@ -127,7 +127,7 @@ document.addEventListener('click', e => {
       });
     } else {
       const windowOptions = 'scrollbars=yes,resizable=yes,toolbar=no,location=yes,width=520,height=420';
-      const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareTitle)}&url=${encodeURIComponent(shareUrl)}&via=Paul_Kinlan`;
+      const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareTitle)}&url=${encodeURIComponent(shareUrl)}`;
 
       window.open(twitterUrl, 'intent', windowOptions);
     }
