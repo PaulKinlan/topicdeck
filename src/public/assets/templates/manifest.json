@@ -1,7 +1,8 @@
 {
   "short_name": "{{=it.config.then(config => config.title)}}",
   "name": "{{=it.config.then(config => config.title)}}",
-  "theme_color": "{{=it.config.then(config => config.theme.backgroundColor)}}",
+  "description": "{{=it.config.then(config => config.description)}}",
+  "theme_color": "{{=it.config.then(config => config.theme.themeColor)}}",
   "background_color": "{{=it.config.then(config => config.theme.backgroundColor)}}",
   "icons": [
     {
