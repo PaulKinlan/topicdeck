@@ -2,13 +2,13 @@ import {
   loadData, fetch, caches, parseUrl, getProxyUrl, getProxyHeaders, Response
 } from '../platform/common.js';
 
-const proxyHandler = (proxyRequest, paths) => {
+const proxyHandler = (request, paths) => {
   const config = loadData(`${paths.dataPath}config.json`).then(r => r.json());
 
   /*
     Go out to the networks.
   */
-  const url = parseUrl(proxyRequest); // The URL we want to fetch.
+  const url = parseUrl(request); // The URL we want to fetch.
 
   return config.then(c => {
     if (c.columns.map(col => col.feedUrl).indexOf(url) < 0 && url.endsWith('/all.rss') == false) {
@@ -16,20 +16,15 @@ const proxyHandler = (proxyRequest, paths) => {
       return new Response('Proxy feed not configured', {status: '401'});
     }
     // Always hit the network, and update the cache so offline (and the streming) renders are ok.
-    return caches.match(proxyRequest).then(cachedResponse => {
-      const network = fetch(getProxyUrl(proxyRequest), getProxyHeaders(proxyRequest)).then(fetchResponse => {
+    return caches.match(request).then(() => {
+      return fetch(getProxyUrl(request), getProxyHeaders(request)).then(fetchResponse => {
         if (fetchResponse.ok) {
           // Update the cache, but return the network response
           return caches.open('data')
-              .then(cache => (cache) ? cache.put(proxyRequest, fetchResponse.clone()) : undefined)
+              .then(cache => (cache) ? cache.put(request, fetchResponse.clone()) : undefined)
               .then(_ => fetchResponse);
         }
       });
-
-      const race = [network];
-      if (cachedResponse) race.push(cachedResponse);
-
-      return Promise.race(race);
     }).catch(error => {
       console.log('Proxy Fetch Error', error);
       throw error;
