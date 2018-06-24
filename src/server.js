@@ -18,6 +18,7 @@
 import express from 'express';
 import fs from 'fs';
 import {URL} from 'url';
+import feed2json from 'feed2json';
 import compression from 'compression';
 import {
   getCompiledTemplate,
@@ -256,6 +257,16 @@ class Server {
       const hostname = this.getHostName(req);
       res.setHeader('Content-Type', 'text/xml');
       res.send(this.feeds.feeds[hostname]);
+    });
+
+    app.get('/all.json', (req, res, next) => {
+      const hostname = this.getHostName(req);
+      const feed = this.feeds.feeds[hostname];
+      res.setHeader('Content-Type', 'application/json');
+
+      feed2json.fromString(feed, hostname + 'all.rss', {}, function(err, json) {
+        res.send(json);
+      });
     });
 
     app.get('/data/config.json', (req, res, next) => {
