@@ -20,6 +20,7 @@ import fs from 'fs';
 import {URL} from 'url';
 import feed2json from 'feed2json';
 import compression from 'compression';
+import streamToString from 'stream-to-string';
 import {
   getCompiledTemplate,
   cacheStorage, paths,
@@ -105,7 +106,10 @@ class FeedFetcher {
       RSSCombiner(feedConfig)
           .then(combinedFeed => {
             console.log(`${hostname} Feed Ready`, Date.now());
-            this.latestFeeds[hostname] = combinedFeed.xml();
+            const feedXml = combinedFeed.xml();
+            
+            cacheStorage[config.feedUrl] = feedXml;
+            this.latestFeeds[hostname] = feedXml;
           });
     });
   }
@@ -231,9 +235,12 @@ class Server {
     });
 
     app.get('/proxy', (req, res, next) => {
-      const hostname = this.getHostName(req);
+      const hostname = this.getHostName(req); 
+      const url = new URL(`${req.protocol}://${hostname}${req.originalUrl}`);
 
-      proxy(req, {
+      console.log(url)
+
+      proxy(url, {
         dataPath: `${this.dataPath}${hostname}.`,
         assetPath: paths.assetPath
       }, templates).then(response => {

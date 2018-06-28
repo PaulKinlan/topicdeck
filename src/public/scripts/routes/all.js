@@ -36,9 +36,11 @@ const fetchCachedFeedData = (config, itemTemplate) => {
     includeAuthor: true
   };
 
+  console.log('attempting to fetch feed');
+
   return caches.open('data')
-      .then(cache => config.then(c => resolveCachedUrl(cache, `/proxy?url=${encodeURIComponent(c.feedUrl)}`)))
-      .then(feed => convertFeedItemsToJSON(feed))
+      .then(cache => config.then(c => resolveCachedUrl(cache, `${c.origin}/proxy?url=${encodeURIComponent(c.feedUrl)}`)))
+      .then(feed => { let items = convertFeedItemsToJSON(feed); console.log('items', items); return items; } )
       .then(items => itemTemplate.then(render => render({options: templateOptions, items: items})));
 };
 
