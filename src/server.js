@@ -117,10 +117,15 @@ class Server {
     this.configPath = configPath;
     this.feeds = feedFetcher;
     this.assetPathBase = configPath.assetPathBase;
+    this.overridePathBase = configPath.overridePathBase || this.assetPathBase;
     this.assetPath = `${configPath.assetPathBase}/${paths.assetPath}`;
     this.dataPath = `${configPath.dataPath}/`;
+  }
 
-    getCompiledTemplate(`${this.assetPath}templates/head.html`);
+  _resolveAssets(path, {defaultBase, overridePathBase}) {
+    const overridePath = `${overridePathBase}${paths.assetPath}${path}`;
+    const defaultPath = `${defaultBase}${paths.assetPath}${path}`;
+    return fs.existsSync(overridePath) ? overridePath : defaultPath;
   }
 
   getHostName(req) {
@@ -133,15 +138,16 @@ class Server {
   }
 
   start(port) {
+    const assetPaths = {overridePathBase: this.overridePathBase, defaultBase: this.assetPathBase};
     const templates = {
-      head: getCompiledTemplate(`${this.assetPath}templates/head.html`),
-      allPreload: getCompiledTemplate(`${this.assetPath}templates/all-preload.html`),
-      allStyle: getCompiledTemplate(`${this.assetPath}templates/all-styles.html`),
-      columnsStyle: getCompiledTemplate(`${this.assetPath}templates/columns-styles.html`),
-      columnsPreload: getCompiledTemplate(`${this.assetPath}templates/columns-preload.html`),
-      column: getCompiledTemplate(`${this.assetPath}templates/column.html`),
-      columns: getCompiledTemplate(`${this.assetPath}templates/columns.html`),
-      item: getCompiledTemplate(`${this.assetPath}templates/item.html`),
+      head: getCompiledTemplate(this._resolveAssets('templates/head.html', assetPaths)),
+      allPreload: getCompiledTemplate(this._resolveAssets('templates/all-preload.html', assetPaths)),
+      allStyle: getCompiledTemplate(this._resolveAssets('templates/all-styles.html', assetPaths)),
+      columnsStyle: getCompiledTemplate(this._resolveAssets('templates/columns-styles.html', assetPaths)),
+      columnsPreload: getCompiledTemplate(this._resolveAssets('templates/columns-preload.html', assetPaths)),
+      column: getCompiledTemplate(this._resolveAssets('templates/column.html', assetPaths)),
+      columns: getCompiledTemplate(this._resolveAssets('templates/columns.html', assetPaths)),
+      item: getCompiledTemplate(this._resolveAssets('templates/item.html', assetPaths)),
       manifest: getCompiledTemplate(`${this.assetPath}templates/manifest.json`)
     };
 

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<!-- THIS IS A CUSTOM TEMPLATE -->
+<html lang=en>
+  <head>
+    <title>{{=it.config.then(config=>config.title)}}</title>
+    <meta name="description" content="{{=it.config.then(config=>config.description)}}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="manifest" href="/manifest.json">
+    <link rel="alternate" type="application/rss+xml" href="/all.rss" />
+    <link rel="alternate" type="application/json" href="/all.json" />
+    <link rel="icon" href="/images/app-192.png">
+    <meta name="theme-color" content="{{=it.config.then(config=>config.theme.backgroundColor)}}">
+    <script src="/scripts/client.js" defer></script>
+    <link rel="stylesheet" href="/styles/main.css" />
+    <meta name="google-site-verification" content="{{=it.config.then(config=>config.site.searchConsole)}}" />
+    {{~it.streams.styles}}
+  </head>
+  <body>
+    <header>
+      <h1>
+        {{=it.config.then(config => config.title)}} 
+      </h1>
+      <span><a href="/">Deck</a> | <a href="/all">Stream</a></span>
+  </header>
+    <main>
+      {{~it.streams.data}}
+    </main>
+    <div id="toast">
+      <span>There is an app update available</span>
+      <a href="/">Refresh</a>
+    </div>
+  </body>
+  <template id='itemTemplate'>
+    {{~it.streams.itemTemplate}}
+  </template>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id={{=it.config.then(config=>config.site.googleAnalytics)}}"></script>
+<script nonce='script-{{= it.nonce.analytics }}'>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '{{=it.config.then(config=>config.site.googleAnalytics)}}');
+</script>
+</html>
