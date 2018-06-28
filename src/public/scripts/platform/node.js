@@ -134,7 +134,10 @@ const cacheStorage = {};
 
 const caches = new (function() {
   this.open = (cacheName) => {
-    return Promise.resolve(undefined);
+    return Promise.resolve({
+      'match': this.match,
+      'put': () => null
+    });
   };
 
   this.has = (cacheName) => {
@@ -143,13 +146,10 @@ const caches = new (function() {
 
   this.match = (request, options) => {
     const url = parseUrl(request);
-    const origin = request.hostname;
-
-
-    if (origin in cacheStorage == false) cacheStorage[origin] = {};
-
-    if (url in cacheStorage[origin]) {
-      const cachedResponse = cacheStorage[origin][url];
+    console.log('match', url)
+    
+    if (url in cacheStorage) {
+      const cachedResponse = cacheStorage[url];
       const cachedResponseStream = stringToStream(cachedResponse);
       return Promise.resolve(new Response(cachedResponseStream, {status: '200', contentType: 'text/xml'}));
     } else {
@@ -158,9 +158,25 @@ const caches = new (function() {
   };
 });
 
-const parseUrl = request => request.query.url;
+const parseUrl = request => {
+  let url;
+  if (request instanceof URL === false) {
+    url = new URL(request.url);
+  } else {
+    url = request.searchParams.get('url');
+  }
+  return url;
+};
 
-const getProxyUrl = request => request.query.url;
+const getProxyUrl = request => {
+  let url;
+  if (request instanceof URL === false) {
+    url = new URL(request.url);
+  } else {
+    url = request.searchParams.get('url');
+  }
+  return url;
+};
 
 const getProxyHeaders = request => {
   return {
