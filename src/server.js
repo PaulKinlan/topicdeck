@@ -283,6 +283,9 @@ class Server {
     /*
       Start the app.
     */
+    if (fs.existsSync(`${this.overridePathBase}/public`)) {
+      app.use(express.static(`${this.overridePathBase}/public`));
+    }
     app.use(express.static(`${this.assetPathBase}/public`));
     app.listen(port);
   }
