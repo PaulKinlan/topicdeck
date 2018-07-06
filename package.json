@@ -6,7 +6,7 @@
     "build:assets": "mkdir -p dist/server/public/assets/ && mkdir -p dist/server/public/styles && mkdir -p dist/server/public/images && cp -R src/public/assets/* dist/server/public/assets/ && cp src/public/styles/* dist/server/public/styles/ && cp src/public/images/* dist/server/public/images/ && node tools/embedcss.js -i dist/server/public/styles/main.css",
     "build:client": "rollup -c rollup.client.config.js",
     "build:server": "mkdir -p dist/server/private/streams && mkdir -p dist/server/configs && cp src/private/streams/* dist/server/private/streams/ && cp src/configs/* dist/server/configs/ && rollup -c rollup.server.config.js",
-    "build:serviceworker": "rollup -c rollup.serviceworker.config.js && node ./tools/generatemanifest.js",
+    "build:serviceworker": "rollup -c rollup.serviceworker.config.js && node tools/producemanifest.js --input=dist/server/public/sw.src.js --output=dist/server/public/sw.js",
     "clean": "rm -rf dist/",
     "lint": "eslint .",
     "postinstall": "npm run build"
@@ -23,7 +23,7 @@
     "feed2json": "^0.5.0",
     "fromwhatwgreadablestream": "^1.0.3",
     "node-fetch": "^1.0.0",
-    "replace-in-file": "^3.1.0",
+    "replace-in-file": "^3.4.0",
     "rollup": "^0.53.4",
     "rollup-plugin-babel": "^3.0.7",
     "rollup-plugin-jscc": "^0.3.0",

@@ -30,7 +30,7 @@ import {router} from './scripts/router.js';
 
 const workbox = new WorkboxSW({skipWaiting: true, precacheChannelName: 'install-cache-channel'});
 // This should pre-cache all of the required assets determined at buildtime.
-workbox.precache([insertfileshere]);
+workbox.precache(['insertfileshere']);
 
 const templates = {
   head: getCompiledTemplate(`${paths.assetPath}templates/head.html`),

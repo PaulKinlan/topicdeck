@@ -16,6 +16,11 @@
 
 const argv = require('minimist')(process.argv.slice(2));
 const swBuild = require('workbox-build');
+const fs = require('fs');
+
+const overridepath = argv['overridepath'];
+const swInputPath = argv['input'];
+const swOutputPath = argv['output'];
 
 const patterns = ['assets/templates/*.html',
   'assets/templates/*.json',
@@ -36,7 +41,8 @@ const overrideConfig = {
 
 let mergeGeneratedManifests = async (base, overrides) => {
   let baseFiles = await swBuild.getManifest(base);
-  let overrideFiles = await swBuild.getManifest(overrides);
+  let overrideFiles = [];
+  if(!overrides.globDirectory) overrideFiles = await swBuild.getManifest(overrides);
 
   let baseFileMap = new Map(baseFiles.manifestEntries.map(entry => [entry.url, entry.revision]));
   let overrideFileMap = new Map(overrideFiles.manifestEntries.map(entry => [entry.url, entry.revision]));
@@ -49,6 +55,8 @@ let mergeGeneratedManifests = async (base, overrides) => {
 (async () => {
   
   let files = await mergeGeneratedManifests(config, overrideConfig);
-  console.log(files);
-  
+  let sw = fs.readFileSync(swInputPath, {encoding: 'utf8'});
+  const newSw = sw.replace(/\["insertfileshere"\]/, JSON.stringify(files));
+  fs.writeFileSync(swOutputPath, newSw);
+
 })();
