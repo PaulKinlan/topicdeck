@@ -14,18 +14,41 @@
  * limitations under the License.
  */
 
+const argv = require('minimist')(process.argv.slice(2));
 const swBuild = require('workbox-build');
+
 const patterns = ['assets/templates/*.html',
   'assets/templates/*.json',
   'scripts/client.js',
   'styles/main.css'];
+
 const config = {
   globDirectory: './dist/server/public/',
   globPatterns: patterns,
   modifyUrlPrefix: {'': '/'}
 };
 
-swBuild.getManifest(config).then((manifestDetails) => {
-  console.log(manifestDetails);
-  console.log('Build Manifest generated.');
-});
+const overrideConfig = {
+  globDirectory: argv['overridepath'],
+  globPatterns: ['**/*'],
+  modifyUrlPrefix: {'': '/'}
+};
+
+let mergeGeneratedManifests = async (base, overrides) => {
+  let baseFiles = await swBuild.getManifest(base);
+  let overrideFiles = await swBuild.getManifest(overrides);
+
+  let baseFileMap = new Map(baseFiles.manifestEntries.map(entry => [entry.url, entry.revision]));
+  let overrideFileMap = new Map(overrideFiles.manifestEntries.map(entry => [entry.url, entry.revision]));
+  let finalManifest = [];
+
+  new Map([...baseFileMap, ...overrideFileMap]).forEach((value, key) => finalManifest.push({ url: key, revision: value}));
+  return finalManifest;
+};
+
+(async () => {
+  
+  let files = await mergeGeneratedManifests(config, overrideConfig);
+  console.log(files);
+  
+})();
