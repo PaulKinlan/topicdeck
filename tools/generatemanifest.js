@@ -22,11 +22,13 @@ const patterns = ['assets/templates/*.html',
 const config = {
   globDirectory: './dist/server/public/',
   globPatterns: patterns,
-  swSrc: './dist/server/public/sw.js',
+  swSrc: './dist/server/public/sw.src.js',
   swDest: './dist/server/public/sw.js',
+  injectionPointRegexp: /(\[)insertfileshere(\])/,
   modifyUrlPrefix: {'': '/'}
 };
 
-swBuild.injectManifest(config).then(() => {
+swBuild.injectManifest(config).then((data) => {
+  console.log(data);
   console.log('Build Manifest generated.');
 });

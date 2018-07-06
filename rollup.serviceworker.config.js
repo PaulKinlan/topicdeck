@@ -19,9 +19,9 @@ import uglify from 'rollup-plugin-uglify';
 import { minify } from 'uglify-es';
 
 export default {
-    input: 'src/public/sw.js',
+    input: 'src/public/sw.src.js',
     output: { 
-        file: 'dist/server/public/sw.js',
+        file: 'dist/server/public/sw.src.js',
         format: 'iife'
     },
     plugins: [
