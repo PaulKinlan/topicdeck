@@ -40,7 +40,7 @@ const fetchCachedFeedData = (config, itemTemplate) => {
 
   return caches.open('data')
       .then(cache => config.then(c => resolveCachedUrl(cache, `${c.origin}/proxy?url=${encodeURIComponent(c.feedUrl)}`)))
-      .then(feed => { let items = convertFeedItemsToJSON(feed); console.log('items', items); return items; } )
+      .then(feed => convertFeedItemsToJSON(feed))
       .then(items => itemTemplate.then(render => render({options: templateOptions, items: items})));
 };
 
