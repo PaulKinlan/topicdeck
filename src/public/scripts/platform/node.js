@@ -23,6 +23,7 @@ const ReadableStream = require('./private/streams/readable-stream.js').ReadableS
 const WritableStream = require('./private/streams/writable-stream.js').WritableStream;
 const {FromWhatWGReadableStream} = require('fromwhatwgreadablestream');
 const fetch = require('node-fetch');
+const URL = require('whatwg-url');
 const stringToStream = require('string-to-stream');
 const Request = fetch.Request;
 const Response = fetch.Response;
@@ -204,5 +205,6 @@ export {
   getProxyUrl,
   getProxyHeaders,
   proxyShouldHitNetwork,
-  paths
+  paths,
+  URL
 };
