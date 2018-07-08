@@ -23,7 +23,7 @@ const ReadableStream = require('./private/streams/readable-stream.js').ReadableS
 const WritableStream = require('./private/streams/writable-stream.js').WritableStream;
 const {FromWhatWGReadableStream} = require('fromwhatwgreadablestream');
 const fetch = require('node-fetch');
-const URL = require('whatwg-url');
+const URL = require('whatwg-url').URL;
 const stringToStream = require('string-to-stream');
 const Request = fetch.Request;
 const Response = fetch.Response;
@@ -159,21 +159,15 @@ const caches = new (function() {
 });
 
 const parseUrl = request => {
-  let url;
-  if (request instanceof URL === false) {
-    url = new URL(request.url);
-  } else {
-    url = request.searchParams.get('url');
-  }
-  return url;
+  return getProxyUrl(request);
 };
 
 const getProxyUrl = request => {
   let url;
-  if (request instanceof URL === false) {
-    url = new URL(request.url);
-  } else {
+  if (request.searchParams) {
     url = request.searchParams.get('url');
+  } else {
+    url = new URL(request.url);
   }
   return url;
 };

@@ -1,6 +1,6 @@
 {
   "name": "topicdeck",
-  "version": "0.0.19",
+  "version": "0.0.21",
   "scripts": {
     "build": "npm run build:server && npm run build:client && npm run build:assets && npm run build:serviceworker",
     "build:assets": "mkdir -p dist/server/public/assets/ && mkdir -p dist/server/public/styles && mkdir -p dist/server/public/images && cp -R src/public/assets/* dist/server/public/assets/ && cp src/public/styles/* dist/server/public/styles/ && cp src/public/images/* dist/server/public/images/ && node tools/embedcss.js -i dist/server/public/styles/main.css",
