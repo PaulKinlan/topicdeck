@@ -18,7 +18,8 @@ const argv = require('minimist')(process.argv.slice(2));
 const swBuild = require('workbox-build');
 const fs = require('fs');
 
-const overridepath = argv['overridepath'];
+const inputPath = argv['inputpath'] || './dist/server/public/';
+const overridePath = argv['overridepath'];
 const swInputPath = argv['input'];
 const swOutputPath = argv['output'];
 
@@ -28,13 +29,13 @@ const patterns = ['assets/templates/*.html',
   'styles/main.css'];
 
 const config = {
-  globDirectory: './dist/server/public/',
+  globDirectory: inputPath,
   globPatterns: patterns,
   modifyUrlPrefix: {'': '/'}
 };
 
 const overrideConfig = {
-  globDirectory: overridepath,
+  globDirectory: overridePath,
   globPatterns: ['**/*'],
   modifyUrlPrefix: {'': '/'}
 };
