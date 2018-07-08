@@ -46,7 +46,7 @@ let mergeGeneratedManifests = async (base, overrides) => {
   if(overrides.globDirectory == undefined) return;
 
   overrideFiles = await swBuild.getManifest(overrides);
-½<½<
+  
   let baseFileMap = new Map(baseFiles.manifestEntries.map(entry => [entry.url, entry.revision]));
   let overrideFileMap = new Map(overrideFiles.manifestEntries.map(entry => [entry.url, entry.revision]));
   let finalManifest = [];
