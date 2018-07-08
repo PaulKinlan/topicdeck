@@ -85,3 +85,4 @@ export const parseUrl = common.parseUrl;
 export const getProxyUrl = common.getProxyUrl;
 export const getProxyHeaders = common.getProxyHeaders;
 export const paths = common.paths;
+export const proxyShouldHitNetwork = common.proxyShouldHitNetwork;

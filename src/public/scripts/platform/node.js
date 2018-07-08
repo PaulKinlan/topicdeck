@@ -146,6 +146,8 @@ const caches = new (function() {
 
   this.match = (request, options) => {
     const url = parseUrl(request);
+
+    console.log('match', url, url in cacheStorage);
     
     if (url in cacheStorage) {
       const cachedResponse = cacheStorage[url];
@@ -188,6 +190,8 @@ const paths = {
   dataPath: 'configs/'
 };
 
+const proxyShouldHitNetwork = false;
+
 export {
   compileTemplate, FromWhatWGReadableStream, loadTemplate,
   loadData, responseToExpressStream, streamToString, sendStream,
@@ -201,5 +205,6 @@ export {
   parseUrl,
   getProxyUrl,
   getProxyHeaders,
+  proxyShouldHitNetwork,
   paths
 };

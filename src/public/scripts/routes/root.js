@@ -40,7 +40,7 @@ const fetchCachedFeedData = (config, itemTemplate, columnTemplate) => {
     return config.columns.map(column => {
       return {
         config: column,
-        data: resolveCache(cache, `/proxy?url=${encodeURIComponent(column.feedUrl)}`).then(items => convertFeedItemsToJSON(items))
+        data: resolveCache(cache, `${config.origin}/proxy?url=${encodeURIComponent(column.feedUrl)}`).then(items => convertFeedItemsToJSON(items))
       };
     });
   };

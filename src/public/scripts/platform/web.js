@@ -132,6 +132,8 @@ const paths = {
 
 const cacheStorage = {};
 
+const proxyShouldHitNetwork = true;
+
 export {
   compileTemplate,
   loadTemplate,
@@ -147,5 +149,6 @@ export {
   parseUrl,
   getProxyUrl,
   getProxyHeaders,
+  proxyShouldHitNetwork,
   paths
 };
