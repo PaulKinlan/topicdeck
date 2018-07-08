@@ -34,7 +34,7 @@ const config = {
 };
 
 const overrideConfig = {
-  globDirectory: argv['overridepath'],
+  globDirectory: overridepath,
   globPatterns: ['**/*'],
   modifyUrlPrefix: {'': '/'}
 };
@@ -42,8 +42,10 @@ const overrideConfig = {
 let mergeGeneratedManifests = async (base, overrides) => {
   let baseFiles = await swBuild.getManifest(base);
   let overrideFiles = [];
-  if(!overrides.globDirectory) overrideFiles = await swBuild.getManifest(overrides);
+  if(overrides.globDirectory == undefined) return;
 
+  overrideFiles = await swBuild.getManifest(overrides);
+½<½<
   let baseFileMap = new Map(baseFiles.manifestEntries.map(entry => [entry.url, entry.revision]));
   let overrideFileMap = new Map(overrideFiles.manifestEntries.map(entry => [entry.url, entry.revision]));
   let finalManifest = [];
@@ -55,6 +57,8 @@ let mergeGeneratedManifests = async (base, overrides) => {
 (async () => {
   
   let files = await mergeGeneratedManifests(config, overrideConfig);
+  if (files === undefined) return; // nothing new to generate.
+  console.log(files);
   let sw = fs.readFileSync(swInputPath, {encoding: 'utf8'});
   const newSw = sw.replace(/\["insertfileshere"\]/, JSON.stringify(files));
   fs.writeFileSync(swOutputPath, newSw);
