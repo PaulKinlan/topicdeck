@@ -167,7 +167,7 @@ const getProxyUrl = request => {
   if (request.searchParams) {
     url = request.searchParams.get('url');
   } else {
-    url = new URL(request.url);
+    url = new URL(request.url).searchParams.get('url');
   }
   return url;
 };
