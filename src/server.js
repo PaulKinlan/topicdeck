@@ -191,7 +191,7 @@ class Server {
         style: generator()
       };
 
-      res.setHeader('Content-Tyep', 'text/html');
+      res.setHeader('Content-Type', 'text/html');
       res.setHeader('Content-Security-Policy', generateCSPPolicy(nonce));
       res.setHeader('Link', preload);
       root(nonce, {
@@ -215,7 +215,7 @@ class Server {
         style: generator()
       };
 
-      res.setHeader('Content-Tyep', 'text/html');
+      res.setHeader('Content-Type', 'text/html');
       res.setHeader('Content-Security-Policy', generateCSPPolicy(nonce));
       res.setHeader('Link', preload);
 
