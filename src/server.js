@@ -191,6 +191,7 @@ class Server {
         style: generator()
       };
 
+      res.setHeader('Content-Tyep', 'text/html');
       res.setHeader('Content-Security-Policy', generateCSPPolicy(nonce));
       res.setHeader('Link', preload);
       root(nonce, {
@@ -214,6 +215,7 @@ class Server {
         style: generator()
       };
 
+      res.setHeader('Content-Tyep', 'text/html');
       res.setHeader('Content-Security-Policy', generateCSPPolicy(nonce));
       res.setHeader('Link', preload);
 
@@ -231,6 +233,7 @@ class Server {
 
     app.get('/manifest.json', (req, res, next) => {
       const hostname = this.getHostName(req);
+      res.setHeader('Content-Type', 'application/manifest+json');
 
       manifest({
         dataPath: `${this.dataPath}${hostname}.`,
@@ -241,10 +244,8 @@ class Server {
     });
 
     app.get('/proxy', (req, res, next) => {
-      const hostname = this.getHostName(req); 
+      const hostname = this.getHostName(req);
       const url = new URL(`${req.protocol}://${hostname}${req.originalUrl}`);
-
-      console.log(url)
 
       proxy(url, {
         dataPath: `${this.dataPath}${hostname}.`,
@@ -284,6 +285,7 @@ class Server {
 
     app.get('/data/config.json', (req, res, next) => {
       const hostname = this.getHostName(req);
+      res.setHeader('Content-Type', 'application/json');
       res.sendFile(`${this.dataPath}/${hostname}.config.json`);
     });
 
