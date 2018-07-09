@@ -14,7 +14,6 @@ const all = (nonce, paths, templates) => {
   const jsonFeedData = fetchCachedFeedData(config, templates.item);
 
   const streams = {
-    preload: templates.allPreload.then(render => config.then(c=> render({config: c}))),
     styles: templates.allStyle.then(render => config.then(c => render({config: c, nonce: nonce}))),
     data: templates.column.then(render => config.then(c => jsonFeedData.then(items => render({column: {config: {feedUrl: c.feedUrl, name: c.content.allTitle}, items: items}})))),
     itemTemplate: templates.item.then(render => render({options: {includeAuthor: true, new: true}, item: {}}))

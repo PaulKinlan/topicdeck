@@ -145,10 +145,8 @@ class Server {
     const assetPaths = {overridePathBase: this.overridePathBase, defaultBase: this.assetPathBase};
     const templates = {
       head: getCompiledTemplate(this._resolveAssets('templates/head.html', assetPaths)),
-      allPreload: getCompiledTemplate(this._resolveAssets('templates/all-preload.html', assetPaths)),
       allStyle: getCompiledTemplate(this._resolveAssets('templates/all-styles.html', assetPaths)),
       columnsStyle: getCompiledTemplate(this._resolveAssets('templates/columns-styles.html', assetPaths)),
-      columnsPreload: getCompiledTemplate(this._resolveAssets('templates/columns-preload.html', assetPaths)),
       column: getCompiledTemplate(this._resolveAssets('templates/column.html', assetPaths)),
       columns: getCompiledTemplate(this._resolveAssets('templates/columns.html', assetPaths)),
       item: getCompiledTemplate(this._resolveAssets('templates/item.html', assetPaths)),

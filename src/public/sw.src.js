@@ -38,10 +38,8 @@ const templates = {
   column: getCompiledTemplate(`${paths.assetPath}templates/column.html`),
   columns: getCompiledTemplate(`${paths.assetPath}templates/columns.html`),
   item: getCompiledTemplate(`${paths.assetPath}templates/item.html`),
-  allPreload: getCompiledTemplate(`${paths.assetPath}templates/all-preload.html`),
   allStyle: getCompiledTemplate(`${paths.assetPath}templates/all-styles.html`),
   columnsStyle: getCompiledTemplate(`${paths.assetPath}templates/columns-styles.html`),
-  columnsPreload: getCompiledTemplate(`${paths.assetPath}templates/columns-preload.html`),
   manifest: getCompiledTemplate(`${paths.assetPath}templates/manifest.json`)
 };
 
