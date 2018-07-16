@@ -54,7 +54,6 @@ const generator = generateIncrementalNonce('service-worker');
 */
 
 // The proxy server '/proxy'
-
 router.get(`${self.location.origin}/proxy`, (e) => {
   const response = proxy(e.request, {
     dataPath: paths.dataPath,
