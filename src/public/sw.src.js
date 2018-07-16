@@ -75,7 +75,9 @@ router.get(`${self.location.origin}/all$`, (e) => {
   const response = all(nonce, {
     dataPath: paths.dataPath,
     assetPath: paths.assetPath
-  }, templates).then(r => setHeader(r, 'Content-Security-Policy', generateCSPPolicy(nonce)));
+  }, templates)
+      .then(r => setHeader(r, 'Content-Security-Policy', generateCSPPolicy(nonce)))
+      .then(r => setHeader(r, 'Content-Type', 'text/html'));
   e.respondWith(response);
 }, {urlMatchProperty: 'href'});
 
@@ -90,6 +92,9 @@ router.get(`${self.location.origin}/$`, (e) => {
   const response = root(nonce, {
     dataPath: paths.dataPath,
     assetPath: paths.assetPath
-  }, templates).then(r => setHeader(r, 'Content-Security-Policy', generateCSPPolicy(nonce)));
+  }, templates)
+      .then(r => setHeader(r, 'Content-Security-Policy', generateCSPPolicy(nonce)))
+      .then(r => setHeader(r, 'Content-Type', 'text/html'));
+
   e.respondWith(response);
 }, {urlMatchProperty: 'href'});
