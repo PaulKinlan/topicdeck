@@ -20,9 +20,9 @@
     "eslint": "^4.17.0",
     "eslint-config-google": "^0.9.1",
     "express": "^4.15.2",
-    "feed2json": "^0.5.0",
+    "feed2json": "^0.6.0",
     "fromwhatwgreadablestream": "^1.0.3",
-    "node-fetch": "^1.0.0",
+    "node-fetch": "^2.0.0",
     "replace-in-file": "^3.4.0",
     "rollup": "^0.53.4",
     "rollup-plugin-babel": "^3.0.7",
@@ -44,7 +44,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/paulkinlan/web-dev-deck.git"
+    "url": "https://github.com/paulkinlan/topicdeck.git"
   },
   "license": "Apache-2.0",
   "keywords": [

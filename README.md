@@ -1,7 +1,5 @@
 Web GDE Deck 💯
 =========================
-[![Build Status](https://travis-ci.org/PaulKinlan/webgde-deck.svg?branch=master)](https://travis-ci.org/PaulKinlan/webgde-deck)
-
 Inspired by River of news, but HTTPs only and a PWA.
 
 Attempt to create a PWA that is a news reader that renders on the server and on the client using all the same templating and logic. 
