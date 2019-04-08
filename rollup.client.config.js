@@ -15,8 +15,7 @@
  */
 
 import jscc from 'rollup-plugin-jscc';
-import uglify from 'rollup-plugin-uglify';
-import { minify } from 'uglify-es';
+import {terser} from 'rollup-plugin-terser';
 import babel from 'rollup-plugin-babel';
 
 export default {
@@ -28,8 +27,10 @@ export default {
     plugins: [
         jscc(),
         babel({
+            babelrc: false,
+            presets: [['@babel/env',{"targets": { "chrome": "52" }}]],
             exclude: 'node_modules/**'
-        }),
-        uglify({}, minify)
+          }),
+        terser()
     ]
 };

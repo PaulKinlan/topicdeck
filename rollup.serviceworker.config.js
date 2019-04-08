@@ -15,8 +15,7 @@
  */
 
 import jscc from 'rollup-plugin-jscc';
-import uglify from 'rollup-plugin-uglify';
-import { minify } from 'uglify-es';
+import {terser} from 'rollup-plugin-terser';
 
 export default {
     input: 'src/public/sw.src.js',
@@ -30,6 +29,6 @@ export default {
                 '_SERVICEWORKER': '1'
             }
         }),
-        uglify({}, minify)
+        terser()
     ]
 };
