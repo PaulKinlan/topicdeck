@@ -289,10 +289,14 @@ class Server {
     /*
       Start the app.
     */
-    if (fs.existsSync(`${this.overridePathBase}/public`)) {
-      app.use(express.static(`${this.overridePathBase}/public`));
+    const overridePathBase = path.join(this.overridePathBase, 'public');
+    const assetPathBase = path.join(this.assetPathBase, 'public');
+    if (fs.existsSync(overridePathBase)) {
+      console.log('Exposing overridePathBase Static', `${overridePathBase}`);
+      app.use(express.static(overridePathBase));
     }
-    app.use(express.static(`${this.assetPathBase}/public`));
+    app.use(express.static(assetPathBase));
+    console.log('Exposing assetPathBases Static', assetPathBase);
     app.listen(port);
   }
 }
