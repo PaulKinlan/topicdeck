@@ -20,7 +20,6 @@ import fs from 'fs';
 import {URL} from 'url';
 import feed2json from 'feed2json';
 import compression from 'compression';
-import streamToString from 'stream-to-string';
 import {
   getCompiledTemplate,
   cacheStorage, paths,
@@ -36,8 +35,8 @@ import {handler as manifest} from './public/scripts/routes/manifest.js';
 
 const preload = '</scripts/client.js>; rel=preload; as=script';
 const generator = generateIncrementalNonce('server');
-
 const RSSCombiner = require('rss-combiner-ns');
+const path = require('path');
 
 // A global server feedcache so we are not overloading remote servers
 class FeedFetcher {
@@ -62,11 +61,11 @@ class FeedFetcher {
     return this.latestFeeds;
   }
 
-  loadConfigs(path) {
+  loadConfigs(basePath) {
     // Dynamically import the config objects
-    const configs = fs.readdirSync(path)
+    const configs = fs.readdirSync(basePath)
         .filter(fileName => fileName.endsWith('.json') && fileName.startsWith('.') == false)
-        .map(fileName => [fileName.replace(/\.config\.json$/, ''), require(path + fileName)]);
+        .map(fileName => [fileName.replace(/\.config\.json$/, ''), require(path.join(basePath, fileName))]);
 
     return new Map(configs);
   }
