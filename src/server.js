@@ -125,9 +125,9 @@ class Server {
     this.dataPath = `${configPath.dataPath}/`;
   }
 
-  _resolveAssets(path, {defaultBase, overridePathBase}) {
-    const overridePath = path.join(overridePathBase, paths.assetPath, path);
-    const defaultPath = path.join(defaultBase, paths.assetPath, path);
+  _resolveAssets(filePath, {defaultBase, overridePathBase}) {
+    const overridePath = path.join(overridePathBase, paths.assetPath, filePath);
+    const defaultPath = path.join(defaultBase, paths.assetPath, filePath);
     return fs.existsSync(overridePath) ? overridePath : defaultPath;
   }
 
