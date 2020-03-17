@@ -18,7 +18,6 @@
 import express from 'express';
 import fs from 'fs';
 import {URL} from 'url';
-import feed2json from 'feed2json';
 import compression from 'compression';
 import {
   getCompiledTemplate,
@@ -41,16 +40,13 @@ const path = require('path');
 // A global server feedcache so we are not overloading remote servers
 class FeedFetcher {
   constructor(fetchInterval, configPath) {
-    this.feedConfigs = this.loadConfigs(configPath);
-    this.knownHosts = new Set();
+    this.feedConfigs = new Map;
+    this.rootConfigPath = configPath;
+    this.loadConfigs(configPath);
     this.latestFeeds = {};
 
     this.fetchFeeds();
     setInterval(this.fetchFeeds, fetchInterval);
-  }
-
-  get hosts() {
-    return this.knownHosts;
   }
 
   get configs() {
@@ -63,20 +59,26 @@ class FeedFetcher {
 
   loadConfigs(basePath) {
     // Dynamically import the config objects
-    const configs = fs.readdirSync(basePath)
-        .filter(fileName => fileName.endsWith('.json') && fileName.startsWith('.') == false)
-        .map(fileName => [fileName.replace(/\.config\.json$/, ''), require(path.join(basePath, fileName))]);
+    console.log('loading config files', basePath);
+    const files = fs.readdirSync(basePath, {withFileTypes: true});
 
-    return new Map(configs);
+    for (const file of files) {
+      const filePath = path.join(basePath, file.name);
+      if (file.isFile && file.name === 'config.json') {
+        this.feedConfigs.set(basePath.replace(this.rootConfigPath, ''), require(filePath));
+        continue;
+      }
+      if (file.isDirectory) {
+        this.loadConfigs(filePath);
+      }
+    }
   }
 
   fetchFeeds() {
     const feeds = this.feedConfigs;
     const feedList = Array.from(feeds.values());
     feedList.filter(config => 'redirect' in config === false).forEach(config => {
-      const hostname = new URL(config.origin).hostname;
-      console.log(`${hostname} Checking Feeds`, Date.now());
-      this.knownHosts.add(hostname);
+      console.log(`${config.origin} Checking Feeds`, Date.now());
 
       const feedConfig = {
         title: config.title,
@@ -104,11 +106,11 @@ class FeedFetcher {
 
       RSSCombiner(feedConfig)
           .then(combinedFeed => {
-            console.log(`${hostname} Feed Ready`, Date.now());
+            console.log(`${config.origin} Feed Ready`, Date.now());
             const feedXml = combinedFeed.xml();
-            
+
             cacheStorage[config.feedUrl] = feedXml;
-            this.latestFeeds[hostname] = feedXml;
+            this.latestFeeds[config.origin] = feedXml;
           });
     });
   }
@@ -131,13 +133,13 @@ class Server {
     return fs.existsSync(overridePath) ? overridePath : defaultPath;
   }
 
-  getHostName(req) {
-    let hostname = req.hostname;
-    if (this.feeds.hosts.has(hostname) == false) {
-      hostname = '127.0.0.1';
+  getPathName(pathName = '') {
+    pathName = pathName.replace(/\/$/, '');
+    if (this.feeds.feedConfigs.has(pathName) === false) {
+      return ''; // If the path isn't set, we will have to handle it later.
     }
 
-    return hostname.replace(/\//g, '');
+    return pathName;
   }
 
   start(port) {
@@ -156,6 +158,15 @@ class Server {
     app.use(compression({
       filter: (req, res) => true
     }));
+
+    const overridePathBase = path.join(this.overridePathBase, 'public');
+    const assetPathBase = path.join(this.assetPathBase, 'public');
+    if (fs.existsSync(overridePathBase)) {
+      console.log('Exposing overridePathBase Static', `${overridePathBase}`);
+      app.use(express.static(overridePathBase));
+    }
+    app.use(express.static(assetPathBase));
+    console.log('Exposing assetPathBases Static', assetPathBase);
 
     app.set('trust proxy', true);
 
@@ -179,32 +190,35 @@ class Server {
       }
     });
 
-    app.get('/', (req, res, next) => {
-      const hostname = this.getHostName(req);
+    app.get('/proxy', (req, res) => {
+      const pathName = this.getPathName(req.params.path);
 
-      const nonce = {
-        analytics: generator(),
-        inlinedcss: generator(),
-        style: generator()
-      };
+      console.log('/proxy', pathName);
 
-      res.setHeader('Content-Type', 'text/html');
-      res.setHeader('Content-Security-Policy', generateCSPPolicy(nonce));
-      res.setHeader('Link', preload);
-      root(nonce, {
-        dataPath: `${this.dataPath}${hostname}.`,
+      // Get the base config file.
+      const hostname = this.feeds.feedConfigs.get(this.configPath);
+
+      const url = new URL(`${req.protocol}://${hostname}${req.originalUrl}`);
+
+      proxy(url, {
+        dataPath: path.join(this.dataPath, pathName),
         assetPath: paths.assetPath
       }, templates).then(response => {
         if (!!response == false) {
-          console.error(req, hostname);
-          return res.status(500).send(`Response undefined Error ${hostname}`);
+          return res.status(500).send(`Response undefined Error ${url}`);
         }
-        node.responseToExpressStream(res, response.body);
+
+        if (typeof(response.body) === 'string') {
+          res.status(response.status).send(response.body);
+        } else {
+          node.sendStream(response.body, true, res);
+        }
       });
     });
 
-    app.get('/all', (req, res, next) => {
-      const hostname = this.getHostName(req);
+    app.get('/:path(*)?/all', (req, res) => {
+      const pathName = this.getPathName(req.params.path);
+      console.log('/:path(*)?/all', pathName);
 
       const nonce = {
         analytics: generator(),
@@ -217,46 +231,29 @@ class Server {
       res.setHeader('Link', preload);
 
       all(nonce, {
-        dataPath: `${this.dataPath}${hostname}.`,
+        dataPath: path.join(this.dataPath, `${pathName}`),
         assetPath: __dirname + paths.assetPath
       }, templates).then(response => {
         if (!!response == false) {
-          console.error(req, hostname);
-          return res.status(500).send(`Response undefined Error ${hostname}`);
+          console.error(req, path);
+          return res.status(500).send(`Response undefined Error ${path}`);
         }
         node.responseToExpressStream(res, response.body);
       });
     });
 
-    app.get('/manifest.json', (req, res, next) => {
-      const hostname = this.getHostName(req);
+    app.get('/:path(*)?/manifest.json', (req, res, next) => {
+      const pathName = this.getPathName(req.params.path);
+
+      console.log('/:path(*)?/manifest.json', pathName);
+
       res.setHeader('Content-Type', 'application/manifest+json');
 
       manifest({
-        dataPath: `${this.dataPath}${hostname}.`,
+        dataPath: path.join(this.dataPath, pathName),
         assetPath: paths.assetPath
       }, templates).then(response => {
         node.responseToExpressStream(res, response.body);
-      });
-    });
-
-    app.get('/proxy', (req, res, next) => {
-      const hostname = this.getHostName(req);
-      const url = new URL(`${req.protocol}://${hostname}${req.originalUrl}`);
-
-      proxy(url, {
-        dataPath: `${this.dataPath}${hostname}.`,
-        assetPath: paths.assetPath
-      }, templates).then(response => {
-        if (!!response == false) {
-          return res.status(500).send(`Response undefined Error ${hostname}`);
-        }
-
-        if (typeof(response.body) === 'string') {
-          res.status(response.status).send(response.body);
-        } else {
-          node.sendStream(response.body, true, res);
-        }
       });
     });
 
@@ -264,39 +261,49 @@ class Server {
       Server specific routes
     */
 
-    app.get('/all.rss', (req, res, next) => {
-      const hostname = this.getHostName(req);
+    app.get('/:path(*)?/all.rss', (req, res) => {
+      const pathName = this.getPathName(req.params.path);
+
+      console.log('/:path(*)?/all.rss', pathName);
       res.setHeader('Content-Type', 'text/xml');
-      res.send(this.feeds.feeds[hostname]);
+      res.send(this.feeds.feeds[pathName]);
     });
 
-    app.get('/all.json', (req, res, next) => {
-      const hostname = this.getHostName(req);
-      const feed = this.feeds.feeds[hostname];
+    app.get('/:path(*)?/data/config.json', (req, res) => {
+      const pathName = this.getPathName(req.params.path);
+      console.log('/:path(*)?/data/config.json', pathName);
       res.setHeader('Content-Type', 'application/json');
+      res.sendFile(path.join(this.dataPath, pathName, 'config.json'));
+    });
 
-      feed2json.fromString(feed, hostname + 'all.rss', {}, function(err, json) {
-        res.send(json);
+    app.get('/:path(*)?/', (req, res) => {
+      const pathName = this.getPathName(req.params.path);
+      console.log('/:path(*)?/', pathName);
+
+      const nonce = {
+        analytics: generator(),
+        inlinedcss: generator(),
+        style: generator()
+      };
+
+      res.setHeader('Content-Type', 'text/html');
+      res.setHeader('Content-Security-Policy', generateCSPPolicy(nonce));
+      res.setHeader('Link', preload);
+      root(nonce, {
+        dataPath: path.join(this.dataPath, pathName),
+        assetPath: paths.assetPath
+      }, templates).then(response => {
+        if (!!response == false) {
+          console.error(req, path);
+          return res.status(500).send(`Response undefined Error ${path}`);
+        }
+        node.responseToExpressStream(res, response.body);
       });
-    });
-
-    app.get('/data/config.json', (req, res, next) => {
-      const hostname = this.getHostName(req);
-      res.setHeader('Content-Type', 'application/json');
-      res.sendFile(`${this.dataPath}/${hostname}.config.json`);
     });
 
     /*
       Start the app.
     */
-    const overridePathBase = path.join(this.overridePathBase, 'public');
-    const assetPathBase = path.join(this.assetPathBase, 'public');
-    if (fs.existsSync(overridePathBase)) {
-      console.log('Exposing overridePathBase Static', `${overridePathBase}`);
-      app.use(express.static(overridePathBase));
-    }
-    app.use(express.static(assetPathBase));
-    console.log('Exposing assetPathBases Static', assetPathBase);
     app.listen(port);
   }
 }

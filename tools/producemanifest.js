@@ -19,7 +19,7 @@ const swBuild = require('workbox-build');
 const fs = require('fs');
 
 const inputPath = argv['inputpath'] || './dist/server/public/';
-const overridePath = argv['overridepath'];
+const overridePath = argv['overridepath'] || inputPath;
 const swInputPath = argv['input'];
 const swOutputPath = argv['output'];
 
@@ -40,28 +40,33 @@ const overrideConfig = {
   modifyUrlPrefix: {'': '/'}
 };
 
-let mergeGeneratedManifests = async (base, overrides) => {
-  let baseFiles = await swBuild.getManifest(base);
+const mergeGeneratedManifests = async (base, overrides) => {
+  const baseFiles = await swBuild.getManifest(base);
   let overrideFiles = [];
-  if(overrides.globDirectory == undefined) return;
 
   overrideFiles = await swBuild.getManifest(overrides);
-  
-  let baseFileMap = new Map(baseFiles.manifestEntries.map(entry => [entry.url, entry.revision]));
-  let overrideFileMap = new Map(overrideFiles.manifestEntries.map(entry => [entry.url, entry.revision]));
-  let finalManifest = [];
 
-  new Map([...baseFileMap, ...overrideFileMap]).forEach((value, key) => finalManifest.push({ url: key, revision: value}));
+  const baseFileMap = new Map(baseFiles.manifestEntries.map(entry => [entry.url, entry.revision]));
+  console.log(baseFileMap)
+  const overrideFileMap = new Map(overrideFiles.manifestEntries.map(entry => [entry.url, entry.revision]));
+  console.log(overrideFileMap)
+  const finalManifest = [];
+
+  new Map([...baseFileMap, ...overrideFileMap]).forEach((value, key) => finalManifest.push({url: key, revision: value}));
   return finalManifest;
 };
 
 (async () => {
-  
-  let files = await mergeGeneratedManifests(config, overrideConfig);
-  if (files === undefined) return; // nothing new to generate.
-  console.log(files);
-  let sw = fs.readFileSync(swInputPath, {encoding: 'utf8'});
-  const newSw = sw.replace(/\["insertfileshere"\]/, JSON.stringify(files));
-  fs.writeFileSync(swOutputPath, newSw);
+  const files = await mergeGeneratedManifests(config, overrideConfig);
+  const sw = fs.readFileSync(swInputPath, {encoding: 'utf8'});
+  let newSw;
 
+  if (files === undefined) {
+    newSw = sw.replace(/\["insertfileshere"\]/, '');
+  }
+  else {
+    newSw = sw.replace(/\["insertfileshere"\]/, JSON.stringify(files));
+  } 
+
+  fs.writeFileSync(swOutputPath, newSw);
 })();
