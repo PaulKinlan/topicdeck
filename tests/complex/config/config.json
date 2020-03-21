@@ -1,0 +1,24 @@
+{
+  "title": "Topic Deck",
+  "description": "The latest news and updates from around the web", 
+  "origin": "http://127.0.0.1:8080/",
+  "feedUrl": "http://127.0.0.1:8080/all.rss",
+  "theme": {
+    "backgroundColor": "#654ff0",
+    "themeColor": "#654ff0"
+  },
+  "content": {
+    "allTitle": "All"
+  },
+  "site": {
+    "googleAnalytics": "UA-111516552-5",
+    "searchConsole": "SrbXKyTScp_FwejgSKpQuqy7agpUaCZvaRqARGmOI2o"
+  },
+  "columns": [
+    {
+      "name": "Web Development",
+      "href": "http://127.0.0.1:8080/web-dev/",
+      "feedUrl": "http://127.0.0.1:8080/web-dev/all.rss"
+    }
+  ]
+}

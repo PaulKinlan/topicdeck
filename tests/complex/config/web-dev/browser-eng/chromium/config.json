@@ -1,0 +1,69 @@
+{
+  "title": "Chromium Dev",
+  "description": "The latest news and updates from the Google Chrome team", 
+  "origin": "http://127.0.0.1:8080/web-dev/browser-eng/chromium/",
+  "feedUrl": "http://127.0.0.1:8080/web-dev/browser-eng/chromium/all.rss",
+  "theme": {
+    "backgroundColor": "#654ff0",
+    "themeColor": "#654ff0"
+  },
+  "content": {
+    "allTitle": "All"
+  },
+  "site": {
+    "googleAnalytics": "UA-111516552-5",
+    "searchConsole": "SrbXKyTScp_FwejgSKpQuqy7agpUaCZvaRqARGmOI2o"
+  },
+  "columns": [
+    {
+      "name": "Chomium Blog",
+      "href": "https://blog.chromium.org/",
+      "feedUrl": "https://blog.chromium.org/feeds/posts/default"
+    },
+    {
+      "name": "Chrome Releases",
+      "href": "https://chromereleases.googleblog.com/",
+      "feedUrl": "http://feeds.feedburner.com/GoogleChromeReleases"
+    },
+    {
+      "name": "Paul Kinlan",
+      "href": "https://paul.kinlan.me/",
+      "feedUrl": "https://paul.kinlan.me/index.xml"
+    },
+    {
+      "name": "Paul Lewis",
+      "href": "https://aerotwist.com/",
+      "feedUrl": "https://aerotwist.com/blog/feed/"
+    },
+    {
+      "name": "Jake Archibald",
+      "href": "https://jakearchibald.com/",
+      "feedUrl": "https://jakearchibald.com/posts.rss"
+    },
+    {
+      "name": "Web Fundamentals",
+      "href": "https://developers.google.com/web/updates",
+      "feedUrl": "https://developers.google.com/web/updates/rss.xml"
+    },
+    {
+      "name": "Rob Dodson (Medium)",
+      "href": "https://medium.com/@robdodson",
+      "feedUrl": "https://medium.com/feed/@robdodson"
+    },
+    {
+      "name": "Addy Osmani (Medium)",
+      "href": "https://medium.com/@addyosmani",
+      "feedUrl": "https://medium.com/feed/@addyosmani"
+    },
+    {
+      "name": "Sam Thorogood (Medium)",
+      "href": "https://medium.com/@samthor",
+      "feedUrl": "https://medium.com/feed/@samthor"
+    },
+    {
+      "name": "Alex Russell (Medium)",
+      "href": "https://medium.com/@slightlylate",
+      "feedUrl": "https://medium.com/feed/@slightlylate"
+    }
+  ]
+}

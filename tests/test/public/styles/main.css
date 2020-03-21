@@ -1,0 +1,219 @@
+head,
+ :root,
+body {
+  background-color: red;
+  margin: 0;
+}
+
+body>header {
+  font: 500 1em Roboto, Helvetica, Arial, sans-serif;
+  color: black;
+  padding: 0.8em 0.8em 0.2em 0.8em;
+  margin: 0 0 0.4em 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+body>header h1 {
+  margin: 0 0 0.2em 0;
+  text-decoration: underline;
+}
+
+body>header span {
+  font-weight: 400;
+  font-size: 0.8em;
+  color: black;
+  margin-bottom: 0.4em;
+  display: block;
+  margin-top: 2px;
+}
+
+body>header span a, body>header span a:visited {
+  color:black;
+}
+
+main {
+  display: flex;
+  /*display: grid;*/
+  overflow-x: auto;
+  max-width: 100%;
+  max-height: calc(100vh - 93px);
+  height: calc(100vh);
+  box-sizing: border-box;
+}
+
+main section {
+  min-width: 310px;
+  max-width: 310px;
+  margin: 1px 5px 4px 5px;
+  background: #fff;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.01), 0 1px 2px rgba(0, 0, 0, 0.07), 0 5px 15px rgba(0, 0, 0, 0.03);
+  transition: box-shadow 0.1s ease-out;
+  box-sizing: border-box;
+}
+
+main section h1 {
+  background-color: #fff;
+}
+
+main section div[data-url] {
+  height: calc(100% - 68px);
+  overflow-y: auto;
+}
+
+main section.selected {
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.7), 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+@media screen and (max-width: 460px) {
+  main {
+    display: block;
+    overflow: initial;
+    height: initial;
+  }
+  main section {
+    min-width: initial;
+    max-width: initial;
+    overflow-y: initial;
+    width: calc(100% - 10px);
+    height: 100%;
+    box-sizing: border-box;
+  }
+  main section div[data-url] {
+    margin: initial;
+  }
+
+  div#toast {
+    height: 48px;
+    font: 'Roboto' 14pt;
+    bottom: 0px !important;
+    left: 0 !important;
+    right: 0 !important;
+    min-width: auto !important;
+    max-width: auto !important;
+    margin-left: 0 !important;
+    border-radius: 0px !important;
+  }
+}
+
+main section h1 {
+  font-family: Helvetica, Arial, sans-serif;
+  font-weight: 300;
+  text-align: center;
+  position: sticky;
+  top: -1px;
+  margin: 0;
+  padding: 0.8em;
+  z-index: 1;
+  width: initial;
+  border-bottom: solid 1px white;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+main section h1 a {
+  color: #333333;
+}
+
+main section div.item {
+  font-size: 1em;
+  padding: 0.8em;
+}
+
+main section div.item:not(:first-child) {
+  border-top: solid 1px #dedede;
+}
+
+main section div.item.new {
+  background-image: url(data:image/svg+xml;utf8,<svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><circle cx="8" cy="8" r="8" fill="#1976d2"/></svg>);
+  background-position-x: calc(100% + 8px);
+  background-position-y: -8px;
+  background-repeat: no-repeat;
+  background-size: 16px;
+}
+
+main section div.item p.description {
+  font-weight: 200;
+  color: #202020;
+  overflow-x: hidden; 
+  font-family: Georgia, serif;
+  font-size: 16px;
+  font-style: italic;
+  border-left: 2px solid #cbcbcb;
+  padding-left: 1em;
+}
+
+main section div.item h3 {
+  font-size: 1.1em;
+  margin: 0 0 0.4em 0;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  font-weight: 400;
+  word-break: break-word;
+}
+
+main section div.item h4 {
+  margin: 0 0 0.8em 0;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  font-weight: 300;
+  word-break: break-word;
+}
+
+main section div.item div {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  position: relative;
+}
+
+main section div.item div svg {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+}
+
+main section div.item div svg>* {
+  pointer-events: none;
+}
+
+div a[data-bind_inner-Text="pubDate"] {
+  font-style: italic;
+  color: #737272 !important;
+}
+
+div a[data-bind_href] {
+  color: black;
+}
+
+div#toast {
+  display: none;
+  background-color: #323232;
+  font-family: 'Roboto', Arial, sans-serif;
+  color: white;
+}
+
+div#toast.visible {
+  display: flex;
+  align-items: center;
+  padding: 0 1em 0 1em;
+  position: fixed;
+  height: 48px;
+  min-width: 400px;
+  max-width: 400px;
+  left: 24px;
+  bottom: 24px;
+  border-radius: 2px;
+}
+
+div#toast span {
+  flex-grow: 1;
+}
+
+div#toast a {
+  color: white;
+  text-transform: uppercase;
+}

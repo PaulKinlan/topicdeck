@@ -1,0 +1,34 @@
+{
+  "title": "Firefox Dev",
+  "description": "The latest news and updates from the Firefox team", 
+  "origin": "http://127.0.0.1:8080/web-dev/browser-eng/firefox/",
+  "feedUrl": "http://127.0.0.1:8080/web-dev/browser-eng/firefox/all.rss",
+  "theme": {
+    "backgroundColor": "#654ff0",
+    "themeColor": "#654ff0"
+  },
+  "content": {
+    "allTitle": "All"
+  },
+  "site": {
+    "googleAnalytics": "UA-111516552-5",
+    "searchConsole": "SrbXKyTScp_FwejgSKpQuqy7agpUaCZvaRqARGmOI2o"
+  },
+  "columns": [
+    {
+      "name": "Firefox Blog",
+      "href": "https://blog.mozilla.org/blog/category/firefox/",
+      "feedUrl": "https://blog.mozilla.org/blog/category/firefox/feed/"
+    },
+    {
+      "name": "Hacks",
+      "href": "https://hacks.mozilla.org/",
+      "feedUrl": "https://hacks.mozilla.org/feed/"
+    },
+    {
+      "name": "Planet Mozilla",
+      "href": "https://planet.mozilla.org/",
+      "feedUrl": "https://planet.mozilla.org/atom.xml"
+    }
+  ]
+}

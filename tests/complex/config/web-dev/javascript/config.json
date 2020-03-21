@@ -1,0 +1,49 @@
+{
+  "title": "JavaScript",
+  "description": "The latest news and updates from around the web about JavaScript", 
+  "origin": "http://127.0.0.1:8080/web-dev/javascript/",
+  "feedUrl": "http://127.0.0.1:8080/web-dev/javascript/all.rss",
+  "theme": {
+    "backgroundColor": "#654ff0",
+    "themeColor": "#654ff0"
+  },
+  "content": {
+    "allTitle": "All"
+  },
+  "site": {
+    "googleAnalytics": "UA-111516552-5",
+    "searchConsole": "SrbXKyTScp_FwejgSKpQuqy7agpUaCZvaRqARGmOI2o"
+  },
+  "columns": [
+    {
+      "name": "v8",
+      "href": "https://v8project.blogspot.com",
+      "feedUrl": "https://v8project.blogspot.com/feeds/posts/default"
+    },
+    {
+      "name": "ChakraCore",
+      "href": "https://github.com/Microsoft/ChakraCore/",
+      "feedUrl": "https://github.com/Microsoft/ChakraCore/commits/master.atom"
+    },
+    {
+      "name": "SpiderMonkey",
+      "href": "https://developer.mozilla.org/en-US/docs/Mozilla/Projects/SpiderMonkey",
+      "feedUrl": "https://groups.google.com/forum/feed/mozilla.dev.tech.js-engine/topics/rss.xml?num=15"
+    },
+    {
+      "name": "JavaScript (Medium)",
+      "href": "https://medium.com/tag/javascript/",
+      "feedUrl": "https://medium.com/feed/tag/javascript"
+    },
+    {
+      "name": "Echo JS",
+      "href": "https://echojs.com/",
+      "feedUrl": "https://echojs.com/rss"
+    },
+    {
+      "name": "Fun Fun Function",
+      "href": "https://www.youtube.com/funfunfunction",
+      "feedUrl": "https://www.youtube.com/feeds/videos.xml?channel_id=UCO1cgjhGzsSYb1rsB4bFe4Q"
+    }
+  ]
+}

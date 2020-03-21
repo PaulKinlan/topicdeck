@@ -31,6 +31,7 @@ import {handler as root} from './public/scripts/routes/root.js';
 import {handler as proxy} from './public/scripts/routes/proxy.js';
 import {handler as all} from './public/scripts/routes/all.js';
 import {handler as manifest} from './public/scripts/routes/manifest.js';
+import {DepGraph, DepGraphCycleError} from 'dependency-graph';
 
 const preload = '</scripts/client.js>; rel=preload; as=script';
 const generator = generateIncrementalNonce('server');
@@ -44,13 +45,15 @@ class FeedFetcher {
     this.rootConfigPath = configPath;
     this.loadConfigs(configPath);
     this.latestFeeds = {};
-
-    this.fetchFeeds();
-    setInterval(this.fetchFeeds, fetchInterval);
+    this._fetchInterval = fetchInterval;
   }
 
   get configs() {
     return this.feedConfigs;
+  }
+
+  get fetchInterval() {
+    return this._fetchInterval;
   }
 
   get feeds() {
@@ -74,10 +77,65 @@ class FeedFetcher {
     }
   }
 
-  fetchFeeds() {
+  async fetchFeeds() {
     const feeds = this.feedConfigs;
     const feedList = Array.from(feeds.values());
-    feedList.filter(config => 'redirect' in config === false).forEach(config => {
+
+    // Build up a simple graph of feeds so we know which order to boot them.
+    // If feed A depends on feed B, then we should boot B first.
+    const dg = new DepGraph();
+    // Our list of servers that we host. We care about these because they need to boot in correct order.
+    const hostedOrigins = [];
+
+    for (const config of feedList) {
+      hostedOrigins.push(config.feedUrl);
+      dg.addNode(config.feedUrl);
+
+      const feeds = config.columns.map(column => column.feedUrl);
+      feeds.forEach(feed => {
+        dg.addNode(feed);
+        dg.addDependency(config.feedUrl, feed);
+      });
+    }
+
+    // After the graph is loaded, ensure config data is attached.
+    // The first time a feed is added to the graph it might not have data.
+    for (const config of feedList) {
+      dg.setNodeData(config.feedUrl, config);
+    }
+
+    // Get the list of feeds in the order we should start them up.
+    const orderedConfigs = [];
+    try {
+      const orderedFeedList = dg.overallOrder().filter(feed => hostedOrigins.indexOf(feed) >= 0);
+      orderedFeedList.forEach(feedUrl => orderedConfigs.push(dg.getNodeData(feedUrl)));
+    } catch (err) {
+      if (err instanceof DepGraphCycleError) {
+        console.error(`Unable to start server, cyclic dependencies found in feed configuration: ${err}`);
+        process.exit(-1);
+      }
+    }
+
+    const success = (streamInfo) => {
+      console.log(`Fetched feed: ${streamInfo.url}`);
+      if ((streamInfo.url in cacheStorage) == false) {
+        cacheStorage[streamInfo.url] = streamInfo.stream;
+      }
+    };
+
+    // Required for closure.
+    const combine = (config, feedConfig) => {
+      return RSSCombiner(feedConfig).then(combinedFeed => {
+        console.log(`${config.origin} Feed Ready`, Date.now());
+        const feedXml = combinedFeed.xml();
+        cacheStorage[config.feedUrl] = feedXml;
+        this.latestFeeds[config.feedUrl] = feedXml;
+      }).catch(err => {
+        console.log(`Error when fetching feeds for ${config.feedUrl}, ${err}`);
+      });
+    };
+
+    for (const config of orderedConfigs) {
       console.log(`${config.origin} Checking Feeds`, Date.now());
 
       const feedConfig = {
@@ -94,25 +152,18 @@ class FeedFetcher {
           'feedburner': 'http://rssnamespace.org/feedburner/ext/1.0'
         },
         pubDate: new Date(),
-        successfulFetchCallback: (streamInfo) => {
-          console.log(`Fetched feed: ${streamInfo.url}`);
-          if ((streamInfo.url in cacheStorage) == false) {
-            cacheStorage[streamInfo.url] = streamInfo.stream;
-          }
-        }
+        successfulFetchCallback: success
       };
 
       feedConfig.pubDate = new Date();
 
-      RSSCombiner(feedConfig)
-          .then(combinedFeed => {
-            console.log(`${config.origin} Feed Ready`, Date.now());
-            const feedXml = combinedFeed.xml();
-
-            cacheStorage[config.feedUrl] = feedXml;
-            this.latestFeeds[config.origin] = feedXml;
-          });
-    });
+      try {
+        await combine(config, feedConfig);
+      }
+      catch (err) {
+        console.log(err);
+      }
+    }
   }
 }
 
@@ -135,11 +186,15 @@ class Server {
 
   getPathName(pathName = '') {
     pathName = pathName.replace(/\/$/, '');
-    if (this.feeds.feedConfigs.has(pathName) === false) {
-      return ''; // If the path isn't set, we will have to handle it later.
+    if (this.feeds.feedConfigs.has(pathName) === true) {
+      return pathName;
     }
 
-    return pathName;
+    if (pathName === '') {
+      return pathName;
+    }
+
+    return undefined;
   }
 
   start(port) {
@@ -244,6 +299,7 @@ class Server {
 
     app.get('/:path(*)?/manifest.json', (req, res, next) => {
       const pathName = this.getPathName(req.params.path);
+      if (pathName === undefined) return res.status(404);
 
       console.log('/:path(*)?/manifest.json', pathName);
 
@@ -263,14 +319,17 @@ class Server {
 
     app.get('/:path(*)?/all.rss', (req, res) => {
       const pathName = this.getPathName(req.params.path);
+      if (pathName === undefined) return res.status(404);
 
       console.log('/:path(*)?/all.rss', pathName);
       res.setHeader('Content-Type', 'text/xml');
-      res.send(this.feeds.feeds[pathName]);
+      res.send(this.feeds.feeds[req.protocol + '://' + req.get('host') + req.originalUrl]);
     });
 
     app.get('/:path(*)?/data/config.json', (req, res) => {
       const pathName = this.getPathName(req.params.path);
+      if (pathName === undefined) return res.status(404);
+
       console.log('/:path(*)?/data/config.json', pathName);
       res.setHeader('Content-Type', 'application/json');
       res.sendFile(path.join(this.dataPath, pathName, 'config.json'));
@@ -279,6 +338,7 @@ class Server {
     app.get('/:path(*)?/', (req, res) => {
       const pathName = this.getPathName(req.params.path);
       console.log('/:path(*)?/', pathName);
+      if (pathName === undefined) return res.status(404);
 
       const nonce = {
         analytics: generator(),
@@ -305,6 +365,8 @@ class Server {
       Start the app.
     */
     app.listen(port);
+    this.feeds.fetchFeeds();
+    setInterval(this.feeds.fetchFeeds.bind(this.feeds), this.feeds.fetchInterval);
   }
 }
 

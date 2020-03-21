@@ -1,0 +1,34 @@
+{
+  "title": "Web Browser Eng",
+  "description": "The latest news and updates from the Web Browser Engineering teams", 
+  "origin": "http://127.0.0.1:8080/web-dev/browser-eng/",
+  "feedUrl": "http://127.0.0.1:8080/web-dev/browser-eng/all.rss",
+  "theme": {
+    "backgroundColor": "#654ff0",
+    "themeColor": "#654ff0"
+  },
+  "content": {
+    "allTitle": "All"
+  },
+  "site": {
+    "googleAnalytics": "UA-111516552-5",
+    "searchConsole": "SrbXKyTScp_FwejgSKpQuqy7agpUaCZvaRqARGmOI2o"
+  },
+  "columns": [
+    {
+      "name": "Chromium Dev",
+      "href": "http://127.0.0.1:8080/web-dev/browser-eng/chromium/",
+      "feedUrl": "http://127.0.0.1:8080/web-dev/browser-eng/chromium/all.rss"
+    },
+    {
+      "name": "Firefox Dev",
+      "href": "http://127.0.0.1:8080/web-dev/browser-eng/firefox/",
+      "feedUrl": "http://127.0.0.1:8080/web-dev/browser-eng/firefox/all.rss"
+    },
+    {
+      "name": "WebKit Dev",
+      "href": "http://127.0.0.1:8080/web-dev/browser-eng/webkit/",
+      "feedUrl": "http://127.0.0.1:8080/web-dev/browser-eng/webkit/all.rss"
+    }
+  ]
+}

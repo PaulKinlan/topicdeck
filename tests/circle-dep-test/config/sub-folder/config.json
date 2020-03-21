@@ -1,0 +1,29 @@
+{
+  "title": "Localhost - Sub GDE Deck",
+  "description": "Localhost latest news and updates from the Google Developer Expert for web program.", 
+  "origin": "http://localhost:8080/sub-folder/",
+  "feedUrl": "http://localhost:8080/sub-folder/all.rss",
+  "theme": {
+    "backgroundColor": "#aa4422",
+    "themeColor":  "#bb4422"
+  },
+  "site": {
+    "googleAnalytics": "UA-111516552-1",
+    "searchConsole": "PR3mkTUh-MFM9msW-rGhyT0qFgWW5w3_0985tkjzWIw"
+  },
+  "content": {
+    "allTitle": "All"
+  },
+  "columns": [
+    {
+      "name": "http://localhost:8080/all.rss",
+      "href": "http://localhost:8080/sub-folder/all.rss",
+      "feedUrl": "http://localhost:8080/sub-folder/all.rss"
+    },
+    {
+      "name": "Rachel Andrew - Sub Folder",
+      "href": "https://rachelandrew.co.uk/archives",
+      "feedUrl": "https://rachelandrew.co.uk/archives/rss.php"
+    }
+  ]
+}

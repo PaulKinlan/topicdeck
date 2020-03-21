@@ -1,0 +1,49 @@
+{
+  "title": "Progressive Web Apps",
+  "description": "The latest news and updates from around the web about PWA", 
+  "origin": "http://127.0.0.1:8080/web-dev/pwa/",
+  "feedUrl": "http://127.0.0.1:8080/web-dev/pwa/all.rss",
+  "theme": {
+    "backgroundColor": "#aa00ff",
+    "themeColor": "#aa00ff"
+  },
+  "content": {
+    "allTitle": "All"
+  },
+  "site": {
+    "googleAnalytics": "UA-111516552-5",
+    "searchConsole": "SrbXKyTScp_FwejgSKpQuqy7agpUaCZvaRqARGmOI2o"
+  },
+  "columns": [
+    {
+      "name": "Latest PWA",
+      "href": "https://pwa-directory.appspot.com/",
+      "feedUrl": "https://pwa-directory.appspot.com/api/pwa/?format=rss&limit=20"
+    },
+    {
+      "name": "Medium",
+      "href": "https://medium.com/tag/progressive-web-app",
+      "feedUrl": "https://medium.com/feed/tag/progressive-web-app"
+    },
+    {
+      "name": "PWA Stats",
+      "href": "https://www.pwastats.com/",
+      "feedUrl": "https://www.pwastats.com/feed.xml"
+    },
+    {
+      "name": "9to5Google",
+      "href": "https://9to5google.com/guides/progressive-web-apps/",
+      "feedUrl": "https://9to5google.com/guides/progressive-web-apps/feed/"
+    },
+    {
+      "name": "Stack Overflow",
+      "href": "https://stackoverflow.com/questions/tagged/progressive-web-apps",
+      "feedUrl": "https://stackoverflow.com/feeds/tag?tagnames=progressive-web-apps&sort=newest"
+    },
+    {
+      "name": "Paul Thurrot",
+      "href": "https://www.thurrott.com/tag/progressive-web-apps",
+      "feedUrl": "https://www.thurrott.com/tag/progressive-web-apps/feed"
+    }
+  ]
+}
