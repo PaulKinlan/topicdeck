@@ -229,13 +229,7 @@ class Server {
       // protocol check, if http, redirect to https
       const forwarded = req.get('X-Forwarded-Proto');
       const hostname = req.hostname;
-      const feed = this.feeds.configs.get(hostname);
-
-      if (feed && 'redirect' in feed) {
-        res.redirect(feed.redirect);
-        return;
-      }
-
+      
       if (forwarded && forwarded.indexOf('https') == 0 || hostname === '127.0.0.1') {
         res.setHeader('Access-Control-Allow-Origin', '*');
         return next();

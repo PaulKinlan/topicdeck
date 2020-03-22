@@ -1,6 +1,6 @@
 {
   "name": "topicdeck",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "scripts": {
     "build": "npm run build:server && npm run build:client && npm run build:assets && npm run build:serviceworker",
     "build:assets": "mkdir -p dist/server/public/assets/ && mkdir -p dist/server/public/styles && mkdir -p dist/server/public/images && cp -R src/public/assets/* dist/server/public/assets/ && cp src/public/styles/* dist/server/public/styles/ && cp src/public/images/* dist/server/public/images/ && node tools/embedcss.js -i dist/server/public/styles/main.css",
@@ -16,8 +16,8 @@
     "start": "node dist/server/server.js"
   },
   "dependencies": {
-    "@babel/core": "^7.4.3",
-    "@babel/preset-env": "^7.4.3",
+    "@babel/core": "^7.9.0",
+    "@babel/preset-env": "^7.9.0",
     "clean-css": "^4.0.0",
     "compression": "^1.7.0",
     "dependency-graph": "^0.9.0",
@@ -31,8 +31,8 @@
     "rollup": "^1.0.0",
     "rollup-plugin-babel": "^4.0.0",
     "rollup-plugin-jscc": "^1.0.0",
-    "rollup-plugin-terser": "^4.0.4",
-    "rss-combiner-ns": "0.0.15",
+    "rollup-plugin-terser": "^5.0.0",
+    "rss-combiner-ns": "0.0.16",
     "stream-to-string": "^1.2.0",
     "string-to-stream": "^1.0.0",
     "text-encoding": "*",
