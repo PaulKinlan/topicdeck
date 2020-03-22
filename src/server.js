@@ -229,7 +229,7 @@ class Server {
       // protocol check, if http, redirect to https
       const forwarded = req.get('X-Forwarded-Proto');
       const hostname = req.hostname;
-      
+
       if (forwarded && forwarded.indexOf('https') == 0 || hostname === '127.0.0.1') {
         res.setHeader('Access-Control-Allow-Origin', '*');
         return next();
@@ -280,7 +280,7 @@ class Server {
       res.setHeader('Link', preload);
 
       all(nonce, {
-        dataPath: path.join(this.dataPath, `${pathName}`),
+        dataPath: path.join(this.dataPath, pathName, '/'),
         assetPath: __dirname + paths.assetPath
       }, templates).then(response => {
         if (!!response == false) {
@@ -300,7 +300,7 @@ class Server {
       res.setHeader('Content-Type', 'application/manifest+json');
 
       manifest({
-        dataPath: path.join(this.dataPath, pathName),
+        dataPath: path.join(this.dataPath, pathName, '/'),
         assetPath: paths.assetPath
       }, templates).then(response => {
         node.responseToExpressStream(res, response.body);
@@ -344,7 +344,7 @@ class Server {
       res.setHeader('Content-Security-Policy', generateCSPPolicy(nonce));
       res.setHeader('Link', preload);
       root(nonce, {
-        dataPath: path.join(this.dataPath, pathName),
+        dataPath: path.join(this.dataPath, pathName, '/'),
         assetPath: paths.assetPath
       }, templates).then(response => {
         if (!!response == false) {

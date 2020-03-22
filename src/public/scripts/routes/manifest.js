@@ -5,7 +5,7 @@ import {
 } from '../platform/common.js';
 
 const manifest = (paths, templates) => {
-  const config = loadData(`${paths.dataPath}/config.json`).then(r => r.json());
+  const config = loadData(`${paths.dataPath}config.json`).then(r => r.json());
   const concatStream = new ConcatStream;
   const manifestStream = templates.manifest.then(render => render({config: config}));
 

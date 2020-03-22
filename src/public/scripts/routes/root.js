@@ -9,7 +9,7 @@ import {
 import {convertFeedItemsToJSON} from '../data/common.js';
 
 const root = (nonce, paths, templates) => {
-  const config = loadData(`${paths.dataPath}/config.json`).then(r => r.json());
+  const config = loadData(`${paths.dataPath}config.json`).then(r => r.json());
 
   const concatStream = new ConcatStream;
 
