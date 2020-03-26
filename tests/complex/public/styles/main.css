@@ -33,18 +33,17 @@ body>header span {
 body>header span a, body>header span a:visited {
   color:black;
 }
-body>header span a, body>header span a.rss {
+body>header span a {
   color:black;
   
 }
 
-body>header span a, body>header span a.rss img {
+body>header span a.rss img {
   color:black;
   vertical-align: bottom;
   width: 1.2em;
   height: 1.2em;
 }
-
 
 main {
   display: flex;
