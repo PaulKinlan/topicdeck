@@ -216,11 +216,15 @@ class Server {
 
     const overridePathBase = path.join(this.overridePathBase, 'public');
     const assetPathBase = path.join(this.assetPathBase, 'public');
+    const staticParams = {
+      maxAge: 86400
+    };
+
     if (fs.existsSync(overridePathBase)) {
       console.log('Exposing overridePathBase Static', `${overridePathBase}`);
-      app.use(express.static(overridePathBase));
+      app.use(express.static(overridePathBase, staticParams));
     }
-    app.use(express.static(assetPathBase));
+    app.use(express.static(assetPathBase, staticParams));
     console.log('Exposing assetPathBases Static', assetPathBase);
 
     app.set('trust proxy', true);
