@@ -234,13 +234,15 @@ class Server {
       const forwarded = req.get('X-Forwarded-Proto');
       const hostname = req.hostname;
 
+      req.setHeader('X-Accel-Buffering', 'no');
+
       if (forwarded && forwarded.indexOf('https') == 0 || hostname === '127.0.0.1') {
         res.setHeader('Access-Control-Allow-Origin', '*');
         return next();
       } else {
         res.redirect('https://' + hostname + req.url);
         return;
-      }
+      }      
     });
 
     app.get('/proxy', (req, res) => {
