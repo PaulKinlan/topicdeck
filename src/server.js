@@ -234,7 +234,7 @@ class Server {
       const forwarded = req.get('X-Forwarded-Proto');
       const hostname = req.hostname;
 
-      req.setHeader('X-Accel-Buffering', 'no');
+      res.setHeader('X-Accel-Buffering', 'no');
 
       if (forwarded && forwarded.indexOf('https') == 0 || hostname === '127.0.0.1') {
         res.setHeader('Access-Control-Allow-Origin', '*');
