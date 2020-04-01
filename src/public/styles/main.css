@@ -3,6 +3,9 @@ head,
 body {
   background-color: white;
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
 }
 
 body>header {
@@ -42,11 +45,8 @@ body>header span a.rss img {
 
 main {
   display: flex;
-  /*display: grid;*/
   overflow-x: auto;
   max-width: 100%;
-  max-height: calc(100vh - 93px);
-  height: calc(100vh);
   box-sizing: border-box;
 }
 
