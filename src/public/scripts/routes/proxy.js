@@ -1,5 +1,5 @@
 import {
-  loadData, fetch, caches, parseUrl, getProxyUrl, getProxyHeaders, Response, proxyShouldHitNetwork
+  fetch, caches, getProxyUrl, getProxyHeaders, proxyShouldHitNetwork
 } from '../platform/common.js';
 
 const proxyHandler = (request, paths) => {
