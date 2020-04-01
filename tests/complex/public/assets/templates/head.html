@@ -21,7 +21,10 @@
         {{=it.config.then(config => config.title)}} 
       </h1>
       <span><a href="/">Home</a> | <a href="../">Parent Topic</a> | <a href="./">Deck</a> | <a href="./all">Stream</a> | <a href="./all.rss"><img src="/images/rss_black.png"></a></span>
-  </header>
+      <span>
+        {{=it.config.then(config => config.columns.filter(col => col.feedUrl.startsWith('http://127')).map(col => '<a href="' + col.href + '">' + col.name + '</a>').join(' | ') )}} 
+      </span>
+    </header>
     <main>
       {{~it.streams.data}}
     </main>

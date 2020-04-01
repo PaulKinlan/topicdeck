@@ -21,6 +21,9 @@
         {{=it.config.then(config => config.title)}} 
       </h1>
       <span><a href="/">Home</a> | <a href="../">Parent Topic</a> | <a href="./">Deck</a> | <a href="./all">Stream</a> | <a href="./all.rss" class="rss"><img src="/images/rss_black.png"></a></span>
+      <span>
+        {{=it.config.then(config => config.columns.filter(col => col.feedUrl.startsWith('https://topicdeck.com/')).map(col => '<a href="' + col.href + '">' + col.name + '</a>').join(' | ') )}} 
+      </span>
   </header>
     <main>
       {{~it.streams.data}}
