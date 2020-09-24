@@ -98,7 +98,7 @@ const nodeReadStreamToWhatWGReadableStream = (stream) => {
       });
       stream.on('error', error => {
         console.log(error);
-        controller.abort(error);
+        controller.error(error);
       });
       stream.on('end', () => {
         controller.close();
